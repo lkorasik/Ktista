@@ -1,7 +1,3 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,intellij+all,kotlin
-# Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,intellij+all,kotlin
-
 ### Android ###
 # Built application files
 *.apk
@@ -315,4 +311,3 @@ Thumbs.db
 
 !/gradle/wrapper/gradle-wrapper.jar
 
-# End of https://www.toptal.com/developers/gitignore/api/android,androidstudio,intellij+all,kotlin
