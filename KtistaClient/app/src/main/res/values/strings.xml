@@ -9,5 +9,6 @@
     <string name="settings_email_name">Email</string>
     <string name="settings_nickname_name">Nickname</string>
 
-    <string name="change_password_button">Change password</string>
+    <string name="settings_password">Password</string>
+    <string name="settings_change">Change</string>
 </resources>
