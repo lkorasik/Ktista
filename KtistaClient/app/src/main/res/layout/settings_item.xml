@@ -9,12 +9,16 @@
         android:id="@+id/field_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="7"/>
+        android:layout_margin="@dimen/base_margin"
+        android:textSize="@dimen/base_text_size"
+        android:layout_weight="65"/>
 
     <EditText
         android:id="@+id/field_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3" />
+        android:layout_margin="@dimen/base_margin"
+        android:textSize="@dimen/base_text_size"
+        android:layout_weight="35" />
 
 </LinearLayout>

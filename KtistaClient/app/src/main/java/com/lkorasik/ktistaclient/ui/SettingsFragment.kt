@@ -32,10 +32,10 @@ class SettingsFragment: Fragment() {
         val root = view.findViewById<View>(R.id.first_name)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = getString(R.string.settings_first_name_title)
+            text = getString(R.string.settings_first_name)
         }
         firstNameEditText = root.findViewById<EditText>(R.id.field_value).apply{
-            hint = getString(R.string.settings_first_name_hint)
+            hint = getString(R.string.settings_first_name)
             inputType = InputType.TYPE_CLASS_TEXT
         }
     }
@@ -44,10 +44,10 @@ class SettingsFragment: Fragment() {
         val root = view.findViewById<View>(R.id.last_name)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = getString(R.string.settings_last_name_title)
+            text = getString(R.string.settings_last_name)
         }
         lastNameEditText = root.findViewById<EditText>(R.id.field_value).apply{
-            hint = getString(R.string.settings_last_name_hint)
+            hint = getString(R.string.settings_last_name)
             inputType = InputType.TYPE_CLASS_TEXT
         }
     }
@@ -56,10 +56,10 @@ class SettingsFragment: Fragment() {
         val root = view.findViewById<View>(R.id.email)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = getString(R.string.settings_email_name_title)
+            text = getString(R.string.settings_email_name)
         }
         emailEditText = root.findViewById<EditText>(R.id.field_value).apply {
-            hint = getString(R.string.settings_email_name_hint)
+            hint = getString(R.string.settings_email_name)
             inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         }
     }
@@ -68,10 +68,10 @@ class SettingsFragment: Fragment() {
         val root = view.findViewById<View>(R.id.nickname)
 
         root.findViewById<TextView>(R.id.field_title).apply{
-            text = getString(R.string.settings_nickname_name_title)
+            text = getString(R.string.settings_nickname_name)
         }
         nicknameEditText = root.findViewById<EditText>(R.id.field_value).apply {
-            hint = getString(R.string.settings_nickname_name_hint)
+            hint = getString(R.string.settings_nickname_name)
             inputType = InputType.TYPE_CLASS_TEXT
         }
     }

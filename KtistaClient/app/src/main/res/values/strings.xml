@@ -4,12 +4,10 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="settings_first_name_title">First name</string>
-    <string name="settings_first_name_hint">Input your first name</string>
-    <string name="settings_last_name_title">Last name</string>
-    <string name="settings_last_name_hint">Input your last name</string>
-    <string name="settings_email_name_title">Email</string>
-    <string name="settings_email_name_hint">Input your email</string>
-    <string name="settings_nickname_name_title">Nickname</string>
-    <string name="settings_nickname_name_hint">Input your nickname</string>
+    <string name="settings_first_name">First name</string>
+    <string name="settings_last_name">Last name</string>
+    <string name="settings_email_name">Email</string>
+    <string name="settings_nickname_name">Nickname</string>
+
+    <string name="change_password_button">Change password</string>
 </resources>
