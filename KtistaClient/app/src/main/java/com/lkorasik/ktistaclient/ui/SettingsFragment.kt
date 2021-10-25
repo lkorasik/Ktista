@@ -1,6 +1,7 @@
 package com.lkorasik.ktistaclient.ui
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -21,40 +22,57 @@ class SettingsFragment: Fragment() {
     }
 
     private fun initViews(view: View){
-        var root = view.findViewById<View>(R.id.first_name)
+        initFirstNameView(view)
+        initLastNameView(view)
+        initEmailView(view)
+        initNicknameView(view)
+    }
+
+    private fun initFirstNameView(view: View){
+        val root = view.findViewById<View>(R.id.first_name)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = "First name"
+            text = getString(R.string.settings_first_name_title)
         }
         firstNameEditText = root.findViewById<EditText>(R.id.field_value).apply{
-            hint = "Your first name"
+            hint = getString(R.string.settings_first_name_hint)
+            inputType = InputType.TYPE_CLASS_TEXT
         }
+    }
 
-        root = view.findViewById(R.id.last_name)
+    private fun initLastNameView(view: View){
+        val root = view.findViewById<View>(R.id.last_name)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = "Last name"
+            text = getString(R.string.settings_last_name_title)
         }
         lastNameEditText = root.findViewById<EditText>(R.id.field_value).apply{
-            hint = "Your last name"
+            hint = getString(R.string.settings_last_name_hint)
+            inputType = InputType.TYPE_CLASS_TEXT
         }
+    }
 
-        root = view.findViewById(R.id.email)
+    private fun initEmailView(view: View){
+        val root = view.findViewById<View>(R.id.email)
 
         root.findViewById<TextView>(R.id.field_title).apply {
-            text = "Email"
+            text = getString(R.string.settings_email_name_title)
         }
         emailEditText = root.findViewById<EditText>(R.id.field_value).apply {
-            hint = "Your email"
+            hint = getString(R.string.settings_email_name_hint)
+            inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         }
+    }
 
-        root = view.findViewById(R.id.nickname)
+    private fun initNicknameView(view: View){
+        val root = view.findViewById<View>(R.id.nickname)
 
         root.findViewById<TextView>(R.id.field_title).apply{
-            text = "Nickname"
+            text = getString(R.string.settings_nickname_name_title)
         }
         nicknameEditText = root.findViewById<EditText>(R.id.field_value).apply {
-            hint = "Your nickname"
+            hint = getString(R.string.settings_nickname_name_hint)
+            inputType = InputType.TYPE_CLASS_TEXT
         }
     }
 }
