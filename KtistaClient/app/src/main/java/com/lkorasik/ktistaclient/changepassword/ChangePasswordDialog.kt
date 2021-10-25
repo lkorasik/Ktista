@@ -54,10 +54,16 @@ class ChangePasswordDialog(private val context: Context, private val activity: A
         dialog = dialogBuilder.create()
     }
 
+    /**
+     * Call listener.onComplete after closing dialog
+     */
     fun setOnCompleteListener(listener: OnCompleteListener<PasswordValues>){
         onCompleteListeners.add(listener)
     }
 
+    /**
+     * Call lambda after closing dialog
+     */
     fun setOnCompleteListener(listener: (PasswordValues) -> Unit){
         val newListener = object: OnCompleteListener<PasswordValues> {
             override fun onComplete(container: PasswordValues) {

@@ -33,11 +33,5 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val dialog = ChangePasswordDialog(this, this)
-        dialog.setOnCompleteListener {
-            Toast.makeText(this, it.currentPassword, Toast.LENGTH_LONG).show()
-        }
-        dialog.show()
     }
 }
