@@ -2,4 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="gradient_angle">180</dimen>
+    <dimen name="button_radius">50dp</dimen>
+    <dimen name="button_horizontal_padding">15dp</dimen>
+    <dimen name="button_secondary_line_width">2dp</dimen>
+
+    <dimen name="edittext_radius">50dp</dimen>
+    <dimen name="edittext_margin">2dp</dimen>
+    <dimen name="edittext_vertical_padding">10dp</dimen>
+    <dimen name="edittext_horizontal_padding">10dp</dimen>
 </resources>
