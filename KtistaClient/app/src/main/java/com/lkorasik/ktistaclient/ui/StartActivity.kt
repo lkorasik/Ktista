@@ -16,8 +16,6 @@ class StartActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initFragment()
 
-        fragmentContainer = findViewById(fragmentContainerId)
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(fragmentContainerId, LoginFragment())
         transaction.commit()
