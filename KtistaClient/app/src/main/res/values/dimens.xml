@@ -13,9 +13,10 @@
     <dimen name="edittext_vertical_padding">10dp</dimen>
     <dimen name="edittext_horizontal_padding">10dp</dimen>
   
-    <dimen name="base_margin">4dp</dimen>
+    <dimen name="base_margin">5dp</dimen>
     <dimen name="base_text_size">20sp</dimen>
-    <dimen name="title_text_size">23sp</dimen>
+    <dimen name="dialog_title_text_size">23sp</dimen>
     <dimen name="base_padding">5dp</dimen>
 
+    <dimen name="login_title_text_size">36sp</dimen>
 </resources>
