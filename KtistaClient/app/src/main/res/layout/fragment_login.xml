@@ -31,7 +31,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text"
             android:hint="@string/login_nickname"
-            android:layout_margin="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin"
+            android:layout_marginBottom="@dimen/base_margin"
+            android:layout_marginStart="@dimen/login_input_margin"
+            android:layout_marginEnd="@dimen/login_input_margin"
             android:singleLine="true"/>
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -41,7 +44,10 @@
             android:background="@drawable/edit_text"
             android:hint="@string/login_password"
             android:inputType="textPassword"
-            android:layout_margin="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin"
+            android:layout_marginBottom="@dimen/base_margin"
+            android:layout_marginStart="@dimen/login_input_margin"
+            android:layout_marginEnd="@dimen/login_input_margin"
             android:singleLine="true"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -50,8 +56,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_main"
+            android:paddingHorizontal="@dimen/login_buttons_horizontal_padding"
             android:text="@string/login_sign_in"
             android:layout_margin="@dimen/base_margin"
+            android:stateListAnimator="@null"
             style="@style/PrimaryButton"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -59,9 +67,11 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/login_buttons_horizontal_padding"
             android:background="@drawable/button_secondary"
             android:text="@string/login_sign_up"
             android:layout_margin="@dimen/base_margin"
+            android:stateListAnimator="@null"
             style="@style/SecondaryButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >
