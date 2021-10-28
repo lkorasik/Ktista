@@ -19,6 +19,7 @@
     <dimen name="base_padding">5dp</dimen>
 
     <dimen name="login_title_text_size">36sp</dimen>
-    <dimen name="login_input_margin">30dp</dimen>
+    <dimen name="login_input_horizontal_margin">30dp</dimen>
+    <dimen name="login_button_top_margin">30dp</dimen>
     <dimen name="login_buttons_horizontal_padding">50dp</dimen>
 </resources>
