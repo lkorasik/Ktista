@@ -1,11 +1,10 @@
-package com.lkorasik.ktistaclient.ui
+package com.lkorasik.ktistaclient.ui.start
 
 import android.os.*
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityStartBinding
-import com.lkorasik.ktistaclient.ui.login.LoginFragment
+import com.lkorasik.ktistaclient.ui.start.login.LoginFragment
 
 class StartActivity: AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding

@@ -16,4 +16,10 @@
     <string name="login_password">Password</string>
     <string name="login_sign_in">Sign in</string>
     <string name="login_sign_up">Sign up</string>
+
+    <string name="registration_first_name">First name</string>
+    <string name="registration_last_name">Last name</string>
+    <string name="registration_email">Email</string>
+    <string name="registration_nickname">Nickname</string>
+    <string name="registration_complete">Complete</string>
 </resources>
