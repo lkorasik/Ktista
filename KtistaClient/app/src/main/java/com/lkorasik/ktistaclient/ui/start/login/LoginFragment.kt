@@ -6,6 +6,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lkorasik.ktistaclient.databinding.*
+import com.lkorasik.ktistaclient.ui.start.StartActivity
 
 class LoginFragment: Fragment() {
     private lateinit var loginViewModel: LoginViewModel
@@ -33,7 +34,7 @@ class LoginFragment: Fragment() {
             Toast.makeText(root.context, "Sign in: ${nickname.text} -> ${password.text}", Toast.LENGTH_SHORT).show()
         }
         signUp.setOnClickListener {
-            Toast.makeText(root.context, "Sign up: ${nickname.text} -> ${password.text}", Toast.LENGTH_SHORT).show()
+            (activity as StartActivity).showRegistrationFragment()
         }
 
         return root

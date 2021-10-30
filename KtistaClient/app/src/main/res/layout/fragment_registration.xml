@@ -77,15 +77,27 @@
             android:singleLine="true"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/complete"
+            android:id="@+id/sign_up"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_main"
             android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-            android:text="@string/registration_complete"
+            android:background="@drawable/button_main"
+            android:text="@string/login_sign_up"
             android:layout_marginTop="@dimen/start_button_top_margin"
             android:stateListAnimator="@null"
             style="@style/PrimaryButton"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_in"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_secondary"
+            android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
+            android:text="@string/login_sign_in"
+            android:layout_marginTop="@dimen/base_margin"
+            android:stateListAnimator="@null"
+            style="@style/SecondaryButton"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

@@ -5,18 +5,36 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityStartBinding
 import com.lkorasik.ktistaclient.ui.start.login.LoginFragment
+import com.lkorasik.ktistaclient.ui.start.registration.RegistrationFragment
+import kotlin.math.log
 
 class StartActivity: AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
     private val fragmentContainerId = R.id.fragment_container
 
+    private lateinit var registrationLoginFragment: RegistrationFragment
+    private lateinit var loginFragment: LoginFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initFragment()
 
+        registrationLoginFragment = RegistrationFragment()
+        loginFragment = LoginFragment()
+
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(fragmentContainerId, LoginFragment())
+        transaction.add(fragmentContainerId, loginFragment)
         transaction.commit()
+    }
+
+    fun showRegistrationFragment(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(fragmentContainerId, registrationLoginFragment).commit()
+    }
+
+    fun showLoginFragment(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(fragmentContainerId, loginFragment).commit()
     }
 
     private fun initFragment(){
