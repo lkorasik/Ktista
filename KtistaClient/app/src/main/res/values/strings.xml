@@ -11,4 +11,5 @@
 
     <string name="settings_password">Password</string>
     <string name="settings_change">Change</string>
+    <string name="post_photo">post_photo</string>
 </resources>

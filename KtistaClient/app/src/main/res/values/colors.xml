@@ -7,7 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dislike">#382C26</color>
+    <color name="like">#FB6565</color>
+    <color name="default_icon">#C8C8C8</color>
 
-    <color name="gradient_start">#E09777</color>
+
+    <color name="base_skin">#E09777</color>
     <color name="gradient_end">#FAEAD3</color>
 </resources>
