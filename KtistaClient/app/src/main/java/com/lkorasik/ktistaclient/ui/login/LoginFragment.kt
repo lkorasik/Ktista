@@ -10,9 +10,9 @@ import com.lkorasik.ktistaclient.ui.dashboard.DashboardViewModel
 
 class LoginFragment: Fragment() {
     private lateinit var dashboardViewModel: LoginViewModel
-    private var _binding: FragmentLoginBinding? = null
+    private var bindingObject: FragmentLoginBinding? = null
 
-    private val binding get() = _binding!!
+    private val binding get() = bindingObject!!
 
     private lateinit var nickname: EditText
     private lateinit var password: EditText
@@ -22,7 +22,7 @@ class LoginFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dashboardViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        bindingObject = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         nickname = binding.nickname
@@ -42,6 +42,6 @@ class LoginFragment: Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        bindingObject = null
     }
 }
