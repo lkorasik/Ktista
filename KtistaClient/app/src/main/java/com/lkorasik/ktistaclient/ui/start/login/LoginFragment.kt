@@ -11,6 +11,7 @@ import com.lkorasik.ktistaclient.ui.start.StartActivity
 class LoginFragment: Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private var bindingObject: FragmentLoginBinding? = null
+    private lateinit var rootActivity: StartActivity
 
     private val binding get() = bindingObject!!
 
@@ -25,16 +26,18 @@ class LoginFragment: Fragment() {
         bindingObject = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        rootActivity = activity as StartActivity
+
         nickname = binding.nickname
         password = binding.password
         signIn = binding.signIn
         signUp = binding.signUp
 
         signIn.setOnClickListener {
-            Toast.makeText(root.context, "Sign in: ${nickname.text} -> ${password.text}", Toast.LENGTH_SHORT).show()
+            rootActivity.launchMainActivity()
         }
         signUp.setOnClickListener {
-            (activity as StartActivity).showRegistrationFragment()
+            rootActivity.showRegistrationFragment()
         }
 
         return root

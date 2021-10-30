@@ -1,16 +1,19 @@
 package com.lkorasik.ktistaclient.ui.start.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lkorasik.ktistaclient.MainActivity
 import com.lkorasik.ktistaclient.databinding.*
 import com.lkorasik.ktistaclient.ui.start.StartActivity
 
 class RegistrationFragment: Fragment() {
     private lateinit var registrationViewModel: RegistrationViewModel
     private var bindingObject: FragmentRegistrationBinding? = null
+    private lateinit var rootActivity: StartActivity
 
     private val binding get() = bindingObject!!
 
@@ -28,6 +31,8 @@ class RegistrationFragment: Fragment() {
         bindingObject = FragmentRegistrationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        rootActivity = activity as StartActivity
+
         firstName = binding.firstName
         lastName = binding.lastName
         nickname = binding.nickname
@@ -37,10 +42,10 @@ class RegistrationFragment: Fragment() {
         signUp = binding.signUp
 
         signIn.setOnClickListener {
-            (activity as StartActivity).showLoginFragment()
+            rootActivity.showLoginFragment()
         }
         signUp.setOnClickListener {
-            Toast.makeText(root.context, "${firstName.text}\n${password.text}\n${nickname.text}\n${email.text}\n${password.text}", Toast.LENGTH_SHORT).show()
+            rootActivity.launchMainActivity()
         }
 
         return root
