@@ -11,4 +11,9 @@
 
     <string name="settings_password">Password</string>
     <string name="settings_change">Change</string>
+
+    <string name="login_nickname">Nickname</string>
+    <string name="login_password">Password</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_sign_up">Sign up</string>
 </resources>
