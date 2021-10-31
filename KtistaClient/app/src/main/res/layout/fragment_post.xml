@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/post_photo"
+            android:contentDescription="@string/cd_post_photo"
             android:scaleType="centerCrop">
 
         </ImageView>

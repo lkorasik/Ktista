@@ -12,10 +12,10 @@
     <string name="settings_password">Password</string>
     <string name="settings_change">Change</string>
 
-    <string name="post_photo">post_photo</string>
-    <string name="post_like">like</string>
-    <string name="post_dislike">CD_dislike</string>
-    <string name="post_comments">CD_comment</string>
+    <string name="cd_post_photo">post_photo</string>
+    <string name="cd_post_like">like</string>
+    <string name="cd_post_dislike">dislike</string>
+    <string name="cd_post_comments">comment</string>
 
 
     <string name="login_nickname">Nickname</string>
