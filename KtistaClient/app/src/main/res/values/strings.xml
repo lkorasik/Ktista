@@ -17,7 +17,6 @@
     <string name="cd_post_dislike">dislike</string>
     <string name="cd_post_comments">comment</string>
 
-
     <string name="login_nickname">Nickname</string>
     <string name="login_password">Password</string>
     <string name="login_sign_in">Sign in</string>
@@ -29,4 +28,7 @@
     <string name="registration_nickname">Nickname</string>
     <string name="registration_sign_in">Sign in</string>
     <string name="registration_sign_up">Sign up</string>
+
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
 </resources>
