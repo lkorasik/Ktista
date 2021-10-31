@@ -13,9 +13,9 @@
     <string name="settings_change">Change</string>
 
     <string name="post_photo">post_photo</string>
-    <string name="cd_like">like</string>
-    <string name="cd_dislike">CD_dislike</string>
-    <string name="cd_comment">CD_comment</string>
+    <string name="post_like">like</string>
+    <string name="post_dislike">CD_dislike</string>
+    <string name="post_comments">CD_comment</string>
 
 
     <string name="login_nickname">Nickname</string>

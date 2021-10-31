@@ -10,15 +10,15 @@
     tools:showIn="@layout/fragment_post">
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/iv_like"
         android:layout_width="13dp"
         android:layout_height="11dp"
         android:layout_marginEnd="1dp"
-        android:contentDescription="@string/cd_like"
+        android:contentDescription="@string/post_like"
         app:srcCompat="@drawable/ic_like" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_like_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -26,15 +26,15 @@
         android:textSize="@dimen/base_feed_text_size" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/iv_dislike"
         android:layout_width="13dp"
         android:layout_height="11dp"
         android:layout_marginEnd="1dp"
-        android:contentDescription="@string/cd_dislike"
+        android:contentDescription="@string/post_dislike"
         app:srcCompat="@drawable/ic_dislike" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv_dislike_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -42,15 +42,15 @@
         android:textSize="@dimen/base_feed_text_size" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/iv_comments"
         android:layout_width="13dp"
         android:layout_height="11dp"
         android:layout_marginEnd="1dp"
-        android:contentDescription="@string/cd_comment"
+        android:contentDescription="@string/post_comments"
         app:srcCompat="@drawable/ic_comment" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_comments_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
