@@ -22,4 +22,7 @@
     <dimen name="start_input_horizontal_margin">30dp</dimen>
     <dimen name="start_button_top_margin">30dp</dimen>
     <dimen name="start_buttons_horizontal_padding">50dp</dimen>
+
+    <dimen name="registration_edit_text_min_height">48dp</dimen>
+    <dimen name="margin_between_buttons">14dp</dimen>
 </resources>

@@ -72,7 +72,7 @@
             android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
             android:background="@drawable/button_secondary"
             android:text="@string/login_sign_up"
-            android:layout_marginTop="@dimen/base_margin"
+            android:layout_marginTop="@dimen/margin_between_buttons"
             android:stateListAnimator="@null"
             style="@style/SecondaryButton"/>
     </LinearLayout>
