@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:id="@+id/ll_TopBar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
-
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -31,19 +29,20 @@
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
+
             <LinearLayout
-                android:layout_width="168dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="50dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:id="@+id/TV_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="TV_user_name">
+                    android:maxLength="20"
+                    android:textSize="@dimen/base_feed_text_size">
 
                 </TextView>
 
@@ -51,30 +50,35 @@
                     android:id="@+id/TV_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TV_login" />
+                    android:maxLength="20"
+                    android:maxLines="3"
+                    android:textSize="@dimen/sec_feed_text_size" />
+
             </LinearLayout>
 
-            <include layout="@layout/icons_feed_widget" />
 
+            <include layout="@layout/widget_icons_feed" />
 
         </LinearLayout>
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2">
+            android:maxLines="2"
+            android:paddingStart="70dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="60dp"
+            android:paddingBottom="10dp"
+            android:textSize="@dimen/base_feed_text_size">
 
         </TextView>
-
 
         <ImageView
             android:id="@+id/IV_photo_post"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/post_photo"
             android:scaleType="centerCrop">
