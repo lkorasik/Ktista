@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.lkorasik.ktistaclient.changepassword.*
 import com.lkorasik.ktistaclient.databinding.ActivityMainBinding
-import com.lkorasik.ktistaclient.changepassword.ChangePasswordDialog
 
 class MainActivity : AppCompatActivity() {
 
