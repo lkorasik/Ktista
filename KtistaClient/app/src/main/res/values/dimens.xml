@@ -18,8 +18,11 @@
     <dimen name="dialog_title_text_size">23sp</dimen>
     <dimen name="base_padding">5dp</dimen>
 
-    <dimen name="login_title_text_size">36sp</dimen>
-    <dimen name="login_input_horizontal_margin">30dp</dimen>
-    <dimen name="login_button_top_margin">30dp</dimen>
-    <dimen name="login_buttons_horizontal_padding">50dp</dimen>
+    <dimen name="start_title_text_size">36sp</dimen>
+    <dimen name="start_input_horizontal_margin">30dp</dimen>
+    <dimen name="start_button_top_margin">30dp</dimen>
+    <dimen name="start_buttons_horizontal_padding">50dp</dimen>
+
+    <dimen name="registration_edit_text_min_height">48dp</dimen>
+    <dimen name="margin_between_buttons">14dp</dimen>
 </resources>
