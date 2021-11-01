@@ -2,25 +2,24 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:weightSum="2"
+    android:weightSum="10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <include
         layout="@layout/fragment_user"
         android:id="@+id/fu_user_info"
-        android:layout_weight="1"
-        android:layout_margin="3dp"
+        android:layout_weight="4"
+        android:layout_margin="10dp"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_action_button"
-        android:layout_weight="1"
+        android:layout_weight="6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-        android:layout_margin="3dp"
+        android:layout_margin="10dp"
         android:background="@drawable/button_main"
         android:text="@string/follow"
         android:stateListAnimator="@null"
