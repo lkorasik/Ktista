@@ -1,78 +1,49 @@
 package com.lkorasik.ktistaclient.changepassword
 
-import android.app.*
+import android.app.AlertDialog
 import android.content.*
-import android.text.InputType
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.widget.*
 import com.lkorasik.ktistaclient.R
-import kotlin.collections.ArrayList
 
-class ChangePasswordDialog(private val context: Context, private val activity: Activity) {
-    private var currentPasswordEditText: EditText
-    private var newPasswordEditText: EditText
-    private var repeatNewPasswordEditText: EditText
-    private var dialog: AlertDialog
+class ChangePasswordDialog(context: Context) {
+    private val ok: Button
+    private val cancel: Button
+    private val currentPassword: EditText
+    private val newPassword: EditText
+    private val repeatNewPassword: EditText
 
-    private val onCompleteListeners: ArrayList<OnCompleteListener<PasswordValues>> = arrayListOf()
+    private val dialog: AlertDialog
 
     init {
-        val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Change password")
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_change_password, null)
+        val builder = AlertDialog.Builder(context)
 
-        val customLayout = activity.layoutInflater.inflate(R.layout.dialog_change_password, null)
+        builder.setView(view)
+        dialog = builder.create()
 
-        dialogBuilder.setView(customLayout)
+        currentPassword = view.findViewById(R.id.current_password)
+        newPassword = view.findViewById(R.id.new_password)
+        repeatNewPassword = view.findViewById(R.id.repeat_new_password)
 
-        currentPasswordEditText = customLayout.findViewById<EditText>(R.id.current_password).apply {
-            hint = "Current pswd"
-            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-        }
-        newPasswordEditText = customLayout.findViewById<EditText>(R.id.new_password).apply {
-            hint = "New pswd"
-            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-        }
-        repeatNewPasswordEditText = customLayout.findViewById<EditText>(R.id.repeat_new_password).apply {
-            hint = "Repeat new pswd"
-            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+        // This line is necessary for rounded shape of dialog back
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        ok = view.findViewById(R.id.btn_ok)
+        ok.setOnClickListener {
+            dialog.dismiss()
         }
 
-        dialogBuilder.setPositiveButton("Ok") { _, _ ->
-            for(listener in onCompleteListeners)
-                listener.onComplete(
-                    PasswordValues(
-                        currentPasswordEditText.text.toString(),
-                        newPasswordEditText.text.toString(),
-                        repeatNewPasswordEditText.text.toString()
-                    )
-                )
-            Toast.makeText(context, "Changed!", Toast.LENGTH_LONG).show()
+        cancel = view.findViewById(R.id.btn_cancel)
+        cancel.setOnClickListener {
+            dialog.dismiss()
         }
-        dialogBuilder.setNegativeButton("Cancel") { _, _ ->
-            Toast.makeText(context, "Go back", Toast.LENGTH_LONG).show()
-        }
-
-        dialog = dialogBuilder.create()
     }
 
-    /**
-     * Call listener.onComplete after closing dialog
-     */
-    fun setOnCompleteListener(listener: OnCompleteListener<PasswordValues>){
-        onCompleteListeners.add(listener)
+    fun show(){
+        dialog.create()
+        dialog.show()
     }
-
-    /**
-     * Call lambda after closing dialog
-     */
-    fun setOnCompleteListener(listener: (PasswordValues) -> Unit){
-        val newListener = object: OnCompleteListener<PasswordValues> {
-            override fun onComplete(container: PasswordValues) {
-                listener(container)
-            }
-        }
-
-        onCompleteListeners.add(newListener)
-    }
-
-    fun show() = dialog.show()
 }
