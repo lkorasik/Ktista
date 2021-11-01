@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:id="@+id/ll_post"
         android:layout_width="match_parent"
@@ -14,7 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
             android:id="@+id/ll_post_header"
             android:layout_width="match_parent"
@@ -22,49 +20,11 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ci_post_avatar"
-
-                android:layout_width="@dimen/radius_avatar_post"
-                android:layout_height="@dimen/radius_avatar_post"
-                android:layout_margin="10dp">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-
-            <LinearLayout
-                android:id="@+id/ll_names"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="50dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="20"
-                    android:textSize="@dimen/base_feed_text_size">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/tv_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="20"
-                    android:maxLines="3"
-                    android:textSize="@dimen/sec_feed_text_size" />
-
-            </LinearLayout>
-
+            <include layout="@layout/fragment_user"/>
 
             <include layout="@layout/widget_icons_feed" />
 
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/tv_post_description"
@@ -76,9 +36,7 @@
             android:paddingTop="6dp"
             android:paddingEnd="60dp"
             android:paddingBottom="10dp"
-            android:textSize="@dimen/base_feed_text_size">
-
-        </TextView>
+            android:textSize="@dimen/base_feed_text_size"/>
 
         <ImageView
             android:id="@+id/iv_post_photo"
@@ -86,12 +44,8 @@
             android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/cd_post_photo"
-            android:scaleType="centerCrop">
-
-        </ImageView>
-
+            android:scaleType="centerCrop"/>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
