@@ -1,6 +1,7 @@
 package com.lkorasik.ktistaclient.ui.feed
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,12 @@ class FeedFragment : Fragment() {
 
     private lateinit var feedAdapter: FeedRecyclerAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        feedAdapter = FeedRecyclerAdapter()
+        feedAdapter.setItems(posts = loadPosts())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,9 +37,6 @@ class FeedFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_feed)
         recyclerView.setHasFixedSize(true)
-        feedAdapter = FeedRecyclerAdapter()
-
-        feedAdapter.setItems(posts = loadPosts())
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
