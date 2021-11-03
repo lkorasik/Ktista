@@ -45,15 +45,15 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
     override fun getItemCount(): Int = postList.size
 
 
-     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatar: CircleImageView = itemView.findViewById(R.id.ci_post_avatar)
         private val postPhoto: ImageView = itemView.findViewById(R.id.iv_post_photo)
-        private val tvDescription: TextView = itemView.findViewById(R.id.tv_post_description)
+        private val description: TextView = itemView.findViewById(R.id.tv_post_description)
         private val name: TextView = itemView.findViewById(R.id.tv_user_name)
         private val login: TextView = itemView.findViewById(R.id.tv_login)
-        private val tvDislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
-        private val tvLikeCount: TextView = itemView.findViewById(R.id.tv_like_count)
-        private val tvCommentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
+        private val dislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
+        private val likeCount: TextView = itemView.findViewById(R.id.tv_like_count)
+        private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
 
 
         fun bind(postModel: PostModel) {
@@ -63,13 +63,12 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
 
             Picasso.get().load(postModel.photo).into(postPhoto)
 
-
-                name.text = postModel.user.name
-                login.text = postModel.user.login
-                tvDescription.text = postModel.description
-                tvDislikeCount.text = postModel.dislikeCount
-                tvLikeCount.text = postModel.likeCount
-                tvCommentCount.text = postModel.commentCount
+            name.text = postModel.user.name
+            login.text = postModel.user.login
+            description.text = postModel.description
+            dislikeCount.text = postModel.dislikeCount
+            likeCount.text = postModel.likeCount
+            commentCount.text = postModel.commentCount
 
         }
     }

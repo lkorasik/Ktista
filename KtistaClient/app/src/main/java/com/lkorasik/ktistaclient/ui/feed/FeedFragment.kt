@@ -32,31 +32,56 @@ class FeedFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         feedAdapter = FeedRecyclerAdapter()
 
+        feedAdapter.setItems(posts = loadPosts())
+
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = feedAdapter
         }
-        feedAdapter.setItems(posts = loadPosts())
     }
 
-    //Test function
+    /*
+    Test Function
+     */
     private fun loadPosts(): ArrayList<PostModel> {
+        val photo =
+            "https://v1.popcornnews.ru/k2/news/1200/upload/news/414696148775.jpg"
+        val text = "texttexttexttexttextte\nxttexttextte\nxttexttexttexttext"
         val usr = UserModel(
-            avatar = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+            avatar = photo,
             name = "Bob",
             login = "@bobik"
         )
-        val photo =
-            "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+
         return arrayListOf(
-            PostModel(user = usr, photo = photo, description = "342423", likeCount = "322", dislikeCount = "1337"),
-            PostModel(user = usr, photo = photo, likeCount = "322", dislikeCount = "1337"),
-            PostModel(user = usr, photo = photo, likeCount = "2", dislikeCount = "37"),
             PostModel(
                 user = usr,
                 photo = photo,
+                description = text,
+                likeCount = "322",
+                dislikeCount = "1337"
+            ),
+            PostModel(
+                user = usr,
+                photo = photo,
+                likeCount = "322",
+                dislikeCount = "1337",
+                commentCount = "232"
+            ),
+            PostModel(
+                user = usr,
+                photo = photo,
+                likeCount = "2",
+                dislikeCount = "37",
+                commentCount = "232"
+            ),
+            PostModel(
+                user = usr,
+                photo = photo,
+                description = text,
                 likeCount = "32",
-                dislikeCount = "17"
+                dislikeCount = "17",
+                commentCount = "232"
             )
         )
 
