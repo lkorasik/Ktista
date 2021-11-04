@@ -46,7 +46,7 @@
             android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/cd_post_photo"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"/>
 
     </LinearLayout>
 
