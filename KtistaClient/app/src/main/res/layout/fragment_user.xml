@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_post_header"
-    android:layout_width="match_parent"
+    android:id="@+id/ll_avatar_names"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal">
@@ -26,14 +26,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
+            android:maxLines="1"
             android:textSize="@dimen/base_feed_text_size"/>
 
         <TextView
-            android:id="@+id/tv_nickname"
+            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
-            android:maxLines="3"
+            android:maxLines="1"
             android:textSize="@dimen/sec_feed_text_size" />
 
     </LinearLayout>
