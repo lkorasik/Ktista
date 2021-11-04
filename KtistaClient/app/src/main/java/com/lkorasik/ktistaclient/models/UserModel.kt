@@ -4,5 +4,4 @@ class UserModel(
     var avatar: String?,
     var name: String = "",
     var login: String = ""
-) {
-}
+)

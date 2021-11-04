@@ -9,7 +9,6 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ci_post_avatar"
-
         android:layout_width="@dimen/radius_avatar_post"
         android:layout_height="@dimen/radius_avatar_post"
         android:layout_margin="10dp"/>
@@ -27,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
+            android:maxLines="1"
             android:textSize="@dimen/base_feed_text_size"/>
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
-            android:maxLines="3"
+            android:maxLines="1"
             android:textSize="@dimen/sec_feed_text_size" />
 
     </LinearLayout>

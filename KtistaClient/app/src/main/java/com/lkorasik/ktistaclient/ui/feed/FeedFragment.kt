@@ -1,7 +1,6 @@
 package com.lkorasik.ktistaclient.ui.feed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,8 +52,8 @@ class FeedFragment : Fragment() {
         val text = "texttexttexttexttextte\nxttexttextte\nxttexttexttexttext"
         val usr = UserModel(
             avatar = photo,
-            name = "Bob",
-            login = "@bobik"
+            name = "Boывавыаывааааааааааааввыааааааааааааааааав1111111111111111ыаааааааааааb",
+            login = "@b1oв\nыааа\nаааа\nааааааааааааа\nаыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы\nыыыыыыыыыыыыыыыыыыы\nыыыы11111111111111ыыыыыыыыыыыыыыыыыыыыыааbik"
         )
 
         return arrayListOf(
@@ -88,6 +87,5 @@ class FeedFragment : Fragment() {
                 commentCount = "232"
             )
         )
-
     }
 }

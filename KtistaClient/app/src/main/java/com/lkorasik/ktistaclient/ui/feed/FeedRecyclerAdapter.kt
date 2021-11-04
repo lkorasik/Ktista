@@ -1,6 +1,5 @@
 package com.lkorasik.ktistaclient.ui.feed
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,26 +15,19 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
 
     private var postList: ArrayList<PostModel> = ArrayList()
 
-
-    @SuppressLint("NotifyDataSetChanged")
     fun setItems(posts: ArrayList<PostModel>) {
         postList.addAll(posts)
-        notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun clearItems() {
         postList.clear()
-        notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val postView = layoutInflater.inflate(R.layout.fragment_post, parent, false)
 
         return FeedViewHolder(itemView = postView)
-
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
@@ -54,7 +46,6 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
         private val dislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
         private val likeCount: TextView = itemView.findViewById(R.id.tv_like_count)
         private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
-
 
         fun bind(postModel: PostModel) {
             postModel.user.avatar?.let { url ->
