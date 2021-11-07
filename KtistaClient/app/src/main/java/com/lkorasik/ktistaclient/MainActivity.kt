@@ -1,5 +1,6 @@
 package com.lkorasik.ktistaclient
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lkorasik.ktistaclient.changepassword.*
 import com.lkorasik.ktistaclient.databinding.ActivityMainBinding
+import com.lkorasik.ktistaclient.ui.AddPostActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,5 +34,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        startActivity(Intent(this, AddPostActivity::class.java))
     }
 }

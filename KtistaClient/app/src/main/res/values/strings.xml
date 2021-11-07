@@ -37,4 +37,6 @@
 
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
+
+    <string name="description_add_post">Description</string>
 </resources>
