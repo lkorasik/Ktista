@@ -48,11 +48,11 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
         private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
 
         fun bind(postModel: PostModel) {
-            postModel.user.avatar?.let { url ->
+            postModel.user.avatarUrl?.let { url ->
                 Picasso.get().load(url).into(avatar)
             }
 
-            Picasso.get().load(postModel.photo).into(postPhoto)
+            Picasso.get().load(postModel.photoUrl).into(postPhoto)
 
             name.text = postModel.user.name
             login.text = postModel.user.login
