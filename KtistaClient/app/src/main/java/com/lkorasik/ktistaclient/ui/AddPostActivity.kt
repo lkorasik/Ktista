@@ -22,7 +22,7 @@ class AddPostActivity: AppCompatActivity() {
         bindingObject = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        image = binding.ivImage
+        image = binding.ivPostPhoto
         description = binding.etDescription
 
         dispatchTakePictureIntent()
