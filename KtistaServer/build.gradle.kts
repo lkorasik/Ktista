@@ -17,6 +17,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("io.ktor:ktor-server-netty:1.5.2")
     implementation("io.ktor:ktor-html-builder:1.5.2")
+    implementation("org.xerial:sqlite-jdbc:3.36.0.3")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
 }
 
