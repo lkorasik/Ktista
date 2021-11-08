@@ -37,7 +37,7 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
     override fun getItemCount(): Int = postList.size
 
 
-    class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatar: CircleImageView = itemView.findViewById(R.id.ci_post_avatar)
         private val postPhoto: ImageView = itemView.findViewById(R.id.iv_post_photo)
         private val description: TextView = itemView.findViewById(R.id.tv_post_description)
@@ -60,7 +60,6 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
             dislikeCount.text = postModel.dislikeCount
             likeCount.text = postModel.likeCount
             commentCount.text = postModel.commentCount
-
         }
     }
 }
