@@ -13,11 +13,17 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation("io.ktor:ktor-server-netty:1.5.2")
-    implementation("io.ktor:ktor-html-builder:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.31")
+
+    implementation("org.xerial:sqlite-jdbc:3.36.0.3")
+    implementation("org.jetbrains.exposed:exposed-core:0.36.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.36.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
+    implementation("io.ktor:ktor-server-netty:1.6.4")
+    implementation("io.ktor:ktor-html-builder:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
 }
 
 tasks.test {
@@ -31,3 +37,4 @@ tasks.withType<KotlinCompile>() {
 application {
     mainClass.set("ServerKt")
 }
+
