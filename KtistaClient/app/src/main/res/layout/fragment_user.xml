@@ -23,6 +23,7 @@
 
         <TextView
             android:id="@+id/tv_user_name"
+            android:fontFamily="@font/montserrat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
@@ -31,6 +32,7 @@
 
         <TextView
             android:id="@+id/tv_login"
+            android:fontFamily="@font/montserrat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
