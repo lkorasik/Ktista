@@ -36,8 +36,10 @@ class AddPostActivity: AppCompatActivity() {
         image = binding.ivPostPhoto
         description = binding.etDescription
 
-        val draw = getDrawable(R.drawable.outrun_vaporwave_hd_wallpaper_preview)
-        image.setImageDrawable(draw)
+        val grad = binding.tvTextStub
+        grad.startColor = getColor(R.color.base_color)
+        grad.endColor = getColor(R.color.gradient_end)
+        grad.invalidate()
 
         chooseImage(this)
     }

@@ -38,5 +38,8 @@
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
 
-    <string name="description_add_post">Description</string>
+    <string name="description_add_post">Your description...</string>
+    <string name="description_title_add_post"><b>Description</b></string>
+
+    <string name="add_post_image_stub">Your image</string>
 </resources>
