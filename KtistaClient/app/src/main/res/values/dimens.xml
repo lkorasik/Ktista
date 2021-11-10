@@ -40,4 +40,6 @@
 
     <dimen name="registration_edit_text_min_height">48dp</dimen>
     <dimen name="margin_between_buttons">14dp</dimen>
+    
+    <dimen name="add_post_text_stub">24sp</dimen>
 </resources>
