@@ -1,3 +1,4 @@
+import com.lkorasik.config.StartupConfigurationLoader
 import io.ktor.application.call
 import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
@@ -19,7 +20,9 @@ fun HTML.index() {
 }
 
 fun main() {
-    embeddedServer(Netty, port = 12364, host = "192.168.0.231") {
+    val configuration = StartupConfigurationLoader.configuration
+
+    embeddedServer(Netty, port = configuration.port, host = configuration.host) {
         routing {
             get("/") {
                 println("Connected")
