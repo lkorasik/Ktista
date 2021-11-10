@@ -60,7 +60,6 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
             dislikeCount.text = postModel.dislikeCount
             likeCount.text = postModel.likeCount
             commentCount.text = postModel.commentCount
-
         }
     }
 }
