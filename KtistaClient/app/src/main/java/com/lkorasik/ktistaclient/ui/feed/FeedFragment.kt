@@ -1,9 +1,7 @@
 package com.lkorasik.ktistaclient.ui.feed
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +15,7 @@ class FeedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         feedAdapter = FeedRecyclerAdapter()
     }
 
@@ -27,7 +26,6 @@ class FeedFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,5 +41,9 @@ class FeedFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = feedAdapter
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_feed_menu, menu)
     }
 }
