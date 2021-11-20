@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
        // startActivity(Intent(this, AddPostActivity::class.java))
-
+        //testci
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 }
