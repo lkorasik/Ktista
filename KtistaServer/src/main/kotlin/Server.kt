@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.lkorasik.auth.Login
+import com.lkorasik.auth.Registration
 import com.lkorasik.jwt.JWT
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -61,7 +62,7 @@ fun main() {
                 call.respond(mapOf("token" to simpleJwt.sign(user.name)))
             }
             post("/reg"){
-                val post = call.receive<Login>()
+                val post = call.receive<Registration>()
                 if(users.containsKey(post.name))
                     throw RuntimeException("User already has")
                 users[post.name] = Login(post.name, post.password)
