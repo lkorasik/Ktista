@@ -29,6 +29,7 @@ class StartActivity: AppCompatActivity() {
 
         val dialog = ChangePasswordDialog(this)
         dialog.show()
+        ///ty
     }
 
     fun showRegistrationFragment(){
