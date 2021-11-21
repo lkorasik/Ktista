@@ -15,9 +15,19 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("io.ktor:ktor-server-netty:1.5.2")
-    implementation("io.ktor:ktor-html-builder:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+
+    // Auth
+    implementation("io.ktor:ktor-auth:1.6.4")
+    implementation("io.ktor:ktor-auth-jwt:1.6.5")
+
+    // Serialization
+    implementation("io.ktor:ktor-jackson:1.6.5")
+
+    // Server
+    val ktor_version = "1.6.4"
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-html-builder:$ktor_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
 }
 
 tasks.test {
