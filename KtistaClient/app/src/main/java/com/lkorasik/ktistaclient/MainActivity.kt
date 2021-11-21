@@ -1,19 +1,19 @@
 package com.lkorasik.ktistaclient
 
-import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.lkorasik.ktistaclient.changepassword.*
 import com.lkorasik.ktistaclient.databinding.ActivityMainBinding
-import com.lkorasik.ktistaclient.ui.AddPostActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,19 +22,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar = binding.includeToolbar.customToolbar
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        navController = navHostFragment.navController
+
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
+            topLevelDestinationIds = setOf(
                 R.id.navigation_feed, R.id.navigation_profile, R.id.navigation_settings
-            )
+            ),
+            fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
+
         navView.setupWithNavController(navController)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        setSupportActionBar(toolbar)
 
-       // startActivity(Intent(this, AddPostActivity::class.java))
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//         startActivity(Intent(this, AddPostActivity::class.java))
     }
 }

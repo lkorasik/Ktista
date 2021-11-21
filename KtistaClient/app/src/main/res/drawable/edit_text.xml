@@ -17,7 +17,7 @@
         android:top="@dimen/edittext_margin">
         <shape android:shape="rectangle" >
             <corners android:radius="@dimen/edittext_radius"/>
-            <solid android:color="@color/white" />
+            <solid android:color="@color/background" />
             <padding
                 android:bottom="@dimen/edittext_vertical_padding"
                 android:top="@dimen/edittext_vertical_padding"
