@@ -14,6 +14,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import io.ktor.util.pipeline.*
 import kotlinx.html.*
 import java.lang.RuntimeException
 import java.util.*
@@ -38,21 +39,13 @@ fun main() {
     }.start(wait = true)
 }
 
-private fun Application.addRouting(simpleJwt: JWT) {
+private fun Application.addRouting(jwt: JWT) {
     routing {
         post("/login") {
-            val post = call.receive<Login>()
-            val user = users[post.name]
-            if (user?.password != post.password)
-                throw RuntimeException("Invalid credentials")
-            call.respond(mapOf("token" to simpleJwt.sign(user.name)))
+            handleLogin(jwt)
         }
         post("/reg") {
-            val post = call.receive<Registration>()
-            if (users.containsKey(post.name))
-                throw RuntimeException("User already has")
-            users[post.name] = Login(post.name, post.password)
-            call.respond(mapOf("token" to simpleJwt.sign(post.name)))
+            handleRegistration(jwt)
         }
         get("/") {
             println("Connected")
@@ -66,6 +59,22 @@ private fun Application.addRouting(simpleJwt: JWT) {
             }
         }
     }
+}
+
+private suspend fun PipelineContext<Unit, ApplicationCall>.handleRegistration(jwt: JWT) {
+    val post = call.receive<Registration>()
+    if (users.containsKey(post.name))
+        throw RuntimeException("User already has")
+    users[post.name] = Login(post.name, post.password)
+    call.respond(mapOf("token" to jwt.sign(post.name)))
+}
+
+private suspend fun PipelineContext<Unit, ApplicationCall>.handleLogin(jwt: JWT) {
+    val post = call.receive<Login>()
+    val user = users[post.name]
+    if (user?.password != post.password)
+        throw RuntimeException("Invalid credentials")
+    call.respond(mapOf("token" to jwt.sign(user.name)))
 }
 
 private fun Application.installFeatures(simpleJwt: JWT) {
