@@ -32,6 +32,7 @@
             android:id="@+id/tv_post_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:ellipsize="end"
             android:maxLines="2"
             android:paddingStart="70dp"

@@ -19,6 +19,7 @@
 
     <TextView
         android:id="@+id/tv_like_count"
+        android:fontFamily="@font/montserrat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -35,6 +36,7 @@
 
     <TextView
         android:id="@+id/tv_dislike_count"
+        android:fontFamily="@font/montserrat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -51,6 +53,7 @@
 
     <TextView
         android:id="@+id/tv_comments_count"
+        android:fontFamily="@font/montserrat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
