@@ -16,7 +16,6 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import kotlinx.html.*
 import java.lang.RuntimeException
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun HTML.index() {
@@ -32,55 +31,62 @@ fun HTML.index() {
 
 fun main() {
     embeddedServer(Netty, port = 12364, host = "192.168.0.231") {
-        val simpleJwt = JWT("my-super-puper-secret-key-for-jwt")
+        val jwt = JWT("my-super-puper-secret-key-for-jwt")
 
-        install(StatusPages) {
-            exception<RuntimeException> { exception ->
-                call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
-            }
-        }
-        install(ContentNegotiation) {
-            jackson {
-                enable(SerializationFeature.INDENT_OUTPUT) // Pretty Prints the JSON
-            }
-        }
-        install(Authentication) {
-            jwt {
-                verifier(simpleJwt.verifier)
-                validate {
-                    UserIdPrincipal(it.payload.getClaim("name").asString())
-                }
-            }
-        }
-
-        routing {
-            post("/login") {
-                val post = call.receive<Login>()
-                val user = users[post.name]
-                if (user?.password != post.password)
-                    throw RuntimeException("Invalid credentials")
-                call.respond(mapOf("token" to simpleJwt.sign(user.name)))
-            }
-            post("/reg"){
-                val post = call.receive<Registration>()
-                if(users.containsKey(post.name))
-                    throw RuntimeException("User already has")
-                users[post.name] = Login(post.name, post.password)
-                call.respond(mapOf("token" to simpleJwt.sign(post.name)))
-            }
-            get("/") {
-                println("Connected")
-                call.respondHtml(HttpStatusCode.OK, HTML::index)
-            }
-            route("/info") {
-                authenticate {
-                    get {
-                        call.respond(Calendar.getInstance().time)
-                    }
-                }
-            }
-        }
+        installFeatures(jwt)
+        addRouting(jwt)
     }.start(wait = true)
+}
+
+private fun Application.addRouting(simpleJwt: JWT) {
+    routing {
+        post("/login") {
+            val post = call.receive<Login>()
+            val user = users[post.name]
+            if (user?.password != post.password)
+                throw RuntimeException("Invalid credentials")
+            call.respond(mapOf("token" to simpleJwt.sign(user.name)))
+        }
+        post("/reg") {
+            val post = call.receive<Registration>()
+            if (users.containsKey(post.name))
+                throw RuntimeException("User already has")
+            users[post.name] = Login(post.name, post.password)
+            call.respond(mapOf("token" to simpleJwt.sign(post.name)))
+        }
+        get("/") {
+            println("Connected")
+            call.respondHtml(HttpStatusCode.OK, HTML::index)
+        }
+        route("/info") {
+            authenticate {
+                get {
+                    call.respond(Calendar.getInstance().time)
+                }
+            }
+        }
+    }
+}
+
+private fun Application.installFeatures(simpleJwt: JWT) {
+    install(StatusPages) {
+        exception<RuntimeException> { exception ->
+            call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
+        }
+    }
+    install(ContentNegotiation) {
+        jackson {
+            enable(SerializationFeature.INDENT_OUTPUT) // Pretty Prints the JSON
+        }
+    }
+    install(Authentication) {
+        jwt {
+            verifier(simpleJwt.verifier)
+            validate {
+                UserIdPrincipal(it.payload.getClaim("name").asString())
+            }
+        }
+    }
 }
 
 val users: MutableMap<String, Login> = Collections.synchronizedMap(
