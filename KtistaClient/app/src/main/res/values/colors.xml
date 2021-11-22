@@ -10,9 +10,12 @@
     <color name="dislike">#382C26</color>
     <color name="like">#FB6565</color>
     <color name="default_icon">#C8C8C8</color>
+    <color name="color_5">#6487A1</color>
 
     <color name="base_color">#E09777</color>
     <color name="gradient_end">#FAEAD3</color>
-
+    <color name="toolbar_line">#A06F57</color>
     <color name="background">#F9F8F8</color>
+    <color name="color_4">#382C26</color>
+
 </resources>

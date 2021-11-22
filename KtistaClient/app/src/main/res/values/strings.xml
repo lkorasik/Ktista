@@ -46,4 +46,7 @@
 
     <string name="title_add_post">add post</string>
     <string name="title_new_post">done</string>
+    <string name="profile_followings">Followings</string>
+    <string name="profile_followers">Followers</string>
+    <string name="profile_posts">Posts</string>
 </resources>
