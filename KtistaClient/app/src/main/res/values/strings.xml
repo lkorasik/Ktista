@@ -1,6 +1,49 @@
 <resources>
     <string name="app_name">Ktista</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_feed">Feed</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="settings_first_name">First name</string>
+    <string name="settings_last_name">Last name</string>
+    <string name="settings_email_name">Email</string>
+    <string name="settings_nickname_name">Nickname</string>
+
+    <string name="settings_password">Password</string>
+    <string name="settings_change">Change</string>
+
+    <string name="cd_post_photo">post_photo</string>
+    <string name="cd_post_like">like</string>
+    <string name="cd_post_dislike">dislike</string>
+    <string name="cd_post_comments">comment</string>
+
+    <string name="dialog_change">Change</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_title">Change password</string>
+    <string name="dialog_old_password">Old password</string>
+    <string name="dialog_new_password">New password</string>
+
+    <string name="login_nickname">Nickname</string>
+    <string name="login_password">Password</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_sign_up">Sign up</string>
+    <string name="login_greetings">Welcome</string>
+
+    <string name="registration_first_name">First name</string>
+    <string name="registration_last_name">Last name</string>
+    <string name="registration_email">Email</string>
+    <string name="registration_nickname">Nickname</string>
+    <string name="registration_sign_in">Sign in</string>
+    <string name="registration_sign_up">Sign up</string>
+
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+
+    <string name="description_add_post">Your description…</string>
+    <string name="description_title_add_post"><b>Description</b></string>
+
+    <string name="add_post_image_stub">Your image</string>
+
+    <string name="title_add_post">add post</string>
+    <string name="title_new_post">done</string>
 </resources>

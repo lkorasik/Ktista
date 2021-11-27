@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:gravity="center_vertical">
+
+    <include
+        layout="@layout/fragment_user"
+        android:id="@+id/fu_user_info"
+        android:layout_weight="4"
+        android:layout_margin="15dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_action_button"
+        style="@style/PrimaryButton"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="26dp"
+        android:layout_weight="6"
+        android:background="@drawable/button_main"
+        android:stateListAnimator="@null"
+        android:text="@string/follow" />
+
+</LinearLayout>
