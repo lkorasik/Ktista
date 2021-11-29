@@ -14,11 +14,13 @@ import retrofit2.Response
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.*
 
-
-class RegistrationRequest(val success: (resp: UserRegistrationResponse) -> Unit, val fail: () -> Unit) : Callback<UserRegistrationResponse?> {
+class RegistrationRequest : Callback<UserRegistrationResponse?> {
     private lateinit var cookieHandler: CookieHandler
+    private var listeners = mutableListOf<OnRegistrationResultListener>()
 
-    suspend fun registerUser(user: UserRegistrationRequest) {
+    fun setOnRegistrationResultListener(listener: OnRegistrationResultListener) = listeners.add(listener)
+
+    fun registerUser(user: UserRegistrationRequest) {
         //Dealy for test
         //delay(2000)
         val gson = GsonBuilder()
@@ -51,17 +53,20 @@ class RegistrationRequest(val success: (resp: UserRegistrationResponse) -> Unit,
             //val cookie = headers.get("Set-Cookie")
             //val result = HttpCookie.parse(cookie.toString())
             //val jwt = result.first { it.name == "jwt" }.value
-            success(user)
+            for(listener in listeners)
+                listener.onSuccess()
             Log.i("KtistaAppHttp", "Registration success!!!")
         } else {
-            fail()
+            for(listener in listeners)
+                listener.onFail()
             Log.i("KtistaAppHttp", "Registration fail!!!")
             println(response.errorBody())
         }
     }
 
     override fun onFailure(call: Call<UserRegistrationResponse?>, t: Throwable) {
-        fail()
+        for(listener in listeners)
+            listener.onFail()
         t.printStackTrace()
     }
 }
