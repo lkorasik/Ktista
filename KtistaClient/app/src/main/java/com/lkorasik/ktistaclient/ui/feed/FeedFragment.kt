@@ -30,7 +30,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_feed)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_posts)
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
