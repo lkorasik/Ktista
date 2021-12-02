@@ -14,9 +14,11 @@ class CookieHandler: CookieJar {
     }
 
     override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
+        /*
         if(!url.encodedPath().endsWith("registration") && cookies != null){
             return cookies as MutableList<Cookie>
         }
+         */
         return mutableListOf()
     }
 }
