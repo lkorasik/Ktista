@@ -1,0 +1,11 @@
+package com.lkorasik.ktistaclient.net
+
+import com.lkorasik.ktistaclient.net.model.*
+import retrofit2.*
+import retrofit2.http.*
+
+
+interface KtistaAPI {
+    @POST("api/user/registration/")
+    fun register(@Body user: UserRegistrationRequest): Call<UserRegistrationResponse?>?
+}
