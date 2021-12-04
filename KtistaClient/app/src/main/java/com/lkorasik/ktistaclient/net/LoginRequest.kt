@@ -1,22 +1,22 @@
 package com.lkorasik.ktistaclient.net
 
 import android.util.Log
-import com.google.gson.*
-import com.lkorasik.ktistaclient.net.model.*
-import okhttp3.*
-import retrofit2.*
+import com.google.gson.GsonBuilder
+import com.lkorasik.ktistaclient.net.model.UserLoginRequest
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RegistrationRequest : Callback<UserRegistrationResponse?> {
+class LoginRequest : Callback<String?> {
     private lateinit var cookieHandler: CookieHandler
     private var listeners = mutableListOf<OnResultListener>()
 
     fun setOnResultListener(listener: OnResultListener) = listeners.add(listener)
 
-    fun registerUser(user: UserRegistrationRequest) {
+    fun loginUser(user: UserLoginRequest) {
         //Dealy for test
         //delay(2000)
         val gson = GsonBuilder()
@@ -34,7 +34,7 @@ class RegistrationRequest : Callback<UserRegistrationResponse?> {
             .client(client)
             .build()
         val ktistaAPI = retrofit.create(KtistaAPI::class.java)
-        val call = ktistaAPI.register(user)
+        val call = ktistaAPI.login(user)
         call?.enqueue(this)
     }
 
@@ -42,13 +42,8 @@ class RegistrationRequest : Callback<UserRegistrationResponse?> {
         const val BASE_URL = "http://192.168.0.231:8080/"
     }
 
-    override fun onResponse(call: Call<UserRegistrationResponse?>, response: Response<UserRegistrationResponse?>) {
+    override fun onResponse(call: Call<String?>, response: Response<String?>) {
         if (response.isSuccessful) {
-            val user = response.body()!!
-            //val headers = response.headers()
-            //val cookie = headers.get("Set-Cookie")
-            //val result = HttpCookie.parse(cookie.toString())
-            //val jwt = result.first { it.name == "jwt" }.value
             for(listener in listeners)
                 listener.onSuccess()
             Log.i("KtistaAppHttp", "Registration success!!!")
@@ -60,7 +55,7 @@ class RegistrationRequest : Callback<UserRegistrationResponse?> {
         }
     }
 
-    override fun onFailure(call: Call<UserRegistrationResponse?>, t: Throwable) {
+    override fun onFailure(call: Call<String?>, t: Throwable) {
         for(listener in listeners)
             listener.onFail()
         t.printStackTrace()

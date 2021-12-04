@@ -1,6 +1,6 @@
 package com.lkorasik.ktistaclient.net
 
-interface OnRegistrationResultListener{
+interface OnResultListener{
     fun onSuccess()
     fun onFail()
 }

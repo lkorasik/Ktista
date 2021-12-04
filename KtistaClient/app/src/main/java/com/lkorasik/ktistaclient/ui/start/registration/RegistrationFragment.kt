@@ -65,7 +65,7 @@ class RegistrationFragment: Fragment() {
         signIn = binding.signIn
         signUp = binding.signUp
 
-        bindProgressButton(binding.signUp)
+        bindProgressButton(signUp)
 
         signIn.setOnClickListener {
             rootActivity.showLoginFragment()
