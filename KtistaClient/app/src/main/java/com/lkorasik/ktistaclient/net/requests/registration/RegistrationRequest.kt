@@ -1,50 +1,23 @@
-package com.lkorasik.ktistaclient.net
+package com.lkorasik.ktistaclient.net.requests.registration
 
 import android.util.Log
-import com.google.gson.*
 import com.lkorasik.ktistaclient.net.model.*
-import okhttp3.*
-import retrofit2.*
+import com.lkorasik.ktistaclient.net.requests.OnResultListener
+import com.lkorasik.ktistaclient.net.requests.RequestContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.converter.gson.GsonConverterFactory
 
 class RegistrationRequest : Callback<UserRegistrationResponse?> {
-    private lateinit var cookieHandler: CookieHandler
     private var listeners = mutableListOf<OnResultListener>()
 
     fun setOnResultListener(listener: OnResultListener) = listeners.add(listener)
 
-    fun registerUser(user: UserRegistrationRequest) {
-        //Dealy for test
-        //delay(2000)
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        cookieHandler = CookieHandler()
-        val client = OkHttpClient()
-            .newBuilder()
-            .cookieJar(cookieHandler)
-            .build()
-        val retrofit = Retrofit
-            .Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
-            .build()
-        val ktistaAPI = retrofit.create(KtistaAPI::class.java)
-        val call = ktistaAPI.register(user)
-        call?.enqueue(this)
-    }
-
-    companion object {
-        const val BASE_URL = "http://192.168.0.231:8080/"
-    }
+    fun registerUser(user: UserRegistrationRequest) = RequestContext.API.register(user)?.enqueue(this)
 
     override fun onResponse(call: Call<UserRegistrationResponse?>, response: Response<UserRegistrationResponse?>) {
         if (response.isSuccessful) {
-            val user = response.body()!!
+            //val user = response.body()!!
             //val headers = response.headers()
             //val cookie = headers.get("Set-Cookie")
             //val result = HttpCookie.parse(cookie.toString())

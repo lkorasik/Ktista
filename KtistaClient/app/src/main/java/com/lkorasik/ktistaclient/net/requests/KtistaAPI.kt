@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net
+package com.lkorasik.ktistaclient.net.requests
 
 import com.lkorasik.ktistaclient.net.model.*
 import retrofit2.*

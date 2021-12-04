@@ -12,10 +12,8 @@ import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.*
-import com.lkorasik.ktistaclient.net.LoginStages
-import com.lkorasik.ktistaclient.net.RegistrationStages
+import com.lkorasik.ktistaclient.net.requests.login.LoginStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
-import com.lkorasik.ktistaclient.ui.start.registration.RegistrationViewModel
 
 class LoginFragment: Fragment() {
     private lateinit var loginViewModel: LoginViewModel

@@ -2,9 +2,9 @@ package com.lkorasik.ktistaclient.ui.start.login
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.lkorasik.ktistaclient.net.LoginRequest
-import com.lkorasik.ktistaclient.net.LoginStages
-import com.lkorasik.ktistaclient.net.OnResultListener
+import com.lkorasik.ktistaclient.net.requests.login.LoginRequest
+import com.lkorasik.ktistaclient.net.requests.login.LoginStages
+import com.lkorasik.ktistaclient.net.requests.OnResultListener
 import com.lkorasik.ktistaclient.net.model.UserLoginRequest
 import kotlinx.coroutines.launch
 

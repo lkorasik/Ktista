@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net
+package com.lkorasik.ktistaclient.net.requests.registration
 
 enum class RegistrationStages {
     INIT,
