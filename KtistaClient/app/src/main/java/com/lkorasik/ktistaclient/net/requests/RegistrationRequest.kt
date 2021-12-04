@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests.registration
+package com.lkorasik.ktistaclient.net.requests
 
 import com.lkorasik.ktistaclient.net.model.UserRegistrationRequest
 import com.lkorasik.ktistaclient.net.model.UserRegistrationResponse

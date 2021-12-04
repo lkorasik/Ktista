@@ -12,7 +12,7 @@ import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.*
-import com.lkorasik.ktistaclient.net.requests.login.LoginStages
+import com.lkorasik.ktistaclient.net.requests.RequestStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
 
 class LoginFragment: Fragment() {
@@ -33,14 +33,14 @@ class LoginFragment: Fragment() {
         loginViewModel.inProgress.observe(this, {
             Log.i(LoginViewModel.LOG_TAG, "$it")
 
-            if(it.equals(LoginStages.SUCCESS)) {
+            if(it.equals(RequestStages.SUCCESS)) {
                 signIn.hideProgress("Success!")
                 rootActivity.launchMainActivity()
             }
-            if(it.equals(LoginStages.FAIL)) {
+            if(it.equals(RequestStages.FAIL)) {
                 signIn.hideProgress("Fail!")
             }
-            if(it.equals(LoginStages.IN_PROGRESS)){
+            if(it.equals(RequestStages.IN_PROGRESS)){
                 signIn.showProgress {
                     buttonTextRes = R.string.registration_button_progress
                     progressColor = Color.WHITE

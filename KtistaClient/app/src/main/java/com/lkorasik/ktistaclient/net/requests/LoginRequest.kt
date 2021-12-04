@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests.login
+package com.lkorasik.ktistaclient.net.requests
 
 import com.lkorasik.ktistaclient.net.model.UserLoginRequest
 import com.lkorasik.ktistaclient.net.requests.Request
