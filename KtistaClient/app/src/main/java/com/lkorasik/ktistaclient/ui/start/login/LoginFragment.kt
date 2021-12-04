@@ -33,17 +33,17 @@ class LoginFragment: Fragment() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         loginViewModel.inProgress.observe(this, {
-            Log.i(RegistrationViewModel.LOG_TAG, "$it")
+            Log.i(LoginViewModel.LOG_TAG, "$it")
 
-            if(it.equals(RegistrationStages.SUCCESS)) {
-                signUp.hideProgress("Success!")
+            if(it.equals(LoginStages.SUCCESS)) {
+                signIn.hideProgress("Success!")
                 rootActivity.launchMainActivity()
             }
-            if(it.equals(RegistrationStages.FAIL)) {
-                signUp.hideProgress("Fail!")
+            if(it.equals(LoginStages.FAIL)) {
+                signIn.hideProgress("Fail!")
             }
-            if(it.equals(RegistrationStages.IN_PROGRESS)){
-                signUp.showProgress {
+            if(it.equals(LoginStages.IN_PROGRESS)){
+                signIn.showProgress {
                     buttonTextRes = R.string.registration_button_progress
                     progressColor = Color.WHITE
                 }
