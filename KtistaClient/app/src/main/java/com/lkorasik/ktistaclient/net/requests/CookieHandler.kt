@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net
+package com.lkorasik.ktistaclient.net.requests
 
 import okhttp3.Cookie
 import okhttp3.CookieJar
@@ -8,7 +8,7 @@ class CookieHandler: CookieJar {
     private var cookies: MutableList<Cookie>? = null
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-        if(url.encodedPath().endsWith("registration/")){
+        if(url.encodedPath().endsWith("registration/") || url.encodedPath().endsWith("login/")){
             this.cookies = cookies
         }
     }

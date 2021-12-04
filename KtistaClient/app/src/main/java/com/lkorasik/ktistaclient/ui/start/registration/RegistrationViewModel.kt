@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.OnRegistrationResultListener
-import com.lkorasik.ktistaclient.net.RegistrationRequest
-import com.lkorasik.ktistaclient.net.RegistrationStages
+import com.lkorasik.ktistaclient.net.requests.OnResultListener
+import com.lkorasik.ktistaclient.net.requests.RegistrationRequest
+import com.lkorasik.ktistaclient.net.requests.RequestStages
 import com.lkorasik.ktistaclient.net.model.UserRegistrationRequest
 import kotlinx.coroutines.launch
 
@@ -15,24 +15,24 @@ class RegistrationViewModel: ViewModel(){
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
-    private val registrationRequest: RegistrationRequest = RegistrationRequest().apply {
-        setOnRegistrationResultListener(object: OnRegistrationResultListener{
+    private val registrationRequest = RegistrationRequest().apply {
+        setOnResultListener(object: OnResultListener {
             override fun onSuccess() {
-                inProgress.value = RegistrationStages.SUCCESS
+                inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }
             override fun onFail() {
-                inProgress.value = RegistrationStages.FAIL
+                inProgress.value = RequestStages.FAIL
                 Log.i(LOG_TAG, "Request was fail ${inProgress.value}")
             }
         })
     }
 
-    val inProgress = MutableLiveData(RegistrationStages.INIT)
+    val inProgress = MutableLiveData(RequestStages.INIT)
 
     fun registerUser(nickname: String, password: String, email: String){
         viewModelScope.launch {
-            inProgress.value = RegistrationStages.IN_PROGRESS
+            inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request ${inProgress.value}")
             registrationRequest.registerUser(UserRegistrationRequest(nickname, password, email))
         }
