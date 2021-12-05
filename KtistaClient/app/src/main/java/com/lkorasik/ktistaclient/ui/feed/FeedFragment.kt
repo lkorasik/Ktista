@@ -7,16 +7,17 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
+import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 class FeedFragment : Fragment() {
 
-    private lateinit var feedAdapter: FeedRecyclerAdapter
+    private lateinit var postsAdapter: PostsRecyclerAdapter
     private val viewModel: FeedViewModel by navGraphViewModels(R.id.navigation_feed)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        feedAdapter = FeedRecyclerAdapter()
+        postsAdapter = PostsRecyclerAdapter()
     }
 
     override fun onCreateView(
@@ -24,6 +25,7 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
@@ -34,12 +36,12 @@ class FeedFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
-            feedAdapter.setItems(posts)
+            postsAdapter.setItems(posts)
         }
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(activity)
-            adapter = feedAdapter
+            adapter = postsAdapter
         }
     }
 
