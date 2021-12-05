@@ -23,7 +23,7 @@
     <dimen name="base_text_size">20sp</dimen>
     <dimen name="dialog_title_text_size">23sp</dimen>
     <dimen name="base_padding">5dp</dimen>
-    <dimen name="radius_avatar_post">50dp</dimen>
+    <dimen name="radius_avatar_post">35dp</dimen>
 
     <dimen name="dialog_radius">20dp</dimen>
     <dimen name="dialog_border_margin">20dp</dimen>
@@ -42,4 +42,5 @@
     <dimen name="margin_between_buttons">14dp</dimen>
     
     <dimen name="add_post_text_stub">24sp</dimen>
+    <dimen name="post_icon_size">23dp</dimen>
 </resources>

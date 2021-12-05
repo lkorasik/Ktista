@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-            android:background="@drawable/button_main"
+            android:background="@drawable/button_primary"
             android:text="@string/login_sign_up"
             android:layout_marginTop="@dimen/start_button_top_margin"
             android:stateListAnimator="@null"
@@ -111,4 +111,5 @@
             android:stateListAnimator="@null"
             style="@style/SecondaryButton"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout >

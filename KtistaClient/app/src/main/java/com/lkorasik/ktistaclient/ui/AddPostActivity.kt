@@ -37,8 +37,8 @@ class AddPostActivity: AppCompatActivity() {
         description = binding.etDescription
 
         val grad = binding.tvTextStub
-        grad.startColor = getColor(R.color.base_color)
-        grad.endColor = getColor(R.color.gradient_end)
+        grad.startColor = getColor(R.color.color_4)
+        grad.endColor = getColor(R.color.color_1)
         grad.invalidate()
 
         chooseImage(this)

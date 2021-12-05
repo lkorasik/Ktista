@@ -24,7 +24,7 @@
             android:fontFamily="@font/montserrat"
             android:lines="1"
             android:text="@string/profile_posts"
-            android:textColor="@color/color_4"
+            android:textColor="@color/color_6"
             android:textSize="18sp"
             android:textStyle="bold" />
 

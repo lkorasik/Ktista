@@ -29,7 +29,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/toolbar_line" />
+            android:background="@color/color_7" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
