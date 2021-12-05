@@ -7,4 +7,5 @@ class PostModel(
     var description: String = "",
     var dislikeCount: String = "",
     var commentCount: String = "",
+    var date: String = "",
 )

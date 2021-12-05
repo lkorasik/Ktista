@@ -3,11 +3,21 @@ package com.lkorasik.ktistaclient.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lkorasik.ktistaclient.models.PostModel
+import com.lkorasik.ktistaclient.ui.TestDataClass
 
 class ProfileViewModel : ViewModel() {
+    private val mutablePostsData: MutableLiveData<ArrayList<PostModel>> = MutableLiveData()
+    val postsData: LiveData<ArrayList<PostModel>> = mutablePostsData
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    init {
+        testLoadPosts()
     }
-    val text: LiveData<String> = _text
+
+    private fun testLoadPosts() {
+        mutablePostsData.postValue(TestDataClass.getPostsData())
+
+    }
+
+    private fun loadPosts() {}
 }

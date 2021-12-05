@@ -11,7 +11,7 @@ class SubscribeFragment: Fragment() {
 
     private val binding get() = bindingObject!!
 
-    private lateinit var fragmentUser: FragmentUserBinding
+    private lateinit var fragmentUser: WidgetUserBinding
     private lateinit var action: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

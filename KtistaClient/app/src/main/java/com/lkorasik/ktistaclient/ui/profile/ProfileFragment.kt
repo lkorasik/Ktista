@@ -1,48 +1,51 @@
 package com.lkorasik.ktistaclient.ui.profile
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Html
-import android.text.SpannableString
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
-import com.lkorasik.ktistaclient.ui.feed.FeedRecyclerAdapter
+import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 import com.lkorasik.ktistaclient.ui.feed.FeedViewModel
-import android.widget.TextView
-
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
-import android.widget.LinearLayout
-import androidx.core.text.HtmlCompat
 
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
-    private val viewModel: FeedViewModel by navGraphViewModels(R.id.navigation_feed)
-    private lateinit var feedAdapter: FeedRecyclerAdapter
-
+    private val viewModel: ProfileViewModel by navGraphViewModels(R.id.navigation_profile)
+    private lateinit var postsAdapter: PostsRecyclerAdapter
     private val binding get() = _binding!!
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        postsAdapter = PostsRecyclerAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment2, bundleOf("position" to 1))
+        }
+
+        binding.includedProfileInfo.llFollowersInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment2, bundleOf("position" to 0))
+        }
 
         return binding.root
     }
@@ -50,30 +53,22 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val recyclerView = binding.rvPosts
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
-            feedAdapter.setItems(posts)
+            postsAdapter.setItems(posts)
         }
-
 
         with(recyclerView) {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = feedAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = postsAdapter
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        feedAdapter = FeedRecyclerAdapter()
     }
 }
 

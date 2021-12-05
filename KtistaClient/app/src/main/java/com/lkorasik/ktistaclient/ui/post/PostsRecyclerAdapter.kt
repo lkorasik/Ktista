@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.ui.feed
+package com.lkorasik.ktistaclient.ui.post
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +11,14 @@ import com.lkorasik.ktistaclient.models.PostModel
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
+class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewHolder>() {
 
     private var postList: ArrayList<PostModel> = ArrayList()
 
     fun setItems(posts: ArrayList<PostModel>) {
+        clearItems()
         postList.addAll(posts)
+        notifyDataSetChanged() // Позже придумаю как это заменить
     }
 
     fun clearItems() {
@@ -46,6 +48,9 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
         private val dislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
         private val likeCount: TextView = itemView.findViewById(R.id.tv_like_count)
         private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
+        private val date: TextView = itemView.findViewById(R.id.tv_date)
+        private val showComments: TextView = itemView.findViewById(R.id.tv_show_comments)
+
 
         fun bind(postModel: PostModel) {
             postModel.user.avatarUrl?.let { url ->
@@ -60,6 +65,15 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
             dislikeCount.text = postModel.dislikeCount
             likeCount.text = postModel.likeCount
             commentCount.text = postModel.commentCount
+            date.text = postModel.date
+
+            if (description.text.isEmpty()) {
+                description.visibility = View.GONE
+            }
+            if (commentCount.text.isEmpty()) {
+                showComments.visibility = View.GONE
+
+            }
         }
     }
 }
