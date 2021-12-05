@@ -46,9 +46,12 @@
 
     <string name="title_add_post">add post</string>
     <string name="title_new_post">done</string>
+
     <string name="profile_followings">Followings</string>
     <string name="profile_followers">Followers</string>
     <string name="profile_posts">Posts</string>
     <string name="Follow">Follow</string>
     <string name="show_comments">Show comments</string>
+  
+    <string name="registration_button_progress">Wait</string>
 </resources>
