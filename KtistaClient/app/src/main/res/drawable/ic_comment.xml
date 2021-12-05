@@ -1,8 +1,9 @@
-<!-- drawable/chat.xml -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
-    android:width="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path android:fillColor="@color/base_color" android:pathData="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z" />
+    android:width="13dp"
+    android:height="12dp"
+    android:viewportWidth="13"
+    android:viewportHeight="12">
+  <path
+      android:pathData="M6.5,0C2.9098,0 0,2.3639 0,5.2813C0,6.5406 0.5434,7.6934 1.4473,8.5998C1.1299,9.8795 0.0686,11.0195 0.0559,11.0322C0,11.0906 -0.0152,11.177 0.0178,11.2531C0.0508,11.3293 0.1219,11.375 0.2031,11.375C1.8865,11.375 3.1484,10.5676 3.7731,10.0699C4.6033,10.3822 5.525,10.5625 6.5,10.5625C10.0902,10.5625 13,8.1986 13,5.2813C13,2.3639 10.0902,0 6.5,0Z"
+      android:fillColor="#C8C8C8"/>
 </vector>

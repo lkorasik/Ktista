@@ -50,4 +50,5 @@
     <string name="profile_followers">Followers</string>
     <string name="profile_posts">Posts</string>
     <string name="Follow">Follow</string>
+    <string name="show_comments">Show comments</string>
 </resources>
