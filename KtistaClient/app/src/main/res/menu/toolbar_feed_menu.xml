@@ -8,5 +8,4 @@
         android:title="@string/title_add_post"
         app:showAsAction="always" />
 
-
 </menu>

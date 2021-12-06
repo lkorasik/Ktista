@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val toolbar = binding.includeToolbar.customToolbar
 
         val navHostFragment =
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-
+        setSupportActionBar(toolbar)
 //         startActivity(Intent(this, AddPostActivity::class.java))
     }
 }
