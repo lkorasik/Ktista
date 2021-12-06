@@ -3,7 +3,7 @@ package com.lkorasik.ktistaclient.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lkorasik.ktistaclient.models.PostModel
+import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
 
 class ProfileViewModel : ViewModel() {
