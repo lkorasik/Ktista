@@ -3,8 +3,9 @@ package com.lkorasik.ktistaclient.ui.follow
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.WidgetFollowerBinding
-import com.lkorasik.ktistaclient.models.FollowModel
+import com.lkorasik.ktistaclient.ui.models.FollowModel
 import com.squareup.picasso.Picasso
 
 
@@ -50,19 +51,15 @@ class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.Followi
                 includeUser.tvLogin.text = model.user.login
 
                 if (model.isFollow) {
-                    btFollow.text = unFollow
-                    btFollow.setBackgroundResource(com.lkorasik.ktistaclient.R.drawable.button_secondary)
-                    btFollow.setTextAppearance(com.lkorasik.ktistaclient.R.style.SecondaryButton)
+                    btFollow.setText(R.string.unfollow)
+                    btFollow.setBackgroundResource(R.drawable.button_secondary)
+                    btFollow.setTextAppearance(R.style.SecondaryButton)
                 } else {
-                    btFollow.text = follow
-                    btFollow.setBackgroundResource(com.lkorasik.ktistaclient.R.drawable.button_primary)
-                    btFollow.setTextAppearance(com.lkorasik.ktistaclient.R.style.PrimaryButton)
+                    btFollow.setText(R.string.follow)
+                    btFollow.setBackgroundResource(R.drawable.button_primary)
+                    btFollow.setTextAppearance(R.style.PrimaryButton)
                 }
             }
-        }
-        companion object {
-            const val follow = "Follow"
-            const val unFollow = "Unfollow"
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.lkorasik.ktistaclient.ui
 
-import com.lkorasik.ktistaclient.models.FollowModel
-import com.lkorasik.ktistaclient.models.PostModel
-import com.lkorasik.ktistaclient.models.UserModel
+import com.lkorasik.ktistaclient.ui.models.FollowModel
+import com.lkorasik.ktistaclient.ui.models.PostModel
+import com.lkorasik.ktistaclient.ui.models.UserModel
 
 object TestDataClass {
     fun getPostsData(): ArrayList<PostModel> {
@@ -19,33 +19,33 @@ object TestDataClass {
                 user = usr,
                 photoUrl = photo,
                 description = text,
-                likeCount = "322",
-                dislikeCount = "1337",
+                likeCount = 322,
+                dislikeCount = 1337,
                 date = "17 november"
             ),
             PostModel(
                 user = usr,
                 photoUrl = photo,
-                likeCount = "322",
-                dislikeCount = "1337",
-                commentCount = "232",
+                likeCount = 322,
+                dislikeCount = 1337,
+                commentCount = 232,
                 date = "17 november"
             ),
             PostModel(
                 user = usr,
                 photoUrl = photo,
-                likeCount = "2",
-                dislikeCount = "373232",
-                commentCount = "232",
+                likeCount = 2,
+                dislikeCount = 1337,
+                commentCount = 232,
                 date = "17 november"
             ),
             PostModel(
                 user = usr,
                 photoUrl = photo,
                 description = text,
-                likeCount = "32",
-                dislikeCount = "13127",
-                commentCount = "232",
+                likeCount = 32,
+                dislikeCount = 13127,
+                commentCount = 232,
                 date = "17 november"
             )
         )
