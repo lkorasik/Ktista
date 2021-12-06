@@ -62,7 +62,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_main"
+            android:background="@drawable/button_primary"
             android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
             android:text="@string/login_sign_in"
             android:layout_marginTop="@dimen/start_button_top_margin"

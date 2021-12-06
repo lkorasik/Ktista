@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.feed.FeedFragment">
+    android:orientation="vertical"
+    android:id="@+id/f_recycler_followers">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_posts"
+        android:id="@+id/rv_following"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/fragment_post" />
+        tools:listitem="@layout/widget_follower" />
 
 </LinearLayout>

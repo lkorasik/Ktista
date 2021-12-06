@@ -7,12 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dislike">#382C26</color>
-    <color name="like">#FB6565</color>
-    <color name="default_icon">#C8C8C8</color>
+    <color name="color_10">#FB6565</color>
+    <color name="color_9">#C8C8C8</color>
+    <color name="color_8">#6487A1</color>
+    <color name="color_11">#565759</color>
 
-    <color name="base_color">#E09777</color>
-    <color name="gradient_end">#FAEAD3</color>
+    <color name="color_4">#E09777</color>
+    <color name="color_1">#FAEAD3</color>
+    <color name="color_7">#A06F57</color>
+    <color name="color_2">#F9F8F8</color>
+    <color name="color_6">#382C26</color>
 
-    <color name="background">#F9F8F8</color>
 </resources>

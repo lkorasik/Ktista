@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.ui.feed
+package com.lkorasik.ktistaclient.ui.post
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +7,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
-import com.lkorasik.ktistaclient.models.PostModel
+import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
+class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewHolder>() {
 
     private var postList: ArrayList<PostModel> = ArrayList()
 
     fun setItems(posts: ArrayList<PostModel>) {
+        clearItems()
         postList.addAll(posts)
+        notifyDataSetChanged() // Позже придумаю как это заменить
     }
 
     fun clearItems() {
@@ -46,6 +48,8 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
         private val dislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
         private val likeCount: TextView = itemView.findViewById(R.id.tv_like_count)
         private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
+        private val date: TextView = itemView.findViewById(R.id.tv_date)
+        private val showComments: TextView = itemView.findViewById(R.id.tv_show_comments)
 
         fun bind(postModel: PostModel) {
             postModel.user.avatarUrl?.let { url ->
@@ -57,9 +61,18 @@ class FeedRecyclerAdapter : RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHol
             name.text = postModel.user.name
             login.text = postModel.user.login
             description.text = postModel.description
-            dislikeCount.text = postModel.dislikeCount
-            likeCount.text = postModel.likeCount
-            commentCount.text = postModel.commentCount
+            dislikeCount.text = if (postModel.dislikeCount == 0) "" else postModel.dislikeCount.toString()
+            likeCount.text = if (postModel.likeCount == 0) "" else postModel.likeCount.toString()
+            commentCount.text = if (postModel.commentCount == 0) "" else postModel.commentCount.toString()
+            date.text = postModel.date
+
+            if (description.text.isEmpty()) {
+                description.visibility = View.GONE
+            }
+            if (commentCount.text.isEmpty()) {
+                showComments.visibility = View.GONE
+
+            }
         }
     }
 }

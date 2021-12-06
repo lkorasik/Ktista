@@ -18,7 +18,7 @@
             android:id="@+id/custom_toolbar"
             style="@style/ToolbarStyle"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:elevation="4dp"
             android:gravity="center_horizontal"
@@ -29,7 +29,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/base_color" />
+            android:background="@color/color_7" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

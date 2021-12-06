@@ -1,6 +1,6 @@
-package com.lkorasik.ktistaclient.models
+package com.lkorasik.ktistaclient.ui.models
 
-class UserModel(
+data class UserModel(
     var avatarUrl: String?,
     var name: String = "",
     var login: String = ""

@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.ui.feed
+package com.lkorasik.ktistaclient.ui.post
 
 import android.os.Bundle
 import android.view.LayoutInflater
