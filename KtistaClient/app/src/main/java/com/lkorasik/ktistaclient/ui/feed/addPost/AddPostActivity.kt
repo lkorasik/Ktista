@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,17 +17,16 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 
 
-class AddPostActivity: AppCompatActivity() {
+class AddPostActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var description: EditText
 
-    private var bindingObject: ActivityAddPostBinding? = null
-    private val binding get() = bindingObject!!
+    private lateinit var binding: ActivityAddPostBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingObject = ActivityAddPostBinding.inflate(layoutInflater)
+        binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         image = binding.ivPostPhoto
@@ -50,7 +50,8 @@ class AddPostActivity: AppCompatActivity() {
                     startActivityForResult(takePicture, 0)
                 }
                 optionsMenu[i] == "Choose from Gallery" -> {
-                    val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    val pickPhoto =
+                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(pickPhoto, 1)
                 }
                 optionsMenu[i] == "Exit" -> {
@@ -86,6 +87,7 @@ class AddPostActivity: AppCompatActivity() {
                     }
                 }
             }
+            binding.tvTextStub.visibility = View.GONE
         }
     }
 }
