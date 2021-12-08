@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/include_toolbar"
-        layout="@layout/toolbar"
+        layout="@layout/widget_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </include>

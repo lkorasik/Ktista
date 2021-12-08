@@ -6,7 +6,7 @@
     <dimen name="gradient_angle">180</dimen>
     <dimen name="button_radius">50dp</dimen>
     <dimen name="button_horizontal_padding">15dp</dimen>
-    <dimen name="button_secondary_line_width">2dp</dimen>
+    <dimen name="button_secondary_line_width">1dp</dimen>
 
     <dimen name="edittext_radius">50dp</dimen>
     <dimen name="edittext_margin">2dp</dimen>

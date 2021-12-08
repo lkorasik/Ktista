@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/color_2"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_2">
 
-    <RelativeLayout
-        android:id="@+id/relative"
+    <ImageView
+        android:id="@+id/iv_post_photo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/cd_post_photo"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_line_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/button_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_post_photo" />
+
+    <com.lkorasik.ktistaclient.ui.feed.addPost.GradientTextView
+        android:id="@+id/tv_text_stub"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/iv_post_photo"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:adjustViewBounds="true"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/cd_post_photo"
-            android:scaleType="centerCrop" />
-
-        <com.lkorasik.ktistaclient.ui.GradientTextView
-            android:id="@+id/tv_text_stub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_post_photo"
-            android:layout_centerInParent="true"
-            android:singleLine="true"
-            android:text="@string/add_post_image_stub"
-            android:textSize="@dimen/add_post_text_stub"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:maxLines="1"
+        android:text="@string/add_post_image_stub"
+        android:textSize="@dimen/add_post_text_stub"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textAlignment="viewStart"
-        android:text="@string/description_title_add_post"
+        android:id="@+id/tv_addPost_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginHorizontal="17dp"
-        android:textSize="18sp"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/description_title_add_post"
+        android:textAlignment="viewStart"
+        android:textColor="@color/color_6"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_line_gradient" />
 
     <EditText
-        android:background="@null"
         android:id="@+id/et_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/description_add_post"
-        android:textSize="11sp"
         android:layout_marginStart="45dp"
-        android:minHeight="48dp" />
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/description_add_post"
+        android:minHeight="48dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_addPost_description" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
