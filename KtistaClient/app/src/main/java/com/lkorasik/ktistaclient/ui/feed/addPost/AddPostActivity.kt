@@ -1,23 +1,19 @@
-package com.lkorasik.ktistaclient.ui
+package com.lkorasik.ktistaclient.ui.feed.addPost
 
-import android.app.*
 import android.app.AlertDialog
-import android.content.*
-import android.graphics.Bitmap
-import android.os.*
-import android.provider.MediaStore
-import android.widget.*
-import com.lkorasik.ktistaclient.R
-import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
-import androidx.core.app.ActivityCompat.startActivityForResult
-
+import android.content.Context
 import android.content.Intent
-
-import android.content.DialogInterface
 import android.database.Cursor
-import androidx.appcompat.app.*
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import com.lkorasik.ktistaclient.R
+import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 
 
 class AddPostActivity: AppCompatActivity() {

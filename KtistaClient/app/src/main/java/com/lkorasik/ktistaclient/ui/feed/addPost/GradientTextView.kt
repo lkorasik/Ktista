@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.ui
+package com.lkorasik.ktistaclient.ui.feed.addPost
 
 import android.content.Context
 import android.graphics.*

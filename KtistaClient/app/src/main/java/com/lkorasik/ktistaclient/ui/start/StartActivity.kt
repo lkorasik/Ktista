@@ -1,10 +1,10 @@
 package com.lkorasik.ktistaclient.ui.start
 
 import android.content.Intent
-import android.os.*
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.lkorasik.ktistaclient.*
-import com.lkorasik.ktistaclient.changepassword.ChangePasswordDialog
+import com.lkorasik.ktistaclient.MainActivity
+import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityStartBinding
 import com.lkorasik.ktistaclient.ui.start.login.LoginFragment
 import com.lkorasik.ktistaclient.ui.start.registration.RegistrationFragment
@@ -26,9 +26,6 @@ class StartActivity: AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(fragmentContainerId, loginFragment)
         transaction.commit()
-
-        val dialog = ChangePasswordDialog(this)
-        dialog.show()
     }
 
     fun showRegistrationFragment(){
@@ -46,6 +43,7 @@ class StartActivity: AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
     private fun initFragment(){
         setTheme(R.style.Theme_Ktista_NoActionBar)

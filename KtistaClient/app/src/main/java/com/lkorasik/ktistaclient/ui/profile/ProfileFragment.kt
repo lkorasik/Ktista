@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
-import com.lkorasik.ktistaclient.ui.feed.FeedViewModel
 
 
 class ProfileFragment : Fragment() {
@@ -40,11 +37,11 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_followFragment2, bundleOf("position" to 1))
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
         }
 
         binding.includedProfileInfo.llFollowersInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_followFragment2, bundleOf("position" to 0))
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
         }
 
         return binding.root
