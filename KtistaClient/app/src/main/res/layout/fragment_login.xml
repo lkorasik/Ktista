@@ -1,85 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
     <TextView
         android:id="@+id/title"
-        android:text="@string/login_greetings"
-        android:textSize="@dimen/start_title_text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/amsterdam"
+        android:text="@string/login_greetings"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:fontFamily="@font/amsterdam"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/input_layout"
+        android:textSize="@dimen/start_title_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/guideline5" />
+
+    <ImageView
+        android:id="@+id/upLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_upline_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/login_line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="-45dp"
+        android:background="@color/color_6"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <LinearLayout
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/login_line">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/nickname"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/login_nickname"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/login_password"
             android:inputType="textPassword"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_in"
-            android:fontFamily="@font/roboto"
+            style="@style/PrimaryButton"
+            android:layout_width="162dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_primary"
-            android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
+            android:layout_marginTop="32dp"
             android:text="@string/login_sign_in"
-            android:layout_marginTop="@dimen/start_button_top_margin"
-            android:stateListAnimator="@null"
-            style="@style/PrimaryButton"/>
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_up"
+            style="@style/SecondaryButton"
+            android:layout_width="162dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:fontFamily="@font/roboto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-            android:background="@drawable/button_secondary"
-            android:text="@string/login_sign_up"
             android:layout_marginTop="@dimen/margin_between_buttons"
-            android:stateListAnimator="@null"
-            style="@style/SecondaryButton"/>
+            android:text="@string/login_sign_up"
+            android:textSize="18sp" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout >
+
+    <ImageView
+        android:id="@+id/downline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_downline_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,115 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
+
+
+    <ImageView
+        android:id="@+id/upLine1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_upline_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/first_name"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/registration_first_name"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
             android:minHeight="@dimen/registration_edit_text_min_height"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/last_name"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/registration_last_name"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
             android:minHeight="@dimen/registration_edit_text_min_height"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/email"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/registration_email"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
             android:minHeight="@dimen/registration_edit_text_min_height"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/nickname"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/registration_nickname"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
             android:minHeight="@dimen/registration_edit_text_min_height"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password"
-            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="45dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/roboto"
             android:hint="@string/login_password"
             android:inputType="textPassword"
-            android:layout_marginTop="@dimen/base_margin"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:layout_marginStart="@dimen/start_input_horizontal_margin"
-            android:layout_marginEnd="@dimen/start_input_horizontal_margin"
             android:minHeight="@dimen/registration_edit_text_min_height"
-            android:singleLine="true"/>
+            android:paddingHorizontal="20dp"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_up"
+            style="@style/PrimaryButton"
+            android:layout_width="162dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:maxLines="1"
             android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-            android:background="@drawable/button_primary"
             android:text="@string/login_sign_up"
-            android:layout_marginTop="@dimen/start_button_top_margin"
-            android:stateListAnimator="@null"
-            style="@style/PrimaryButton"/>
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_in"
-            android:fontFamily="@font/roboto"
+            style="@style/SecondaryButton"
+            android:layout_width="162dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_secondary"
-            android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
-            android:text="@string/login_sign_in"
             android:layout_marginTop="@dimen/margin_between_buttons"
+            android:fontFamily="@font/roboto"
+            android:maxLines="1"
+
+            android:paddingHorizontal="@dimen/start_buttons_horizontal_padding"
             android:stateListAnimator="@null"
-            style="@style/SecondaryButton"/>
+            android:text="Back"
+            android:textSize="18sp"/>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout >
+    <ImageView
+        android:id="@+id/downLine1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_downline_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

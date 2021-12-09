@@ -3,6 +3,7 @@ package com.lkorasik.ktistaclient.ui.feed
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,5 +48,13 @@ class FeedFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_feed_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_add_post ->
+                findNavController().navigate(R.id.action_navigation_feed_to_addPostActivity)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

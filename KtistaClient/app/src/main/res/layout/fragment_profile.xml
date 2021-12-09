@@ -13,7 +13,7 @@
 
         <include
             android:id="@+id/included_profile_info"
-            layout="@layout/profile_info" />
+            layout="@layout/widget_profile_info" />
 
         <TextView
             android:id="@+id/label_profile"
