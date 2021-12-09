@@ -81,7 +81,6 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:background="@drawable/button_primary"
             android:text="@string/login_sign_in"
             android:textSize="18sp" />
 
