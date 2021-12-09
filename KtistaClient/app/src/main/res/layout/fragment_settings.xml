@@ -34,8 +34,8 @@
                 android:id="@+id/settings_cv_avatar"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                android:layout_marginVertical="20dp"
                 app:cardCornerRadius="24dp"
+                android:layout_marginVertical="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -173,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
