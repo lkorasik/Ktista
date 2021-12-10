@@ -57,8 +57,7 @@ class RegistrationFragment: Fragment() {
 
         rootActivity = activity as StartActivity
 
-        firstName = binding.firstName
-        lastName = binding.lastName
+
         nickname = binding.nickname
         email = binding.email
         password = binding.password

@@ -44,7 +44,6 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
         private val postPhoto: ImageView = itemView.findViewById(R.id.iv_post_photo)
         private val description: TextView = itemView.findViewById(R.id.tv_post_description)
         private val name: TextView = itemView.findViewById(R.id.tv_user_name)
-        private val login: TextView = itemView.findViewById(R.id.tv_login)
         private val dislikeCount: TextView = itemView.findViewById(R.id.tv_dislike_count)
         private val likeCount: TextView = itemView.findViewById(R.id.tv_like_count)
         private val commentCount: TextView = itemView.findViewById(R.id.tv_comments_count)
@@ -59,7 +58,6 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
             Picasso.get().load(postModel.photoUrl).into(postPhoto)
 
             name.text = postModel.user.name
-            login.text = postModel.user.login
             description.text = postModel.description
             dislikeCount.text = if (postModel.dislikeCount == 0) "" else postModel.dislikeCount.toString()
             likeCount.text = if (postModel.likeCount == 0) "" else postModel.likeCount.toString()

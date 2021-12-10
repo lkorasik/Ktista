@@ -13,14 +13,6 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="10dp" />
 
-    <LinearLayout
-        android:id="@+id/ll_names"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="30dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
@@ -31,18 +23,7 @@
             android:maxLines="1"
             android:text="Max"
             android:textColor="@color/color_6"
-            android:textSize="@dimen/base_feed_text_size" />
-
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1"
-            android:text="'@fdsfdssfdsfdfdsffdfdfsfsd"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sec_feed_text_size" />
-    </LinearLayout>
+            android:textSize="@dimen/base_feed_text_size"
+            android:layout_gravity="center_vertical"/>
 
 </LinearLayout>
