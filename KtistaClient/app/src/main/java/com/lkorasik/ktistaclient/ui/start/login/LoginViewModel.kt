@@ -31,6 +31,7 @@ class LoginViewModel:ViewModel() {
 
     fun loginUser(nickname: String, password: String){
         viewModelScope.launch {
+            inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request")
             loginRequest.loginUser(UserLoginRequest(nickname, password))
         }
