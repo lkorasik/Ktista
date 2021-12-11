@@ -9,9 +9,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
@@ -28,9 +31,11 @@ class AddPostActivity : AppCompatActivity() {
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setToolBar()
 
         image = binding.ivPostPhoto
         description = binding.etDescription
+        binding.tvTextStub.setOnClickListener { chooseImage(this) }
 
         val grad = binding.tvTextStub
         grad.startColor = getColor(R.color.color_4)
@@ -88,6 +93,46 @@ class AddPostActivity : AppCompatActivity() {
                 }
             }
             binding.tvTextStub.visibility = View.GONE
+        }
+    }
+
+    private fun showEmptyPostDataToast() {
+        val text = "Your beautiful image hasn't loaded"
+        val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
+    private fun sendTHISSHIT() {
+        if (image.drawable == null) {
+            showEmptyPostDataToast()
+        } else {
+            //send..........
+        }
+    }
+
+    private fun setToolBar() {
+        setSupportActionBar(binding.includeAddPostToolbar.customToolbar)
+        supportActionBar?.title = "New post"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_add_post, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_icon_addPost -> {
+                sendTHISSHIT()
+                true
+            }
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
