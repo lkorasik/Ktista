@@ -57,6 +57,7 @@
 
         <ImageView
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="1dp"
             android:src="@drawable/button_primary" />
 
@@ -84,65 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/registration_first_name"
-                    android:textColor="@color/color_6" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/settings_first_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/edit_text"
-                    android:fontFamily="@font/roboto"
-                    android:singleLine="true"
-                    android:text="Zadalbaldsya "
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/registration_last_name"
-                    android:textColor="@color/color_6" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/settings_last_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/edit_text"
-                    android:fontFamily="@font/roboto"
-                    android:singleLine="true"
-                    android:text="Verstat"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
@@ -201,7 +143,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/button_primary" />
 
         <TextView

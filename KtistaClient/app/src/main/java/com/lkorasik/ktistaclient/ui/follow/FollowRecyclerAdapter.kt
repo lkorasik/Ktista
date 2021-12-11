@@ -48,7 +48,6 @@ class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.Followi
                 }
 
                 includeUser.tvUserName.text = model.user.name
-                includeUser.tvLogin.text = model.user.login
 
                 if (model.isFollow) {
                     btFollow.setText(R.string.unfollow)
