@@ -45,18 +45,6 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        viewModel.inProgress.observe(this, {
-            Log.i(LoginViewModel.LOG_TAG, "$it")
-
-            if(it.equals(RequestStages.SUCCESS)) {
-            }
-            if(it.equals(RequestStages.FAIL)) {
-
-            }
-            if(it.equals(RequestStages.IN_PROGRESS)){
-
-            }
-        })
         viewModel.data.observe(this, {
             nickname.text = it.username
         })
