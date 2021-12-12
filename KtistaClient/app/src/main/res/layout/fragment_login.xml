@@ -58,6 +58,8 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/roboto"
+            android:maxLength="@integer/max_length_et"
+            android:maxLines="1"
             android:hint="@string/login_nickname"
             android:paddingHorizontal="20dp"
             android:singleLine="true" />
@@ -69,6 +71,8 @@
             android:layout_marginHorizontal="45dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/roboto"
+            android:maxLength="@integer/max_length_et"
+            android:maxLines="1"
             android:hint="@string/login_password"
             android:inputType="textPassword"
             android:paddingHorizontal="20dp"

@@ -43,4 +43,6 @@
     
     <dimen name="add_post_text_stub">24sp</dimen>
     <dimen name="post_icon_size">23dp</dimen>
+
+    <integer name="max_length_et">25</integer>
 </resources>
