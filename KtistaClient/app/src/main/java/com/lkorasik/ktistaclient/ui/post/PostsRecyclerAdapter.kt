@@ -27,7 +27,7 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val postView = layoutInflater.inflate(R.layout.fragment_post, parent, false)
+        val postView = layoutInflater.inflate(R.layout.widget_post, parent, false)
 
         return FeedViewHolder(itemView = postView)
     }

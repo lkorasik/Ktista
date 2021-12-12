@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:listitem="@layout/fragment_post" />
+            tools:listitem="@layout/widget_post" />
 
     </LinearLayout>
 

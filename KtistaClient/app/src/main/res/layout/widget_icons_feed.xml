@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:paddingHorizontal="15dp"
     android:paddingVertical="12dp"
-    tools:showIn="@layout/fragment_post">
+    tools:showIn="@layout/widget_post">
 
 
     <ImageView
