@@ -3,10 +3,10 @@ package com.lkorasik.ktistaclient.ui.start.login
 import android.util.Log
 import androidx.lifecycle.*
 import com.lkorasik.ktistaclient.net.requests.LoginRequest
-import com.lkorasik.ktistaclient.net.requests.OnResultListener
+import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.model.UserLoginRequest
 import com.lkorasik.ktistaclient.net.model.UserLoginResponse
-import com.lkorasik.ktistaclient.net.requests.RequestStages
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import kotlinx.coroutines.launch
 
 class LoginViewModel:ViewModel() {

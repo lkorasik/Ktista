@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests
+package com.lkorasik.ktistaclient.net.core
 
 import okhttp3.Cookie
 import okhttp3.CookieJar

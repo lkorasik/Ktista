@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.model.GetProfileRequest
 import com.lkorasik.ktistaclient.net.model.ProfileResponse
-import com.lkorasik.ktistaclient.net.requests.OnResultListener
+import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.requests.ProfileRequest
-import com.lkorasik.ktistaclient.net.requests.RequestStages
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     private val getProfileRequest = ProfileRequest().apply {
-        setOnResultListener(object : OnResultListener<ProfileResponse>{
+        setOnResultListener(object : OnResultListener<ProfileResponse> {
             override fun onSuccess(obj: ProfileResponse?) {
                 inProgress.value = RequestStages.SUCCESS
                 data.value = obj

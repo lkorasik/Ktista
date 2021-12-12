@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests
+package com.lkorasik.ktistaclient.net.core
 
 import android.util.Log
 import retrofit2.Call
