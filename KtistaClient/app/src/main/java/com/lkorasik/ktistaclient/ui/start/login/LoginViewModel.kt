@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.lkorasik.ktistaclient.net.requests.LoginRequest
 import com.lkorasik.ktistaclient.net.requests.OnResultListener
 import com.lkorasik.ktistaclient.net.model.UserLoginRequest
+import com.lkorasik.ktistaclient.net.model.UserLoginResponse
 import com.lkorasik.ktistaclient.net.requests.RequestStages
 import kotlinx.coroutines.launch
 
@@ -14,8 +15,8 @@ class LoginViewModel:ViewModel() {
     }
 
     private val loginRequest = LoginRequest().apply {
-        setOnResultListener(object : OnResultListener {
-            override fun onSuccess() {
+        setOnResultListener(object : OnResultListener<UserLoginResponse> {
+            override fun onSuccess(obj: UserLoginResponse?) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success")
             }

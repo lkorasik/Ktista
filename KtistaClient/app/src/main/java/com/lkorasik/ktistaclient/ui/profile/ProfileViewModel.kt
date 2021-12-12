@@ -20,9 +20,10 @@ class ProfileViewModel : ViewModel() {
     }
 
     private val getProfileRequest = ProfileRequest().apply {
-        setOnResultListener(object : OnResultListener{
-            override fun onSuccess() {
+        setOnResultListener(object : OnResultListener<ProfileResponse>{
+            override fun onSuccess(obj: ProfileResponse?) {
                 inProgress.value = RequestStages.SUCCESS
+                data.value = obj
                 Log.i(LOG_TAG, "Request get profile was success")
             }
 
