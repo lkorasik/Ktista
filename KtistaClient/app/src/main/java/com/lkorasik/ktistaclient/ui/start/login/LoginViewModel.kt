@@ -22,7 +22,7 @@ class LoginViewModel:ViewModel() {
 
             override fun onFail() {
                 inProgress.value = RequestStages.FAIL
-                Log.i(LOG_TAG, "Login was success")
+                Log.i(LOG_TAG, "Login was failed")
             }
         })
     }

@@ -11,4 +11,7 @@ interface KtistaAPI {
 
     @POST("api/user/login/")
     fun login(@Body user: UserLoginRequest): Call<UserLoginResponse?>?
+
+    @GET("api/user/profile/{id}")
+    fun getProfile(@Path("id") id: Long): Call<ProfileResponse?>?
 }
