@@ -10,5 +10,5 @@ interface KtistaAPI {
     fun register(@Body user: UserRegistrationRequest): Call<UserRegistrationResponse?>?
 
     @POST("api/user/login/")
-    fun login(@Body user: UserLoginRequest): Call<String?>?
+    fun login(@Body user: UserLoginRequest): Call<UserLoginResponse?>?
 }
