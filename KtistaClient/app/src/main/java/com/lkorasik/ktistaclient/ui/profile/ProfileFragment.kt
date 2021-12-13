@@ -21,7 +21,6 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by navGraphViewModels(R.id.navigation_profile)
     private lateinit var postsAdapter: PostsRecyclerAdapter
     private val binding get() = _binding!!
-    private lateinit var rootActivity: MainActivity
 
     private lateinit var nickname: TextView
 

@@ -47,7 +47,6 @@ class ProfileViewModel : ViewModel() {
 
     private fun testLoadPosts() {
         mutablePostsData.postValue(TestDataClass.getPostsData())
-
     }
 
     private fun loadPosts() {}
