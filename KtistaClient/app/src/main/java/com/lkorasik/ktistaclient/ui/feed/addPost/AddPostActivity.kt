@@ -23,13 +23,15 @@ import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 import java.io.File
 import java.io.IOException
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 
 class AddPostActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var description: EditText
 
-    lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoPath: String
 
     private lateinit var binding: ActivityAddPostBinding
 
@@ -46,10 +48,11 @@ class AddPostActivity : AppCompatActivity() {
             dispatchTakePictureIntent()
         }
 
-        val grad = binding.tvTextStub
-        grad.startColor = getColor(R.color.color_4)
-        grad.endColor = getColor(R.color.color_1)
-        grad.invalidate()
+        binding.tvTextStub.apply {
+            startColor = getColor(R.color.color_4)
+            endColor = getColor(R.color.color_1)
+            invalidate()
+        }
     }
 
     private fun createImageFile(): File {
@@ -84,14 +87,10 @@ class AddPostActivity : AppCompatActivity() {
 
             BitmapFactory.decodeFile(currentPhotoPath, this)
 
-            val photoW: Int = outWidth
-            val photoH: Int = outHeight
-
-            val scaleFactor: Int = Math.max(1, Math.min(photoW / image.width, photoH / image.height))
+            val scaleFactor: Int = max(1, min(outWidth / image.width, outHeight / image.height))
 
             inJustDecodeBounds = false
             inSampleSize = scaleFactor
-            inPurgeable = true
         }
 
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.apply {
