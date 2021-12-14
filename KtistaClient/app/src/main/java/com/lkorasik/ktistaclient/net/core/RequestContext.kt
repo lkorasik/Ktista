@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests
+package com.lkorasik.ktistaclient.net.core
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
