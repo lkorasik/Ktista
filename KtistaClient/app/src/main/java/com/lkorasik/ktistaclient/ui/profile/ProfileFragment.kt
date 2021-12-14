@@ -1,19 +1,40 @@
 package com.lkorasik.ktistaclient.ui.profile
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lkorasik.ktistaclient.BuildConfig
 import com.lkorasik.ktistaclient.MainActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
+import java.io.File
+import java.io.IOException
+import java.text.DateFormat.getDateTimeInstance
+import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 
 class ProfileFragment : Fragment() {
@@ -24,6 +45,9 @@ class ProfileFragment : Fragment() {
 
     private lateinit var nickname: TextView
 
+    private lateinit var imagePath: String
+    private lateinit var image: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,9 +57,16 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        image = binding.includedProfileInfo.ivAvatar
+
         viewModel.data.observe(this, {
             nickname.text = it.username
         })
+
+        binding.includedProfileInfo.ivAvatar.setOnClickListener {
+            chooseImage(activity)
+            //TODO("Load avatar!")
+        }
 
         nickname = binding.includedProfileInfo.profileName
 
@@ -50,6 +81,92 @@ class ProfileFragment : Fragment() {
         viewModel.getProfile()
 
         return binding.root
+    }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(activity!!.baseContext, BuildConfig.APPLICATION_ID, it)
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, 0)
+                }
+            }
+        }
+    }
+
+    private fun createImageFile(): File {
+        val timeStamp = getDateTimeInstance().format(Date())
+        val storageDir: File? = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
+            imagePath = absolutePath
+        }
+    }
+
+    private fun chooseImage(context: Context?) {
+        val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setItems(optionsMenu) { dialogInterface, i ->
+            when {
+                optionsMenu[i] == "Take Photo" -> {
+                    dispatchTakePictureIntent()
+                }
+                optionsMenu[i] == "Choose from Gallery" -> {
+                    val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(pickPhoto, 1)
+                }
+                optionsMenu[i] == "Exit" -> {
+                    dialogInterface.dismiss()
+                }
+            }
+        }
+        builder.show()
+    }
+
+    private fun setPic() {
+        val bmOptions = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+
+            BitmapFactory.decodeFile(imagePath, this)
+
+            val scaleFactor: Int = max(1, min(outWidth / image.width, outHeight / image.height))
+
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+        }
+
+        BitmapFactory.decodeFile(imagePath, bmOptions)?.apply {
+            image.setImageBitmap(rotateImage(this, 90f))
+        }
+    }
+
+    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+        val matrix = Matrix().apply {
+            postRotate(angle)
+        }
+        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != RESULT_CANCELED) {
+            when (requestCode) {
+                0 -> if (resultCode == RESULT_OK) {
+                    setPic()
+                }
+                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
+                    val selectedOImage = data.data
+                    image.setImageURI(selectedOImage)
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,4 +190,3 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 }
-
