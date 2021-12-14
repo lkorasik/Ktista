@@ -12,7 +12,7 @@ import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.*
-import com.lkorasik.ktistaclient.net.requests.RequestStages
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
 
 class LoginFragment: Fragment() {

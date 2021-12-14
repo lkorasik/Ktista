@@ -4,10 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.requests.OnResultListener
+import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.requests.RegistrationRequest
-import com.lkorasik.ktistaclient.net.requests.RequestStages
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.UserRegistrationRequest
+import com.lkorasik.ktistaclient.net.model.UserRegistrationResponse
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel: ViewModel(){
@@ -16,8 +17,8 @@ class RegistrationViewModel: ViewModel(){
     }
 
     private val registrationRequest = RegistrationRequest().apply {
-        setOnResultListener(object: OnResultListener {
-            override fun onSuccess() {
+        setOnResultListener(object: OnResultListener<UserRegistrationResponse> {
+            override fun onSuccess(obj: UserRegistrationResponse?) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }

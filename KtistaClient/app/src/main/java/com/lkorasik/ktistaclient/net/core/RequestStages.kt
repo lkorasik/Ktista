@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.net.requests
+package com.lkorasik.ktistaclient.net.core
 
 enum class RequestStages {
     INIT,
