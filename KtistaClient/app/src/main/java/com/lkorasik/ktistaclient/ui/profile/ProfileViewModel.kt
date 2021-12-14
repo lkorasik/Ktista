@@ -23,8 +23,10 @@ class ProfileViewModel : ViewModel() {
         setOnResultListener(object : OnResultListener<ProfileResponse> {
             override fun onSuccess(obj: ProfileResponse?) {
                 inProgress.value = RequestStages.SUCCESS
-                data.value = obj
-                Log.i(LOG_TAG, "Request get profile was success")
+                obj.let {
+                    data.value = it
+                    Log.i(LOG_TAG, "Request get profile was success")
+                }
             }
 
             override fun onFail() {
@@ -36,7 +38,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     val inProgress = MutableLiveData(RequestStages.INIT)
-    val data = MutableLiveData(ProfileResponse(""))
+    val data = MutableLiveData<ProfileResponse>()
 
     private val mutablePostsData: MutableLiveData<ArrayList<PostModel>> = MutableLiveData()
     val postsData: LiveData<ArrayList<PostModel>> = mutablePostsData
