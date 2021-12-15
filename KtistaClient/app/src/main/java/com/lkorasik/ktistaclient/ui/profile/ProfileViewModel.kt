@@ -12,6 +12,14 @@ import com.lkorasik.ktistaclient.net.requests.ProfileRequest
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
+import android.graphics.BitmapFactory
+import android.R
+import android.provider.MediaStore
+import android.content.Intent
+import androidx.core.app.ActivityCompat.startActivityForResult
+import android.os.Bundle
+import android.app.Activity
+import android.view.View
 import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
