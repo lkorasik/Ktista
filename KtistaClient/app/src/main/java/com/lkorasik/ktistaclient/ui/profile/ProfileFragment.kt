@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lkorasik.ktistaclient.ui.helper.ImageCaptureTypes
+import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
@@ -31,10 +31,9 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var nickname: TextView
-
-    private lateinit var imagePath: String
     private lateinit var image: ImageView
 
+    private lateinit var imagePath: String
     private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,16 +47,15 @@ class ProfileFragment : Fragment() {
 
         image = binding.includedProfileInfo.ivAvatar
 
+        nickname = binding.includedProfileInfo.profileName
+
         viewModel.data.observe(this, {
             nickname.text = it.username
         })
 
         binding.includedProfileInfo.ivAvatar.setOnClickListener {
             chooseImage(activity)
-            //TODO("Load avatar!")
         }
-
-        nickname = binding.includedProfileInfo.profileName
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
@@ -72,11 +70,11 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun dispatchTakePictureIntent() {
+    private fun sendTakePictureIntent() {
         imageHelper.createEmptyImageFile(activity!!)?.let {
             imagePath = it.absolutePath.toString()
             val intent = imageHelper.createTakePictureIntent(activity!!, it)
-            startActivityForResult(intent, ImageCaptureTypes.CAMERA.ordinal)
+            startActivityForResult(intent, ImageSources.CAMERA.ordinal)
         }
     }
 
@@ -85,10 +83,10 @@ class ProfileFragment : Fragment() {
 
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
-                ImageCaptureTypes.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
+                ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
                     image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
-                ImageCaptureTypes.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
+                ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)
                 }
             }
@@ -104,10 +102,10 @@ class ProfileFragment : Fragment() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setItems(optionsMenu) { dialogInterface, i ->
             when(optionsMenu[i]) {
-                takePhoto -> dispatchTakePictureIntent()
+                takePhoto -> sendTakePictureIntent()
                 selectPhoto -> {
                     val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(pickPhoto, 1)
+                    startActivityForResult(pickPhoto, ImageSources.GALLERY.ordinal)
                 }
                 exit -> dialogInterface.dismiss()
             }

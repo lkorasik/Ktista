@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.lkorasik.ktistaclient.ui.helper.ImageCaptureTypes
+import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
@@ -48,11 +48,11 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun dispatchTakePictureIntent() {
+    private fun sendTakePictureIntent() {
         imageHelper.createEmptyImageFile(this)?.let {
             imagePath = it.absolutePath.toString()
             val intent = imageHelper.createTakePictureIntent(this, it)
-            startActivityForResult(intent, ImageCaptureTypes.CAMERA.ordinal)
+            startActivityForResult(intent, ImageSources.CAMERA.ordinal)
         }
     }
 
@@ -61,10 +61,10 @@ class AddPostActivity : AppCompatActivity() {
 
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
-                ImageCaptureTypes.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
+                ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
                     image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
-                ImageCaptureTypes.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
+                ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)
                 }
             }
@@ -81,7 +81,7 @@ class AddPostActivity : AppCompatActivity() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setItems(optionsMenu) { dialogInterface, i ->
             when(optionsMenu[i]) {
-                takePhoto -> dispatchTakePictureIntent()
+                takePhoto -> sendTakePictureIntent()
                 selectPhoto -> {
                     val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(pickPhoto, 1)

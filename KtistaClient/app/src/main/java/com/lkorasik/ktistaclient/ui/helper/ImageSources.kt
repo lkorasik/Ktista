@@ -1,6 +1,6 @@
 package com.lkorasik.ktistaclient.ui.helper
 
-enum class ImageCaptureTypes {
+enum class ImageSources {
     CAMERA,
     GALLERY
 }

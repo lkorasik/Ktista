@@ -23,6 +23,7 @@ class ImageHelper {
     fun createEmptyImageFile(context: Context): File? {
         val timeStamp = DateFormat.getDateTimeInstance().format(Date())
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
         return try {
             File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir)
         } catch (ex: IOException) {
@@ -37,8 +38,7 @@ class ImageHelper {
             resolveActivity(activity.packageManager)
         }
 
-        val photoURI: Uri = FileProvider.getUriForFile(activity,
-            BuildConfig.APPLICATION_ID, tempFile)
+        val photoURI: Uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID, tempFile)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
         return intent
     }
