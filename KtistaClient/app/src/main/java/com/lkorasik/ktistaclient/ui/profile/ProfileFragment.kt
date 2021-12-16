@@ -75,11 +75,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-        val tempFile = imageHelper.createEmptyImageFile(activity!!)
-
-        if(tempFile != null) {
-            imagePath = tempFile.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(activity!!, tempFile)
+        imageHelper.createEmptyImageFile(activity!!)?.let {
+            imagePath = it.absolutePath.toString()
+            val intent = imageHelper.dispatchTakePictureIntent(activity!!, it)
             startActivityForResult(intent, 0)
         }
     }

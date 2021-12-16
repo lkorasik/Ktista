@@ -51,11 +51,9 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        val tempFile = imageHelper.createEmptyImageFile(this)
-
-        if(tempFile != null) {
-            imagePath = tempFile.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(this, tempFile)
+        imageHelper.createEmptyImageFile(this)?.let {
+            imagePath = it.absolutePath.toString()
+            val intent = imageHelper.dispatchTakePictureIntent(this, it)
             startActivityForResult(intent, 0)
         }
     }

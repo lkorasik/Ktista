@@ -30,7 +30,7 @@ class ImageHelper {
         }
     }
 
-    fun dispatchTakePictureIntent(activity: Activity, tempFile: File): Intent? {
+    fun dispatchTakePictureIntent(activity: Activity, tempFile: File): Intent {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
             resolveActivity(activity.packageManager)
         }
