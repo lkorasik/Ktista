@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.BuildConfig
+import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.MainActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
@@ -47,6 +49,8 @@ class ProfileFragment : Fragment() {
 
     private lateinit var imagePath: String
     private lateinit var image: ImageView
+
+    private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,10 +91,13 @@ class ProfileFragment : Fragment() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
                 val photoFile: File? = try {
-                    createImageFile()
+                    imageHelper.createImageFile(activity!!)
                 } catch (ex: IOException) {
+                    Log.e(this::class.java.canonicalName, "I Cant create a temp file")
                     null
                 }
+
+                imagePath = photoFile?.absolutePath.toString()
 
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(activity!!.baseContext, BuildConfig.APPLICATION_ID, it)
@@ -98,14 +105,6 @@ class ProfileFragment : Fragment() {
                     startActivityForResult(takePictureIntent, 0)
                 }
             }
-        }
-    }
-
-    private fun createImageFile(): File {
-        val timeStamp = getDateTimeInstance().format(Date())
-        val storageDir: File? = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
-            imagePath = absolutePath
         }
     }
 

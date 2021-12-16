@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.lkorasik.ktistaclient.BuildConfig
+import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 import java.io.File
@@ -36,6 +38,8 @@ class AddPostActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
 
     private lateinit var binding: ActivityAddPostBinding
+
+    private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,22 +62,17 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun createImageFile(): File {
-        val timeStamp = getDateTimeInstance().format(Date())
-        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
-            currentPhotoPath = absolutePath
-        }
-    }
-
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 val photoFile: File? = try {
-                    createImageFile()
+                    imageHelper.createImageFile(this)
                 } catch (ex: IOException) {
+                    Log.e(this::class.java.canonicalName, "I Cant create a temp file")
                     null
                 }
+
+                currentPhotoPath = photoFile?.absolutePath.toString()
 
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID, it)
