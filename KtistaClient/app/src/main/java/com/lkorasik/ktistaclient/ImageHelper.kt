@@ -6,16 +6,23 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.icu.text.DateFormat
 import android.os.Environment
+import android.util.Log
 import java.io.File
+import java.io.IOException
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
 class ImageHelper {
-    fun createImageFile(context: Context): File {
+    fun createImageFile(context: Context): File? {
         val timeStamp = DateFormat.getDateTimeInstance().format(Date())
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir)
+        return try {
+            File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir)
+        } catch (ex: IOException) {
+            Log.e(this::class.java.canonicalName, "I Cant create a temp file")
+            null
+        }
     }
 
     fun createBitmap(path: String, viewWidth: Int, viewHeight: Int): Bitmap {

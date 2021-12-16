@@ -80,21 +80,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
-                val photoFile: File? = try {
-                    imageHelper.createImageFile(activity!!)
-                } catch (ex: IOException) {
-                    Log.e(this::class.java.canonicalName, "I Cant create a temp file")
-                    null
-                }
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+            resolveActivity(activity?.packageManager!!)?.also {
+                val photoFile = imageHelper.createImageFile(activity!!)
 
                 imagePath = photoFile?.absolutePath.toString()
 
                 photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(activity!!.baseContext, BuildConfig.APPLICATION_ID, it)
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, 0)
+                    val photoURI: Uri = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID, it)
+                    putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(this, 0)
                 }
             }
         }

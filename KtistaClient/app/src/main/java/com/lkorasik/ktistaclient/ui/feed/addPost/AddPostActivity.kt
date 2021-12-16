@@ -56,21 +56,16 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile: File? = try {
-                    imageHelper.createImageFile(this)
-                } catch (ex: IOException) {
-                    Log.e(this::class.java.canonicalName, "I Cant create a temp file")
-                    null
-                }
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+            resolveActivity(packageManager)?.also {
+                val photoFile = imageHelper.createImageFile(this@AddPostActivity)
 
                 imagePath = photoFile?.absolutePath.toString()
 
                 photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID, it)
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, 0)
+                    val photoURI: Uri = FileProvider.getUriForFile(this@AddPostActivity, BuildConfig.APPLICATION_ID, it)
+                    putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(this, 0)
                 }
             }
         }
