@@ -2,7 +2,6 @@ package com.lkorasik.ktistaclient.ui.feed.addPost
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
@@ -13,8 +12,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
-import com.lkorasik.ktistaclient.BuildConfig
 import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
@@ -28,12 +25,10 @@ class AddPostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPostBinding
 
-    private lateinit var imageHelper: ImageHelper
+    private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        imageHelper = ImageHelper(this)
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -53,9 +48,9 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        imageHelper.createEmptyImageFile()?.let {
+        imageHelper.createEmptyImageFile(this)?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(it)
+            val intent = imageHelper.createTakePictureIntent(this, it)
             startActivityForResult(intent, 0)
         }
     }
@@ -66,7 +61,7 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 0 -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
+                    image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
                 1 -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)

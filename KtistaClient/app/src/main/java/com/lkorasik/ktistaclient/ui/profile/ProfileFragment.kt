@@ -5,7 +5,6 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -13,13 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lkorasik.ktistaclient.BuildConfig
 import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
@@ -37,12 +34,10 @@ class ProfileFragment : Fragment() {
     private lateinit var imagePath: String
     private lateinit var image: ImageView
 
-    private lateinit var imageHelper: ImageHelper
+    private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        imageHelper = ImageHelper(activity!!)
 
         postsAdapter = PostsRecyclerAdapter()
     }
@@ -77,9 +72,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-        imageHelper.createEmptyImageFile()?.let {
+        imageHelper.createEmptyImageFile(activity!!)?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(it)
+            val intent = imageHelper.createTakePictureIntent(activity!!, it)
             startActivityForResult(intent, 0)
         }
     }
@@ -110,7 +105,7 @@ class ProfileFragment : Fragment() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 0 -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
+                    image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
                 1 -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)

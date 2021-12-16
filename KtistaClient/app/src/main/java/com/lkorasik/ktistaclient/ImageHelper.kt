@@ -1,6 +1,7 @@
 package com.lkorasik.ktistaclient
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -17,10 +18,10 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
-class ImageHelper(val activity: Activity) {
-    fun createEmptyImageFile(): File? {
+class ImageHelper() {
+    fun createEmptyImageFile(context: Context): File? {
         val timeStamp = DateFormat.getDateTimeInstance().format(Date())
-        val storageDir: File? = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return try {
             File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir)
         } catch (ex: IOException) {
@@ -29,7 +30,7 @@ class ImageHelper(val activity: Activity) {
         }
     }
 
-    fun dispatchTakePictureIntent(tempFile: File): Intent {
+    fun createTakePictureIntent(activity: Activity, tempFile: File): Intent {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
             resolveActivity(activity.packageManager)
         }
@@ -39,7 +40,7 @@ class ImageHelper(val activity: Activity) {
         return intent
     }
 
-    fun createBitmap(path: String, viewWidth: Int, viewHeight: Int): Bitmap {
+    fun loadBitmap(path: String, viewWidth: Int, viewHeight: Int): Bitmap {
         val bmOptions = BitmapFactory.Options().apply {
             inSampleSize = max(1, min(outWidth / viewWidth, outHeight / viewHeight))
         }
