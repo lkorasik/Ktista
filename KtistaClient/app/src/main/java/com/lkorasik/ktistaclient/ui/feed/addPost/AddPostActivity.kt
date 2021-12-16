@@ -75,17 +75,13 @@ class AddPostActivity : AppCompatActivity() {
         val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setItems(optionsMenu) { dialogInterface, i ->
-            when {
-                optionsMenu[i] == "Take Photo" -> {
-                    dispatchTakePictureIntent()
-                }
-                optionsMenu[i] == "Choose from Gallery" -> {
+            when(optionsMenu[i]) {
+                "Take Photo" -> dispatchTakePictureIntent()
+                "Choose from Gallery" -> {
                     val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(pickPhoto, 1)
                 }
-                optionsMenu[i] == "Exit" -> {
-                    dialogInterface.dismiss()
-                }
+                "Exit" -> dialogInterface.dismiss()
             }
         }
         builder.show()

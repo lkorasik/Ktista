@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
-class ImageHelper() {
+class ImageHelper {
     fun createEmptyImageFile(context: Context): File? {
         val timeStamp = DateFormat.getDateTimeInstance().format(Date())
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
