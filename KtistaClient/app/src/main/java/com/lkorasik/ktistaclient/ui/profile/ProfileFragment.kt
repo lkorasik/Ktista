@@ -5,12 +5,9 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +24,6 @@ import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
-import java.io.File
-import java.io.IOException
 
 
 class ProfileFragment : Fragment() {
@@ -80,18 +75,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            resolveActivity(activity?.packageManager!!)?.also {
-                val photoFile = imageHelper.createImageFile(activity!!)
+        val tempFile = imageHelper.createEmptyImageFile(activity!!)
 
-                imagePath = photoFile?.absolutePath.toString()
-
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID, it)
-                    putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(this, 0)
-                }
-            }
+        if(tempFile != null) {
+            imagePath = tempFile.absolutePath.toString()
+            val intent = imageHelper.dispatchTakePictureIntent(activity!!, tempFile)
+            startActivityForResult(intent, 0)
         }
     }
 

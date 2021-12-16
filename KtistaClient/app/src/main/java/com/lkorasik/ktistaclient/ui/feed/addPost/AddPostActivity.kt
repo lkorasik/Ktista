@@ -2,12 +2,9 @@ package com.lkorasik.ktistaclient.ui.feed.addPost
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,8 +18,6 @@ import com.lkorasik.ktistaclient.BuildConfig
 import com.lkorasik.ktistaclient.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
-import java.io.File
-import java.io.IOException
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -56,18 +51,28 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            resolveActivity(packageManager)?.also {
-                val photoFile = imageHelper.createImageFile(this@AddPostActivity)
+        val tempFile = imageHelper.createEmptyImageFile(this)
 
-                imagePath = photoFile?.absolutePath.toString()
+        if(tempFile != null) {
+            imagePath = tempFile.absolutePath.toString()
+            val intent = imageHelper.dispatchTakePictureIntent(this, tempFile)
+            startActivityForResult(intent, 0)
+        }
+    }
 
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(this@AddPostActivity, BuildConfig.APPLICATION_ID, it)
-                    putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(this, 0)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != RESULT_CANCELED) {
+            when (requestCode) {
+                0 -> if (resultCode == RESULT_OK) {
+                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
+                }
+                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
+                    image.setImageURI(data.data)
                 }
             }
+            binding.tvTextStub.visibility = View.GONE
         }
     }
 
@@ -89,22 +94,6 @@ class AddPostActivity : AppCompatActivity() {
             }
         }
         builder.show()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode != RESULT_CANCELED) {
-            when (requestCode) {
-                0 -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
-                }
-                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
-                    image.setImageURI(data.data)
-                }
-            }
-            binding.tvTextStub.visibility = View.GONE
-        }
     }
 
     private fun showEmptyPostDataToast() {
