@@ -37,10 +37,12 @@ class ProfileFragment : Fragment() {
     private lateinit var imagePath: String
     private lateinit var image: ImageView
 
-    private var imageHelper = ImageHelper()
+    private lateinit var imageHelper: ImageHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        imageHelper = ImageHelper(activity!!)
 
         postsAdapter = PostsRecyclerAdapter()
     }
@@ -75,9 +77,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-        imageHelper.createEmptyImageFile(activity!!)?.let {
+        imageHelper.createEmptyImageFile()?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(activity!!, it)
+            val intent = imageHelper.dispatchTakePictureIntent(it)
             startActivityForResult(intent, 0)
         }
     }

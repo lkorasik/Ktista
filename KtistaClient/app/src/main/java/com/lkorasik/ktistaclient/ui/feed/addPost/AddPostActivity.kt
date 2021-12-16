@@ -28,10 +28,12 @@ class AddPostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPostBinding
 
-    private var imageHelper = ImageHelper()
+    private lateinit var imageHelper: ImageHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        imageHelper = ImageHelper(this)
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -51,9 +53,9 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        imageHelper.createEmptyImageFile(this)?.let {
+        imageHelper.createEmptyImageFile()?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.dispatchTakePictureIntent(this, it)
+            val intent = imageHelper.dispatchTakePictureIntent(it)
             startActivityForResult(intent, 0)
         }
     }
