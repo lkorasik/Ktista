@@ -1,5 +1,6 @@
 package com.lkorasik.ktistaclient.ui.feed.addPost
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,6 +16,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.lkorasik.ktistaclient.BuildConfig
@@ -45,7 +47,8 @@ class AddPostActivity : AppCompatActivity() {
         image = binding.ivPostPhoto
         description = binding.etDescription
         binding.tvTextStub.setOnClickListener {
-            dispatchTakePictureIntent()
+            //dispatchTakePictureIntent()
+            chooseImage(this)
         }
 
         binding.tvTextStub.apply {
@@ -105,27 +108,25 @@ class AddPostActivity : AppCompatActivity() {
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
 
-//    private fun chooseImage(context: Context) {
-//        val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
-//        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-//        builder.setItems(optionsMenu) { dialogInterface, i ->
-//            when {
-//                optionsMenu[i] == "Take Photo" -> {
-//                    val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                    startActivityForResult(takePicture, 0)
-//                }
-//                optionsMenu[i] == "Choose from Gallery" -> {
-//                    val pickPhoto =
-//                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                    startActivityForResult(pickPhoto, 1)
-//                }
-//                optionsMenu[i] == "Exit" -> {
-//                    dialogInterface.dismiss()
-//                }
-//            }
-//        }
-//        builder.show()
-//    }
+    private fun chooseImage(context: Context) {
+        val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setItems(optionsMenu) { dialogInterface, i ->
+            when {
+                optionsMenu[i] == "Take Photo" -> {
+                    dispatchTakePictureIntent()
+                }
+                optionsMenu[i] == "Choose from Gallery" -> {
+                    val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(pickPhoto, 1)
+                }
+                optionsMenu[i] == "Exit" -> {
+                    dialogInterface.dismiss()
+                }
+            }
+        }
+        builder.show()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -135,20 +136,10 @@ class AddPostActivity : AppCompatActivity() {
                 0 -> if (resultCode == RESULT_OK) {
                     setPic()
                 }
-//                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
-//                    val selectedImage: Uri? = data.data
-//                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-//                    if (selectedImage != null) {
-//                        val cursor: Cursor? = contentResolver.query(selectedImage, filePathColumn, null, null, null)
-//                        if (cursor != null) {
-//                            cursor.moveToFirst()
-//                            val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
-//                            val picturePath: String = cursor.getString(columnIndex)
-//                            image.setImageBitmap(BitmapFactory.decodeFile(picturePath))
-//                            cursor.close()
-//                        }
-//                    }
-//                }
+                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
+                    val selectedOImage = data.data
+                    image.setImageURI(selectedOImage)
+                }
             }
             binding.tvTextStub.visibility = View.GONE
         }
