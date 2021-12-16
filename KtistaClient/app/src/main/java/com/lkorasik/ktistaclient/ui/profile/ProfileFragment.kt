@@ -23,8 +23,6 @@ class ProfileFragment : Fragment() {
 
     private var nickname: TextView? = null
 
-    private var imagePath: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
