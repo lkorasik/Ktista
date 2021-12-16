@@ -3,6 +3,7 @@ package com.lkorasik.ktistaclient
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.icu.text.DateFormat
 import android.os.Environment
 import java.io.File
@@ -22,6 +23,15 @@ class ImageHelper {
             inSampleSize = max(1, min(outWidth / viewWidth, outHeight / viewHeight))
         }
 
-        return BitmapFactory.decodeFile(path, bmOptions)
+        val bitmap = BitmapFactory.decodeFile(path, bmOptions)
+        
+        return rotateImage(bitmap, 90f)
+    }
+
+    fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+        val matrix = Matrix().apply {
+            postRotate(angle)
+        }
+        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
 }

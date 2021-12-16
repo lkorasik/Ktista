@@ -122,14 +122,7 @@ class ProfileFragment : Fragment() {
 
     private fun setPic() {
         val bitmap = imageHelper.createBitmap(imagePath, image.width, image.height)
-        image.setImageBitmap(rotateImage(bitmap, 90f))
-    }
-
-    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
-        val matrix = Matrix().apply {
-            postRotate(angle)
-        }
-        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+        image.setImageBitmap(imageHelper.rotateImage(bitmap, 90f))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
