@@ -19,27 +19,27 @@ import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 
 
 class AddPostActivity : AppCompatActivity() {
-    private lateinit var image: ImageView
-    private lateinit var description: EditText
+    private var image: ImageView? = null
+    private var description: EditText? = null
 
-    private lateinit var imagePath: String
+    private var imagePath: String? = null
 
-    private lateinit var binding: ActivityAddPostBinding
+    private var binding: ActivityAddPostBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
         setToolBar()
 
-        image = binding.ivPostPhoto
-        description = binding.etDescription
-        binding.tvTextStub.setOnClickListener {
+        image = binding?.ivPostPhoto
+        description = binding?.etDescription
+        binding?.tvTextStub?.setOnClickListener {
             chooseImage(this)
         }
 
-        binding.tvTextStub.apply {
+        binding?.tvTextStub?.apply {
             startColor = getColor(R.color.color_4)
             endColor = getColor(R.color.color_1)
             invalidate()
@@ -60,13 +60,13 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(ImageHelper.loadBitmap(imagePath, image.width, image.height))
+                    image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
-                    image.setImageURI(data.data)
+                    image?.setImageURI(data.data)
                 }
             }
-            binding.tvTextStub.visibility = View.GONE
+            binding?.tvTextStub?.visibility = View.GONE
         }
     }
 
@@ -97,7 +97,7 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun sendTHISSHIT() {
-        if (image.drawable == null) {
+        if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
             //send..........
@@ -105,7 +105,7 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun setToolBar() {
-        setSupportActionBar(binding.includeAddPostToolbar.customToolbar)
+        setSupportActionBar(binding?.includeAddPostToolbar?.customToolbar)
         supportActionBar?.title = "New post"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

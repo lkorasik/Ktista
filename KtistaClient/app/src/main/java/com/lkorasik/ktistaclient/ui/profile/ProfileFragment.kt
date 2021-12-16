@@ -27,13 +27,13 @@ import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val viewModel: ProfileViewModel by navGraphViewModels(R.id.navigation_profile)
-    private lateinit var postsAdapter: PostsRecyclerAdapter
+    private var postsAdapter: PostsRecyclerAdapter? = null
     private val binding get() = _binding!!
 
-    private lateinit var nickname: TextView
-    private lateinit var image: ImageView
+    private var nickname: TextView? = null
+    private var image: ImageView? = null
 
-    private lateinit var imagePath: String
+    private var imagePath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
         nickname = binding.includedProfileInfo.profileName
 
         viewModel.data.observe(this, {
-            nickname.text = it.username
+            nickname?.text = it.username
         })
 
         binding.includedProfileInfo.ivAvatar.setOnClickListener {
@@ -83,10 +83,10 @@ class ProfileFragment : Fragment() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(ImageHelper.loadBitmap(imagePath, image.width, image.height))
+                    image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
-                    image.setImageURI(data.data)
+                    image?.setImageURI(data.data)
                 }
             }
         }
@@ -119,7 +119,7 @@ class ProfileFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
-            postsAdapter.setItems(posts)
+            postsAdapter?.setItems(posts)
         }
 
         with(recyclerView) {
