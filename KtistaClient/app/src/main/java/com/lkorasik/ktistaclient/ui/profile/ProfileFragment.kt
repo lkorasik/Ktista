@@ -120,10 +120,7 @@ class ProfileFragment : Fragment() {
         builder.show()
     }
 
-    private fun setPic() {
-        val bitmap = imageHelper.createBitmap(imagePath, image.width, image.height)
-        image.setImageBitmap(imageHelper.rotateImage(bitmap, 90f))
-    }
+    private fun setPic() = image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

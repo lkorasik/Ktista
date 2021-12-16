@@ -76,10 +76,7 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPic() {
-        val bitmap = imageHelper.createBitmap(imagePath, image.width, image.height)
-        image.setImageBitmap(imageHelper.rotateImage(bitmap, 90f))
-    }
+    private fun setPic() = image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
 
     private fun chooseImage(context: Context) {
         val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")

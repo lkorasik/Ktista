@@ -24,11 +24,11 @@ class ImageHelper {
         }
 
         val bitmap = BitmapFactory.decodeFile(path, bmOptions)
-        
+
         return rotateImage(bitmap, 90f)
     }
 
-    fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix().apply {
             postRotate(angle)
         }
