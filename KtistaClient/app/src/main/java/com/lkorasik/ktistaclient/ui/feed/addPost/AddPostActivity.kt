@@ -71,8 +71,6 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPic() = image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
-
     private fun chooseImage(context: Context) {
         val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
@@ -99,11 +97,10 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 0 -> if (resultCode == RESULT_OK) {
-                    setPic()
+                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
                 }
                 1 -> if ((resultCode == RESULT_OK) && (data != null)) {
-                    val selectedOImage = data.data
-                    image.setImageURI(selectedOImage)
+                    image.setImageURI(data.data)
                 }
             }
             binding.tvTextStub.visibility = View.GONE

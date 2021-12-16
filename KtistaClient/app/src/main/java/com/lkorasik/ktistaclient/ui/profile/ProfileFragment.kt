@@ -115,19 +115,16 @@ class ProfileFragment : Fragment() {
         builder.show()
     }
 
-    private fun setPic() = image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 0 -> if (resultCode == RESULT_OK) {
-                    setPic()
+                    image.setImageBitmap(imageHelper.createBitmap(imagePath, image.width, image.height))
                 }
                 1 -> if ((resultCode == RESULT_OK) && (data != null)) {
-                    val selectedOImage = data.data
-                    image.setImageURI(selectedOImage)
+                    image.setImageURI(data.data)
                 }
             }
         }
