@@ -3,12 +3,9 @@ package com.lkorasik.ktistaclient.ui.feed.addPost
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.icu.text.DateFormat.getDateTimeInstance
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
@@ -26,16 +23,13 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 import java.io.File
 import java.io.IOException
-import java.util.*
-import kotlin.math.max
-import kotlin.math.min
 
 
 class AddPostActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var description: EditText
 
-    private lateinit var currentPhotoPath: String
+    private lateinit var imagePath: String
 
     private lateinit var binding: ActivityAddPostBinding
 
@@ -51,7 +45,6 @@ class AddPostActivity : AppCompatActivity() {
         image = binding.ivPostPhoto
         description = binding.etDescription
         binding.tvTextStub.setOnClickListener {
-            //dispatchTakePictureIntent()
             chooseImage(this)
         }
 
@@ -72,7 +65,7 @@ class AddPostActivity : AppCompatActivity() {
                     null
                 }
 
-                currentPhotoPath = photoFile?.absolutePath.toString()
+                imagePath = photoFile?.absolutePath.toString()
 
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID, it)
@@ -84,20 +77,8 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun setPic() {
-        val bmOptions = BitmapFactory.Options().apply {
-            inJustDecodeBounds = true
-
-            BitmapFactory.decodeFile(currentPhotoPath, this)
-
-            val scaleFactor: Int = max(1, min(outWidth / image.width, outHeight / image.height))
-
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-        }
-
-        BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.apply {
-            image.setImageBitmap(rotateImage(this, 90f))
-        }
+        val bitmap = imageHelper.createBitmap(imagePath, image.width, image.height)
+        image.setImageBitmap(rotateImage(bitmap, 90f))
     }
 
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {

@@ -6,11 +6,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,23 +18,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.BuildConfig
 import com.lkorasik.ktistaclient.ImageHelper
-import com.lkorasik.ktistaclient.MainActivity
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 import java.io.File
 import java.io.IOException
-import java.text.DateFormat.getDateTimeInstance
-import java.util.*
-import kotlin.math.max
-import kotlin.math.min
 
 
 class ProfileFragment : Fragment() {
@@ -129,20 +121,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setPic() {
-        val bmOptions = BitmapFactory.Options().apply {
-            inJustDecodeBounds = true
-
-            BitmapFactory.decodeFile(imagePath, this)
-
-            val scaleFactor: Int = max(1, min(outWidth / image.width, outHeight / image.height))
-
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-        }
-
-        BitmapFactory.decodeFile(imagePath, bmOptions)?.apply {
-            image.setImageBitmap(rotateImage(this, 90f))
-        }
+        val bitmap = imageHelper.createBitmap(imagePath, image.width, image.height)
+        image.setImageBitmap(rotateImage(bitmap, 90f))
     }
 
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
