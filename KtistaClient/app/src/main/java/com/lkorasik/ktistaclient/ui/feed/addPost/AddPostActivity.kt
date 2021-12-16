@@ -12,7 +12,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.lkorasik.ktistaclient.ImageHelper
+import com.lkorasik.ktistaclient.ui.helper.ImageCaptureTypes
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 
@@ -51,7 +52,7 @@ class AddPostActivity : AppCompatActivity() {
         imageHelper.createEmptyImageFile(this)?.let {
             imagePath = it.absolutePath.toString()
             val intent = imageHelper.createTakePictureIntent(this, it)
-            startActivityForResult(intent, 0)
+            startActivityForResult(intent, ImageCaptureTypes.CAMERA.ordinal)
         }
     }
 
@@ -60,10 +61,10 @@ class AddPostActivity : AppCompatActivity() {
 
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
-                0 -> if (resultCode == RESULT_OK) {
+                ImageCaptureTypes.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
                     image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
-                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
+                ImageCaptureTypes.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)
                 }
             }
@@ -72,16 +73,20 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun chooseImage(context: Context) {
-        val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
+        val takePhoto = getString(R.string.dialog_take_photo)
+        val selectPhoto = getString(R.string.dialog_select_photo)
+        val exit = getString(R.string.dialog_exit)
+
+        val optionsMenu = arrayOf(takePhoto, selectPhoto, exit)
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setItems(optionsMenu) { dialogInterface, i ->
             when(optionsMenu[i]) {
-                "Take Photo" -> dispatchTakePictureIntent()
-                "Choose from Gallery" -> {
+                takePhoto -> dispatchTakePictureIntent()
+                selectPhoto -> {
                     val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(pickPhoto, 1)
                 }
-                "Exit" -> dialogInterface.dismiss()
+                exit -> dialogInterface.dismiss()
             }
         }
         builder.show()

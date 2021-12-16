@@ -51,4 +51,8 @@
     <string name="settings_confidential">Confidential</string>
     <string name="settings_change">Change</string>
     <string name="settings_photo">Photo</string>
+
+    <string name="dialog_take_photo">Take photo</string>
+    <string name="dialog_select_photo">Choose from gallery</string>
+    <string name="dialog_exit">Exit</string>
 </resources>

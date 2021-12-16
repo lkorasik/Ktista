@@ -17,7 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lkorasik.ktistaclient.ImageHelper
+import com.lkorasik.ktistaclient.ui.helper.ImageCaptureTypes
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
@@ -75,24 +76,8 @@ class ProfileFragment : Fragment() {
         imageHelper.createEmptyImageFile(activity!!)?.let {
             imagePath = it.absolutePath.toString()
             val intent = imageHelper.createTakePictureIntent(activity!!, it)
-            startActivityForResult(intent, 0)
+            startActivityForResult(intent, ImageCaptureTypes.CAMERA.ordinal)
         }
-    }
-
-    private fun chooseImage(context: Context?) {
-        val optionsMenu = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Exit")
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        builder.setItems(optionsMenu) { dialogInterface, i ->
-            when(optionsMenu[i]) {
-                "Take Photo" -> dispatchTakePictureIntent()
-                "Choose from Gallery" -> {
-                    val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(pickPhoto, 1)
-                }
-                "Exit" -> dialogInterface.dismiss()
-            }
-        }
-        builder.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -100,14 +85,34 @@ class ProfileFragment : Fragment() {
 
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
-                0 -> if (resultCode == RESULT_OK) {
+                ImageCaptureTypes.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
                     image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
-                1 -> if ((resultCode == RESULT_OK) && (data != null)) {
+                ImageCaptureTypes.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)
                 }
             }
         }
+    }
+
+    private fun chooseImage(context: Context?) {
+        val takePhoto = getString(R.string.dialog_take_photo)
+        val selectPhoto = getString(R.string.dialog_select_photo)
+        val exit = getString(R.string.dialog_exit)
+
+        val optionsMenu = arrayOf(takePhoto, selectPhoto, exit)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setItems(optionsMenu) { dialogInterface, i ->
+            when(optionsMenu[i]) {
+                takePhoto -> dispatchTakePictureIntent()
+                selectPhoto -> {
+                    val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(pickPhoto, 1)
+                }
+                exit -> dialogInterface.dismiss()
+            }
+        }
+        builder.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

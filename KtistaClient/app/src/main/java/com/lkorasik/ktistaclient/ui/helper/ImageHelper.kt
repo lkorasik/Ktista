@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient
+package com.lkorasik.ktistaclient.ui.helper
 
 import android.app.Activity
 import android.content.Context
@@ -12,6 +12,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
+import com.lkorasik.ktistaclient.BuildConfig
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -25,7 +26,8 @@ class ImageHelper {
         return try {
             File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir)
         } catch (ex: IOException) {
-            Log.e(this::class.java.canonicalName, "I Cant create a temp file")
+            Log.e(this::class.java.canonicalName, "I can't create a temp file")
+            ex.printStackTrace()
             null
         }
     }
@@ -35,7 +37,8 @@ class ImageHelper {
             resolveActivity(activity.packageManager)
         }
 
-        val photoURI: Uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID, tempFile)
+        val photoURI: Uri = FileProvider.getUriForFile(activity,
+            BuildConfig.APPLICATION_ID, tempFile)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
         return intent
     }
