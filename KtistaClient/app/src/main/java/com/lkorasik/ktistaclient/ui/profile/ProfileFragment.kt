@@ -34,7 +34,6 @@ class ProfileFragment : Fragment() {
     private lateinit var image: ImageView
 
     private lateinit var imagePath: String
-    private var imageHelper = ImageHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +70,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun sendTakePictureIntent() {
-        imageHelper.createEmptyImageFile(activity!!)?.let {
+        ImageHelper.createEmptyImageFile(activity!!)?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.createTakePictureIntent(activity!!, it)
+            val intent = ImageHelper.createTakePictureIntent(activity!!, it)
             startActivityForResult(intent, ImageSources.CAMERA.ordinal)
         }
     }
@@ -84,7 +83,7 @@ class ProfileFragment : Fragment() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
+                    image.setImageBitmap(ImageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)

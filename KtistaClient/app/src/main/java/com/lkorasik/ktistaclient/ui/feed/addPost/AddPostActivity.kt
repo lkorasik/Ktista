@@ -26,8 +26,6 @@ class AddPostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPostBinding
 
-    private var imageHelper = ImageHelper()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,9 +47,9 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun sendTakePictureIntent() {
-        imageHelper.createEmptyImageFile(this)?.let {
+        ImageHelper.createEmptyImageFile(this)?.let {
             imagePath = it.absolutePath.toString()
-            val intent = imageHelper.createTakePictureIntent(this, it)
+            val intent = ImageHelper.createTakePictureIntent(this, it)
             startActivityForResult(intent, ImageSources.CAMERA.ordinal)
         }
     }
@@ -62,7 +60,7 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image.setImageBitmap(imageHelper.loadBitmap(imagePath, image.width, image.height))
+                    image.setImageBitmap(ImageHelper.loadBitmap(imagePath, image.width, image.height))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image.setImageURI(data.data)
