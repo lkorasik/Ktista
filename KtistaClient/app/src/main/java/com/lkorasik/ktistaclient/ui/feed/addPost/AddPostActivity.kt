@@ -20,7 +20,12 @@ import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import com.github.razir.progressbutton.hideProgress
+import com.github.razir.progressbutton.showProgress
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
 import java.io.ByteArrayOutputStream
 
@@ -38,6 +43,15 @@ class AddPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addPostViewModel = ViewModelProvider(this)[AddPostViewModel::class.java]
+
+        addPostViewModel.inProgress.observe(this, {
+            Log.i(LoginViewModel.LOG_TAG, "new state: $it")
+
+            if (it == RequestStages.SUCCESS)
+                Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
+            if (it == RequestStages.FAIL)
+                Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+        })
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding?.root)
