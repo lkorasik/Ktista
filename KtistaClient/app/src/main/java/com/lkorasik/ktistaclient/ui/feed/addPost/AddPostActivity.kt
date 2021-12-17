@@ -18,9 +18,16 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.lifecycle.ViewModelProvider
+import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
+import java.io.ByteArrayOutputStream
 
 
 class AddPostActivity : AppCompatActivity() {
+    private lateinit var addPostViewModel: AddPostViewModel
+
     private var image: ImageView? = null
     private var description: EditText? = null
 
@@ -30,6 +37,7 @@ class AddPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        addPostViewModel = ViewModelProvider(this)[AddPostViewModel::class.java]
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -102,7 +110,14 @@ class AddPostActivity : AppCompatActivity() {
         if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
-            CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArrayOf(1, 2, 3)))
+//            val bmp = BitmapFactory.decodeFile(imagePath)
+//            val stream = ByteArrayOutputStream()
+//            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//            val byteArray: ByteArray = stream.toByteArray()
+//            bmp.recycle()
+
+//            CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArray))
+            addPostViewModel.createPost(1, "hi", byteArrayOf(1, 2, 3))
         }
     }
 
