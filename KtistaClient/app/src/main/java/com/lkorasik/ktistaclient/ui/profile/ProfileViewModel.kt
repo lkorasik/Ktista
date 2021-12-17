@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.app.Activity
 import android.view.View
 import kotlinx.coroutines.launch
+import okhttp3.Headers
 
 class ProfileViewModel : ViewModel() {
     companion object{
@@ -29,7 +30,7 @@ class ProfileViewModel : ViewModel() {
 
     private val getProfileRequest = ProfileRequest().apply {
         setOnResultListener(object : OnResultListener<ProfileResponse> {
-            override fun onSuccess(obj: ProfileResponse?) {
+            override fun onSuccess(obj: ProfileResponse?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 obj.let {
                     data.value = it

@@ -10,6 +10,7 @@ import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.UserRegistrationRequest
 import com.lkorasik.ktistaclient.net.model.UserRegistrationResponse
 import kotlinx.coroutines.launch
+import okhttp3.Headers
 
 class RegistrationViewModel: ViewModel(){
     companion object{
@@ -18,7 +19,7 @@ class RegistrationViewModel: ViewModel(){
 
     private val registrationRequest = RegistrationRequest().apply {
         setOnResultListener(object: OnResultListener<UserRegistrationResponse> {
-            override fun onSuccess(obj: UserRegistrationResponse?) {
+            override fun onSuccess(obj: UserRegistrationResponse?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }
