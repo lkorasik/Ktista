@@ -1,9 +1,6 @@
 package com.lkorasik.ktistaclient.net.core
 
-import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationRequestDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationResponseDTO
+import com.lkorasik.ktistaclient.net.model.dto.*
 import retrofit2.*
 import retrofit2.http.*
 
@@ -17,4 +14,7 @@ interface KtistaAPI {
 
     @GET("api/user/profile/{id}")
     fun getProfile(@Path("id") id: Long): Call<ProfileResponseDTO?>?
+
+    @POST("api/post/create")
+    fun createPost(@Header("Authorization") token: String, @Body postDTO: CreatePostDTO): Call<String?>?
 }

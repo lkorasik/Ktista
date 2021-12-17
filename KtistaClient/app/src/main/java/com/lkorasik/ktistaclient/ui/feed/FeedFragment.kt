@@ -8,6 +8,8 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
+import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
+import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 class FeedFragment : Fragment() {
@@ -32,6 +34,8 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val req = CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArrayOf(1, 2, 3)))
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_posts)
         recyclerView.setHasFixedSize(true)
