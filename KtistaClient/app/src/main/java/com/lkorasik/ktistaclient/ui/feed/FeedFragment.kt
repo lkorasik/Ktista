@@ -35,8 +35,6 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val req = CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArrayOf(1, 2, 3)))
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_posts)
         recyclerView.setHasFixedSize(true)
 

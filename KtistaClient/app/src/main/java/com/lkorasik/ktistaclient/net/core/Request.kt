@@ -14,12 +14,13 @@ abstract class Request<T>: Callback<T?> {
         if (response.isSuccessful){
             for(listener in listeners)
                 listener.onSuccess(response.body(), response.headers())
-            Log.i("KtistaAppHttp", "Registration success!!!")
+            Log.i("KtistaAppHttp", "Request success")
         }
         else{
             for(listener in listeners)
                 listener.onFail()
-            Log.i("KtistaAppHttp", "Registration fail!!!")
+            Log.i("KtistaAppHttp", "Request fail")
+            Log.e("KtistaAppHttp", response.errorBody().toString())
         }
     }
 

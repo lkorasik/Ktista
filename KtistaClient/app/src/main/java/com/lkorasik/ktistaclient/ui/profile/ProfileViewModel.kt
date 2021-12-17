@@ -22,9 +22,9 @@ class ProfileViewModel : ViewModel() {
 
     private val getProfileRequest = ProfileRequest().apply {
         setOnResultListener(object : OnResultListener<ProfileResponseDTO> {
-            override fun onSuccess(obj: ProfileResponseDTO?, headers: Headers) {
+            override fun onSuccess(body: ProfileResponseDTO?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
-                obj.let {
+                body.let {
                     data.value = it
                     Log.i(LOG_TAG, "Request get profile was success")
                 }

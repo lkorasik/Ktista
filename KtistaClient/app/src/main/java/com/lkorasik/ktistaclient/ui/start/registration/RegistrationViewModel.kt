@@ -19,7 +19,7 @@ class RegistrationViewModel: ViewModel(){
 
     private val registrationRequest = RegistrationRequest().apply {
         setOnResultListener(object: OnResultListener<UserRegistrationResponseDTO> {
-            override fun onSuccess(obj: UserRegistrationResponseDTO?, headers: Headers) {
+            override fun onSuccess(body: UserRegistrationResponseDTO?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }

@@ -16,6 +16,8 @@ import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
+import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
+import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -100,7 +102,7 @@ class AddPostActivity : AppCompatActivity() {
         if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
-            //send..........
+            CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArrayOf(1, 2, 3)))
         }
     }
 
