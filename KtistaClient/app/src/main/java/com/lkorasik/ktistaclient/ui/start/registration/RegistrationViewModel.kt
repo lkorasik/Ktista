@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.requests.RegistrationRequest
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.UserRegistrationRequest
-import com.lkorasik.ktistaclient.net.model.UserRegistrationResponse
+import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationRequestDTO
+import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationResponseDTO
 import kotlinx.coroutines.launch
 import okhttp3.Headers
 
@@ -18,8 +18,8 @@ class RegistrationViewModel: ViewModel(){
     }
 
     private val registrationRequest = RegistrationRequest().apply {
-        setOnResultListener(object: OnResultListener<UserRegistrationResponse> {
-            override fun onSuccess(obj: UserRegistrationResponse?, headers: Headers) {
+        setOnResultListener(object: OnResultListener<UserRegistrationResponseDTO> {
+            override fun onSuccess(obj: UserRegistrationResponseDTO?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }
@@ -36,7 +36,7 @@ class RegistrationViewModel: ViewModel(){
         viewModelScope.launch {
             inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request ${inProgress.value}")
-            registrationRequest.registerUser(UserRegistrationRequest(nickname, password, email))
+            registrationRequest.registerUser(UserRegistrationRequestDTO(nickname, password, email))
         }
     }
 }

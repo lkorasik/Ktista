@@ -2,9 +2,9 @@ package com.lkorasik.ktistaclient.net.requests
 
 import com.lkorasik.ktistaclient.net.core.Request
 import com.lkorasik.ktistaclient.net.core.RequestContext
-import com.lkorasik.ktistaclient.net.model.GetProfileRequest
-import com.lkorasik.ktistaclient.net.model.ProfileResponse
+import com.lkorasik.ktistaclient.net.model.dto.ProfileRequestDTO
+import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
 
-class ProfileRequest: Request<ProfileResponse>() {
-    fun getProfile(user: GetProfileRequest) = RequestContext.API.getProfile(user.id)?.enqueue(this)
+class ProfileRequest: Request<ProfileResponseDTO>() {
+    fun getProfile(user: ProfileRequestDTO) = RequestContext.API.getProfile(user.id)?.enqueue(this)
 }

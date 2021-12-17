@@ -5,21 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.model.GetProfileRequest
-import com.lkorasik.ktistaclient.net.model.ProfileResponse
+import com.lkorasik.ktistaclient.net.model.dto.ProfileRequestDTO
+import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.requests.ProfileRequest
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
-import android.graphics.BitmapFactory
-import android.R
-import android.provider.MediaStore
-import android.content.Intent
-import androidx.core.app.ActivityCompat.startActivityForResult
-import android.os.Bundle
-import android.app.Activity
-import android.view.View
 import kotlinx.coroutines.launch
 import okhttp3.Headers
 
@@ -29,8 +21,8 @@ class ProfileViewModel : ViewModel() {
     }
 
     private val getProfileRequest = ProfileRequest().apply {
-        setOnResultListener(object : OnResultListener<ProfileResponse> {
-            override fun onSuccess(obj: ProfileResponse?, headers: Headers) {
+        setOnResultListener(object : OnResultListener<ProfileResponseDTO> {
+            override fun onSuccess(obj: ProfileResponseDTO?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 obj.let {
                     data.value = it
@@ -47,7 +39,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     val inProgress = MutableLiveData(RequestStages.INIT)
-    val data = MutableLiveData<ProfileResponse>()
+    val data = MutableLiveData<ProfileResponseDTO>()
 
     private val mutablePostsData: MutableLiveData<ArrayList<PostModel>> = MutableLiveData()
     val postsData: LiveData<ArrayList<PostModel>> = mutablePostsData
@@ -66,7 +58,7 @@ class ProfileViewModel : ViewModel() {
         viewModelScope.launch {
             inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request get profile")
-            getProfileRequest.getProfile(GetProfileRequest(1))
+            getProfileRequest.getProfile(ProfileRequestDTO(1))
         }
     }
 }
