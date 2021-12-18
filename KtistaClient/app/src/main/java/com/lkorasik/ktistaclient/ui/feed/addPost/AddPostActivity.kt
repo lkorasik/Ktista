@@ -2,6 +2,7 @@ package com.lkorasik.ktistaclient.ui.feed.addPost
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -20,6 +21,8 @@ import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
+import android.os.Environment
+import java.io.File
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -79,6 +82,7 @@ class AddPostActivity : AppCompatActivity() {
                     image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
+                    imagePath = data.dataString
                     image?.setImageURI(data.data)
                 }
             }
@@ -116,7 +120,12 @@ class AddPostActivity : AppCompatActivity() {
         if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
-            addPostViewModel.createPost(1, "hi", imagePath!!)
+            if (imagePath!!.contains("content")) {
+                addPostViewModel.createPost(contentResolver, 1, "hi", imagePath!!)
+            }
+            else {
+                addPostViewModel.createPost(1, "hi", imagePath!!)
+            }
         }
     }
 
