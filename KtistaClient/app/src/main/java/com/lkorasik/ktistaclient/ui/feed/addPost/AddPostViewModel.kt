@@ -1,5 +1,6 @@
 package com.lkorasik.ktistaclient.ui.feed.addPost
 
+import android.util.Base64.encodeToString
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,8 +49,10 @@ class AddPostViewModel: ViewModel() {
             val bytes = File(imagePath).readBytes()
             SimpleBenchmark.stop()
 
+            val data = Base64.getEncoder().encodeToString(bytes)
+
             SimpleBenchmark.start()
-            createPost.createPost(CreatePostDTO(id, text, bytes))
+            createPost.createPost(CreatePostDTO(id, text, data))
         }
     }
 }
