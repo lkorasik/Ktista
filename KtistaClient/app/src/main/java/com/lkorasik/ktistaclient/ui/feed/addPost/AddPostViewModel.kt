@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Headers
 import java.io.File
+import java.util.*
 
 class AddPostViewModel: ViewModel() {
     companion object{
@@ -23,11 +24,15 @@ class AddPostViewModel: ViewModel() {
             override fun onSuccess(body: String?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
                 Log.i(LOG_TAG, "Request was success")
+
+                SimpleBenchmark.stop()
             }
 
             override fun onFail() {
                 inProgress.value = RequestStages.FAIL
                 Log.i(LOG_TAG, "Request was failed")
+
+                SimpleBenchmark.stop()
             }
         })
     }
@@ -39,9 +44,28 @@ class AddPostViewModel: ViewModel() {
             inProgress.postValue(RequestStages.IN_PROGRESS)
             Log.i(LOG_TAG, "Start request")
 
+            SimpleBenchmark.start()
             val bytes = File(imagePath).readBytes()
+            SimpleBenchmark.stop()
 
+            SimpleBenchmark.start()
             createPost.createPost(CreatePostDTO(id, text, bytes))
         }
+    }
+}
+
+object SimpleBenchmark{
+    private var time: Long = 0
+
+    fun start(){
+        Log.i(this::class.java.canonicalName, "Start")
+        time = Calendar.getInstance().timeInMillis
+    }
+
+    fun stop() {
+        val endTime = Calendar.getInstance().timeInMillis
+        val result = endTime - time
+
+        Log.i(this::class.java.canonicalName, "End: $result")
     }
 }
