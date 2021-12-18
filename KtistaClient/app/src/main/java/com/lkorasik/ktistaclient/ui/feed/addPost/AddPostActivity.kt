@@ -2,7 +2,6 @@ package com.lkorasik.ktistaclient.ui.feed.addPost
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -21,8 +20,8 @@ import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
-import android.os.Environment
-import java.io.File
+import com.lkorasik.ktistaclient.utils.EmptyDescriptionException
+import com.lkorasik.ktistaclient.utils.ImageNotSelectedException
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -110,21 +109,23 @@ class AddPostActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun showEmptyPostDataToast() {
+    private fun showNotSelectedImageToast() {
         val text = "Your beautiful image hasn't loaded"
         val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
         toast.show()
     }
 
+    @Throws(Exception::class)
     private fun sendPost() {
-        if (image?.drawable == null) {
-            showEmptyPostDataToast()
-        } else {
-            if (imagePath!!.contains("content")) {
-                addPostViewModel.createPost(contentResolver, 1, "hi", imagePath!!)
-            }
-            else {
-                addPostViewModel.createPost(1, "hi", imagePath!!)
+        if(imagePath.isNullOrEmpty())
+            throw ImageNotSelectedException("User must select image")
+
+        imagePath?.let {
+            val text = binding?.etDescription?.text.toString()
+            if(it.contains("content")) {
+                addPostViewModel.createPost(contentResolver, 1, text,it)
+            } else {
+                addPostViewModel.createPost(1, text, it)
             }
         }
     }
@@ -144,8 +145,13 @@ class AddPostActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_icon_addPost -> {
-                sendPost()
-                finish()
+                try {
+                    sendPost()
+                    finish()
+                }
+                catch (exc: ImageNotSelectedException){
+                    showNotSelectedImageToast()
+                }
                 true
             }
             android.R.id.home -> {

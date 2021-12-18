@@ -42,47 +42,39 @@ class AddPostViewModel: ViewModel() {
 
     val inProgress = MutableLiveData(RequestStages.INIT)
 
-    fun createPost(contentResolver: ContentResolver, id: Long, text: String, imagePath: String){
+    private fun createPost(id: Long, text: String, getBytes: () -> ByteArray?){
         viewModelScope.launch(Dispatchers.IO) {
             inProgress.postValue(RequestStages.IN_PROGRESS)
             Log.i(LOG_TAG, "Start request")
 
-            PrimitiveBenchmark.startMessage = "Start read file"
-            PrimitiveBenchmark.startMessage = "End read file"
+            PrimitiveBenchmark.startMessage = "Start getting bytes"
+            PrimitiveBenchmark.startMessage = "End getting bytes file"
 
             PrimitiveBenchmark.start()
-            val bytes = contentResolver.openInputStream(Uri.parse(imagePath))?.readBytes()
+            val bytes = getBytes()
             PrimitiveBenchmark.stop()
 
-            val data = Base64.getEncoder().encodeToString(bytes)
+            bytes?.let {
+                val data = Base64.getEncoder().encodeToString(it)
 
-            PrimitiveBenchmark.startMessage = "Start request"
-            PrimitiveBenchmark.startMessage = "End request"
+                PrimitiveBenchmark.startMessage = "Start request"
+                PrimitiveBenchmark.startMessage = "End request"
 
-            PrimitiveBenchmark.start()
-            createPost.createPost(CreatePostDTO(id, text, data))
+                PrimitiveBenchmark.start()
+                createPost.createPost(CreatePostDTO(id, text, data))
+            }
+        }
+    }
+
+    fun createPost(contentResolver: ContentResolver, id: Long, text: String, imagePath: String){
+        createPost(id, text) {
+            contentResolver.openInputStream(Uri.parse(imagePath))?.readBytes()
         }
     }
 
     fun createPost(id: Long, text: String, imagePath: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            inProgress.postValue(RequestStages.IN_PROGRESS)
-            Log.i(LOG_TAG, "Start request")
-
-            PrimitiveBenchmark.startMessage = "Start read file"
-            PrimitiveBenchmark.startMessage = "End read file"
-
-            PrimitiveBenchmark.start()
-            val bytes = File(imagePath).readBytes()
-            PrimitiveBenchmark.stop()
-
-            val data = Base64.getEncoder().encodeToString(bytes)
-
-            PrimitiveBenchmark.startMessage = "Start request"
-            PrimitiveBenchmark.startMessage = "End request"
-
-            PrimitiveBenchmark.start()
-            createPost.createPost(CreatePostDTO(id, text, data))
+        createPost(id, text) {
+            File(imagePath).readBytes()
         }
     }
 }
