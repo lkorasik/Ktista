@@ -1,4 +1,4 @@
-package com.lkorasik.ktistaclient.utils
+package com.lkorasik.ktistaclient.ui.helper.utils
 
 import android.util.Log
 import java.util.*

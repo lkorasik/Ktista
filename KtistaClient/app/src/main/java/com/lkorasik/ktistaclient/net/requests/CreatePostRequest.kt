@@ -4,7 +4,6 @@ import com.lkorasik.ktistaclient.net.core.Request
 import com.lkorasik.ktistaclient.net.core.RequestContext
 import com.lkorasik.ktistaclient.net.model.JWTTempStorage
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
 
 class CreatePostRequest: Request<String>() {
     fun createPost(post: CreatePostDTO) = RequestContext.API.createPost("Bearer ${JWTTempStorage.jwt}", post)?.enqueue(this)

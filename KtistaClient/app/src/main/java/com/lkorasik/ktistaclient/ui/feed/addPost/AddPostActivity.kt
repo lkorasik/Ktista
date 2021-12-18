@@ -20,8 +20,7 @@ import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
-import com.lkorasik.ktistaclient.utils.EmptyDescriptionException
-import com.lkorasik.ktistaclient.utils.ImageNotSelectedException
+import com.lkorasik.ktistaclient.ui.helper.utils.ImageNotSelectedException
 
 
 class AddPostActivity : AppCompatActivity() {

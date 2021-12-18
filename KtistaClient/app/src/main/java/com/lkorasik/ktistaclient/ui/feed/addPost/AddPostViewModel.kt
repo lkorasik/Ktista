@@ -10,7 +10,7 @@ import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
-import com.lkorasik.ktistaclient.utils.PrimitiveBenchmark
+import com.lkorasik.ktistaclient.ui.helper.utils.PrimitiveBenchmark
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Headers

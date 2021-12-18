@@ -8,8 +8,6 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
-import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
-import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 class FeedFragment : Fragment() {
