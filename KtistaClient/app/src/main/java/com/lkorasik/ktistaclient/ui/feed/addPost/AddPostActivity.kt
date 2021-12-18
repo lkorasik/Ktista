@@ -20,7 +20,6 @@ import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
-import java.io.File
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -113,7 +112,7 @@ class AddPostActivity : AppCompatActivity() {
         toast.show()
     }
 
-    private fun sendTHISSHIT() {
+    private fun sendPost() {
         if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
@@ -136,7 +135,7 @@ class AddPostActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_icon_addPost -> {
-                sendTHISSHIT()
+                sendPost()
                 finish()
                 true
             }
