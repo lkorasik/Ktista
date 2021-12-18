@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,22 +13,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.lkorasik.ktistaclient.ui.helper.ImageSources
-import com.lkorasik.ktistaclient.ui.helper.ImageHelper
+import androidx.lifecycle.ViewModelProvider
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
-import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
-import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
-import com.github.razir.progressbutton.hideProgress
-import com.github.razir.progressbutton.showProgress
 import com.lkorasik.ktistaclient.net.core.RequestStages
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
+import com.lkorasik.ktistaclient.ui.helper.ImageSources
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
-import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class AddPostActivity : AppCompatActivity() {
@@ -124,14 +117,7 @@ class AddPostActivity : AppCompatActivity() {
         if (image?.drawable == null) {
             showEmptyPostDataToast()
         } else {
-//            val bmp = BitmapFactory.decodeFile(imagePath)
-//            val stream = ByteArrayOutputStream()
-//            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//            val byteArray: ByteArray = stream.toByteArray()
-//            bmp.recycle()
-
-//            CreatePostRequest().createPost(CreatePostDTO(1, "hi", byteArray))
-            addPostViewModel.createPost(1, "hi", byteArrayOf(1, 2, 3))
+            addPostViewModel.createPost(1, "hi", imagePath!!)
         }
     }
 
@@ -151,6 +137,7 @@ class AddPostActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_icon_addPost -> {
                 sendTHISSHIT()
+                finish()
                 true
             }
             android.R.id.home -> {
