@@ -77,7 +77,9 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
+                    imagePath?.let {
+                        image?.setImageBitmap(ImageHelper.loadBitmap(it, image?.width ?: 0, image?.height ?: 0))
+                    }
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     imagePath = data.dataString

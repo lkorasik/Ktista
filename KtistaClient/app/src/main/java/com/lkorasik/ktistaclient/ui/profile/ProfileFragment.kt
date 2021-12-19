@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val viewModel: ProfileViewModel by navGraphViewModels(R.id.navigation_profile)
     private var postsAdapter: PostsRecyclerAdapter? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private var nickname: TextView? = null
     private var image: ImageView? = null
@@ -70,10 +70,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun sendTakePictureIntent() {
-        ImageHelper.createEmptyImageFile(activity!!)?.let {
-            imagePath = it.absolutePath.toString()
-            val intent = ImageHelper.createTakePictureIntent(activity!!, it)
-            startActivityForResult(intent, ImageSources.CAMERA.ordinal)
+        activity?.apply {
+            ImageHelper.createEmptyImageFile(this)?.let {
+                imagePath = it.absolutePath.toString()
+                val intent = ImageHelper.createTakePictureIntent(this, it)
+                startActivityForResult(intent, ImageSources.CAMERA.ordinal)
+            }
         }
     }
 
@@ -83,7 +85,9 @@ class ProfileFragment : Fragment() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
+                    imagePath?.let {
+                        image?.setImageBitmap(ImageHelper.loadBitmap(it, image?.width ?: 0, image?.height ?: 0))
+                    }
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
                     image?.setImageURI(data.data)
