@@ -1,24 +1,15 @@
 package com.lkorasik.ktistaclient.ui.profile
 
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lkorasik.ktistaclient.ui.helper.ImageSources
-import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
@@ -31,9 +22,6 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private var nickname: TextView? = null
-    private var image: ImageView? = null
-
-    private var imagePath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,17 +32,11 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        image = binding.includedProfileInfo.ivAvatar
-
         nickname = binding.includedProfileInfo.profileName
 
         viewModel.data.observe(this, {
             nickname?.text = it.username
         })
-
-        binding.includedProfileInfo.ivAvatar.setOnClickListener {
-            chooseImage(activity)
-        }
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
@@ -104,7 +86,7 @@ class ProfileFragment : Fragment() {
         val optionsMenu = arrayOf(takePhoto, selectPhoto, exit)
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setItems(optionsMenu) { dialogInterface, i ->
-            when(optionsMenu[i]) {
+            when(optionsMenu[i]) {  
                 takePhoto -> sendTakePictureIntent()
                 selectPhoto -> {
                     val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
