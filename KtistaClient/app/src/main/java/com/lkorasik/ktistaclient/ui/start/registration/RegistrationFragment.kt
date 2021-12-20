@@ -22,8 +22,6 @@ class RegistrationFragment: Fragment() {
 
     private val binding get() = bindingObject ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
-    private lateinit var firstName: EditText
-    private lateinit var lastName: EditText
     private lateinit var email: EditText
     private lateinit var nickname: EditText
     private lateinit var password: EditText
@@ -39,7 +37,7 @@ class RegistrationFragment: Fragment() {
 
             if(it.equals(RequestStages.SUCCESS)) {
                 signUp.hideProgress("Success!")
-                rootActivity.launchMainActivity()
+                rootActivity.showLoginFragment()
             }
             if(it.equals(RequestStages.FAIL)) {
                 signUp.hideProgress("Fail!")
@@ -56,7 +54,6 @@ class RegistrationFragment: Fragment() {
         val root: View = binding.root
 
         rootActivity = activity as StartActivity
-
 
         nickname = binding.nickname
         email = binding.email
