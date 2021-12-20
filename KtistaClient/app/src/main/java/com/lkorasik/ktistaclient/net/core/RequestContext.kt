@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RequestContext{
-    private val cookieHandler: CookieHandler
     private val ktistaAPI: KtistaAPI
     private const val BASE_URL = "http://192.168.0.231:8080/"
     val API: KtistaAPI
@@ -16,10 +15,8 @@ object RequestContext{
         val gson = GsonBuilder()
             .setLenient()
             .create()
-        cookieHandler = CookieHandler()
         val client = OkHttpClient()
             .newBuilder()
-            .cookieJar(cookieHandler)
             .build()
         val retrofit = Retrofit
             .Builder()

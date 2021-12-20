@@ -6,11 +6,11 @@ import retrofit2.http.*
 
 
 interface KtistaAPI {
-    @POST("api/user/registration/")
+    @POST("api/auth/registration/")
     fun register(@Body user: UserRegistrationRequest): Call<UserRegistrationResponse?>?
 
-    @POST("api/user/login/")
-    fun login(@Body user: UserLoginRequest): Call<UserLoginResponse?>?
+    @POST("api/auth/login")
+    fun login(@Body user: UserLoginRequest): Call<Void?>?
 
     @GET("api/user/profile/{id}")
     fun getProfile(@Path("id") id: Long): Call<ProfileResponse?>?

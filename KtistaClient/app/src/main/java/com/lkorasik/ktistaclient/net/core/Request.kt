@@ -13,7 +13,7 @@ abstract class Request<T>: Callback<T?> {
     open override fun onResponse(call: Call<T?>, response: Response<T?>){
         if (response.isSuccessful){
             for(listener in listeners)
-                listener.onSuccess(response.body())
+                listener.onSuccess(response.body(), response.headers())
             Log.i("KtistaAppHttp", "Registration success!!!")
         }
         else{

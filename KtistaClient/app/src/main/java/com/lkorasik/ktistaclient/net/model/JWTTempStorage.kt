@@ -1,3 +1,5 @@
 package com.lkorasik.ktistaclient.net.model
 
-data class UserLoginResponse(val id: Long)
+object JWTTempStorage {
+    var jwt = ""
+}

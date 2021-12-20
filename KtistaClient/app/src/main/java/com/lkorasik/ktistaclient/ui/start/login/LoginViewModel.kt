@@ -5,9 +5,11 @@ import androidx.lifecycle.*
 import com.lkorasik.ktistaclient.net.requests.LoginRequest
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.model.UserLoginRequest
-import com.lkorasik.ktistaclient.net.model.UserLoginResponse
 import com.lkorasik.ktistaclient.net.core.RequestStages
+import com.lkorasik.ktistaclient.net.model.HeadersKeys
+import com.lkorasik.ktistaclient.net.model.JWTTempStorage
 import kotlinx.coroutines.launch
+import okhttp3.Headers
 
 class LoginViewModel:ViewModel() {
     companion object{
@@ -15,9 +17,10 @@ class LoginViewModel:ViewModel() {
     }
 
     private val loginRequest = LoginRequest().apply {
-        setOnResultListener(object : OnResultListener<UserLoginResponse> {
-            override fun onSuccess(obj: UserLoginResponse?) {
+        setOnResultListener(object : OnResultListener<Void> {
+            override fun onSuccess(body: Void?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
+                JWTTempStorage.jwt = headers[HeadersKeys.AUTHORIZATION.toString()].toString().split(" ")[1]
                 Log.i(LOG_TAG, "Request was success")
             }
 
