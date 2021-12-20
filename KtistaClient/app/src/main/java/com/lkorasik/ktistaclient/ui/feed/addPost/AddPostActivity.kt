@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,13 +13,19 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.lkorasik.ktistaclient.ui.helper.ImageSources
-import com.lkorasik.ktistaclient.ui.helper.ImageHelper
+import androidx.lifecycle.ViewModelProvider
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.ActivityAddPostBinding
+import com.lkorasik.ktistaclient.net.core.RequestStages
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
+import com.lkorasik.ktistaclient.ui.helper.ImageSources
+import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
+import com.lkorasik.ktistaclient.ui.helper.utils.ImageNotSelectedException
 
 
 class AddPostActivity : AppCompatActivity() {
+    private lateinit var addPostViewModel: AddPostViewModel
+
     private var image: ImageView? = null
     private var description: EditText? = null
 
@@ -28,6 +35,16 @@ class AddPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        addPostViewModel = ViewModelProvider(this)[AddPostViewModel::class.java]
+
+        addPostViewModel.inProgress.observe(this, {
+            Log.i(LoginViewModel.LOG_TAG, "new state: $it")
+
+            if (it == RequestStages.SUCCESS)
+                Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
+            if (it == RequestStages.FAIL)
+                Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
+        })
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -60,9 +77,12 @@ class AddPostActivity : AppCompatActivity() {
         if (resultCode != RESULT_CANCELED) {
             when (requestCode) {
                 ImageSources.CAMERA.ordinal -> if (resultCode == RESULT_OK) {
-                    image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
+                    imagePath?.let {
+                        image?.setImageBitmap(ImageHelper.loadBitmap(it, image?.width ?: 0, image?.height ?: 0))
+                    }
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == RESULT_OK) && (data != null)) {
+                    imagePath = data.dataString
                     image?.setImageURI(data.data)
                 }
             }
@@ -90,17 +110,24 @@ class AddPostActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun showEmptyPostDataToast() {
+    private fun showNotSelectedImageToast() {
         val text = "Your beautiful image hasn't loaded"
         val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
         toast.show()
     }
 
-    private fun sendTHISSHIT() {
-        if (image?.drawable == null) {
-            showEmptyPostDataToast()
-        } else {
-            //send..........
+    @Throws(Exception::class)
+    private fun sendPost() {
+        if(imagePath.isNullOrEmpty())
+            throw ImageNotSelectedException("User must select image")
+
+        imagePath?.let {
+            val text = binding?.etDescription?.text.toString()
+            if(it.contains("content")) {
+                addPostViewModel.createPost(contentResolver, 1, text,it)
+            } else {
+                addPostViewModel.createPost(1, text, it)
+            }
         }
     }
 
@@ -119,7 +146,13 @@ class AddPostActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_icon_addPost -> {
-                sendTHISSHIT()
+                try {
+                    sendPost()
+                    finish()
+                }
+                catch (exc: ImageNotSelectedException){
+                    showNotSelectedImageToast()
+                }
                 true
             }
             android.R.id.home -> {

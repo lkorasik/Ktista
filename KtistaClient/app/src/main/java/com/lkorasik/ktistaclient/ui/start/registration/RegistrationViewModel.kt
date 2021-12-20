@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.requests.RegistrationRequest
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.*
-import com.lkorasik.ktistaclient.net.requests.LoginRequest
+import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationRequestDTO
+import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationResponseDTO
 import kotlinx.coroutines.launch
 import okhttp3.Headers
 
@@ -18,47 +18,25 @@ class RegistrationViewModel: ViewModel(){
     }
 
     private val registrationRequest = RegistrationRequest().apply {
-        setOnResultListener(object: OnResultListener<UserRegistrationResponse> {
-            override fun onSuccess(obj: UserRegistrationResponse?, headers: Headers) {
-                //inProgress.value = RequestStages.SUCCESS
-                loginRequest.loginUser(UserLoginRequest(nickname, password))
-                Log.i(LOG_TAG, "Registration request was success ${inProgress.value}")
-            }
-            override fun onFail() {
-                inProgress.value = RequestStages.FAIL
-                Log.i(LOG_TAG, "Registration request was fail ${inProgress.value}")
-            }
-        })
-    }
-
-    private val loginRequest = LoginRequest().apply {
-        setOnResultListener(object : OnResultListener<Void> {
-            override fun onSuccess(body: Void?, headers: Headers) {
+        setOnResultListener(object: OnResultListener<UserRegistrationResponseDTO> {
+            override fun onSuccess(body: UserRegistrationResponseDTO?, headers: Headers) {
                 inProgress.value = RequestStages.SUCCESS
-                JWTTempStorage.jwt = headers[HeadersKeys.AUTHORIZATION.toString()].toString().split(" ")[1]
-                Log.i(LOG_TAG, "Login was success")
+                Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }
-
             override fun onFail() {
                 inProgress.value = RequestStages.FAIL
-                Log.i(LOG_TAG, "Login was failed")
+                Log.i(LOG_TAG, "Request was fail ${inProgress.value}")
             }
         })
     }
 
     val inProgress = MutableLiveData(RequestStages.INIT)
 
-    private var nickname: String = ""
-    private var password: String = ""
-
     fun registerUser(nickname: String, password: String, email: String){
-        this.nickname = nickname
-        this.password = password
-
         viewModelScope.launch {
             inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request ${inProgress.value}")
-            registrationRequest.registerUser(UserRegistrationRequest(nickname, password, email))
+            registrationRequest.registerUser(UserRegistrationRequestDTO(nickname, password, email))
         }
     }
 }

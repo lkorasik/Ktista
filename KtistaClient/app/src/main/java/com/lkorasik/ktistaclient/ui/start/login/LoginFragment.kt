@@ -20,7 +20,7 @@ class LoginFragment: Fragment() {
     private var bindingObject: FragmentLoginBinding? = null
     private lateinit var rootActivity: StartActivity
 
-    private val binding get() = bindingObject!!
+    private val binding get() = bindingObject ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private lateinit var nickname: EditText
     private lateinit var password: EditText
@@ -28,7 +28,7 @@ class LoginFragment: Fragment() {
     private lateinit var signUp: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         loginViewModel.inProgress.observe(this, {
             Log.i(LoginViewModel.LOG_TAG, "$it")

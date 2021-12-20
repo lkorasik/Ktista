@@ -24,7 +24,7 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
     private var _binding: FragmentSettingsBinding? = null
 
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private var image: ImageView? = null
     private var changeAvatar: Button? = null

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.lkorasik.ktistaclient.net.requests.LoginRequest
 import com.lkorasik.ktistaclient.net.core.OnResultListener
-import com.lkorasik.ktistaclient.net.model.UserLoginRequest
+import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.HeadersKeys
 import com.lkorasik.ktistaclient.net.model.JWTTempStorage
@@ -37,7 +37,7 @@ class LoginViewModel:ViewModel() {
         viewModelScope.launch {
             inProgress.value = RequestStages.IN_PROGRESS
             Log.i(LOG_TAG, "Start request")
-            loginRequest.loginUser(UserLoginRequest(nickname, password))
+            loginRequest.loginUser(UserLoginRequestDTO(nickname, password))
         }
     }
 }

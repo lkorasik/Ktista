@@ -20,7 +20,7 @@ class RegistrationFragment: Fragment() {
     private var bindingObject: FragmentRegistrationBinding? = null
     private lateinit var rootActivity: StartActivity
 
-    private val binding get() = bindingObject!!
+    private val binding get() = bindingObject ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private lateinit var firstName: EditText
     private lateinit var lastName: EditText
