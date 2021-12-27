@@ -4,14 +4,6 @@
     <string name="title_settings">Settings</string>
     <string name="title_profile">Profile</string>
 
-    <string name="settings_first_name">First name</string>
-    <string name="settings_last_name">Last name</string>
-    <string name="settings_email_name">Email</string>
-    <string name="settings_nickname_name">Nickname</string>
-
-    <string name="settings_password">Password</string>
-    <string name="settings_change">Change</string>
-
     <string name="cd_post_photo">post_photo</string>
     <string name="cd_post_like">like</string>
     <string name="cd_post_dislike">dislike</string>
@@ -22,6 +14,7 @@
     <string name="dialog_title">Change password</string>
     <string name="dialog_old_password">Old password</string>
     <string name="dialog_new_password">New password</string>
+    <string name="dialog_confirm_password">Confirm password</string>
 
     <string name="login_nickname">Nickname</string>
     <string name="login_password">Password</string>
@@ -45,7 +38,21 @@
     <string name="add_post_image_stub">Your image</string>
 
     <string name="title_add_post">add post</string>
-    <string name="title_new_post">done</string>
+    <string name="title_new_post">Done</string>
+
+    <string name="profile_followings">Followings</string>
+    <string name="profile_followers">Followers</string>
+    <string name="profile_posts">Posts</string>
+    <string name="Follow">Follow</string>
+    <string name="show_comments">Show comments</string>
 
     <string name="registration_button_progress">Wait</string>
+    <string name="settings_user_info">Info</string>
+    <string name="settings_confidential">Confidential</string>
+    <string name="settings_change">Change</string>
+    <string name="settings_photo">Photo</string>
+
+    <string name="dialog_take_photo">Take photo</string>
+    <string name="dialog_select_photo">Choose from gallery</string>
+    <string name="dialog_exit">Exit</string>
 </resources>

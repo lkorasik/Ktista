@@ -1,18 +1,17 @@
 package com.lkorasik.ktistaclient
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lkorasik.ktistaclient.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
@@ -21,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val toolbar = binding.includeToolbar.customToolbar
 
         val navHostFragment =
@@ -31,17 +29,14 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
 
-        val appBarConfiguration = AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
-                R.id.navigation_feed, R.id.navigation_profile, R.id.navigation_settings
+                R.id.navigation_feed, R.id.navigation_profile, R.id.navigation_settings,
             ),
-            fallbackOnNavigateUpListener = ::onSupportNavigateUp
+            fallbackOnNavigateUpListener = ::onSupportNavigateUp,
         )
-
+        setSupportActionBar(toolbar)
         navView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-        setSupportActionBar(toolbar)
-
-//         startActivity(Intent(this, AddPostActivity::class.java))
     }
 }

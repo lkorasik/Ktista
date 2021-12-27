@@ -1,8 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.settings.SettingsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/settings_photo"
+            android:textColor="@color/color_6"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/settings_cv_avatar"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                app:cardCornerRadius="24dp"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/setting_bt_change_avatar"
+                style="@style/PrimaryButton"
+                android:layout_width="138dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:text="@string/settings_change"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_cv_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.557"
+                app:layout_constraintStart_toEndOf="@+id/settings_cv_avatar"
+                app:layout_constraintTop_toTopOf="@+id/settings_cv_avatar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:src="@drawable/button_primary" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/settings_user_info"
+            android:textColor="@color/color_6"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/settings_main_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="17dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/registration_email"
+                    android:textColor="@color/color_6" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edit_text"
+                    android:fontFamily="@font/roboto"
+                    android:singleLine="true"
+                    android:text="knista@gmail.com"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/registration_nickname"
+                    android:textColor="@color/color_6" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/settings_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edit_text"
+                    android:fontFamily="@font/roboto"
+                    android:singleLine="true"
+                    android:text="mi mi"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/button_primary" />
+
+        <TextView
+            android:id="@+id/settings_confidential"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/settings_confidential"
+            android:textColor="@color/color_6"
+            android:textSize="18sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_settings_password"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/login_password"
+                android:textColor="@color/color_6"
+                app:layout_constraintBottom_toBottomOf="@+id/setting_bt_change_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/setting_bt_change_password" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/setting_bt_change_password"
+                style="@style/PrimaryButton"
+                android:layout_width="138dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="@string/settings_change"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.557"
+                app:layout_constraintStart_toEndOf="@+id/tv_settings_password"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>

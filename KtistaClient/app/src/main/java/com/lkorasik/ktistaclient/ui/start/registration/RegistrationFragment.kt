@@ -12,7 +12,7 @@ import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.lkorasik.ktistaclient.*
 import com.lkorasik.ktistaclient.databinding.*
-import com.lkorasik.ktistaclient.net.requests.RequestStages
+import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
 
 class RegistrationFragment: Fragment() {
@@ -20,10 +20,8 @@ class RegistrationFragment: Fragment() {
     private var bindingObject: FragmentRegistrationBinding? = null
     private lateinit var rootActivity: StartActivity
 
-    private val binding get() = bindingObject!!
+    private val binding get() = bindingObject ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
-    private lateinit var firstName: EditText
-    private lateinit var lastName: EditText
     private lateinit var email: EditText
     private lateinit var nickname: EditText
     private lateinit var password: EditText
@@ -39,7 +37,7 @@ class RegistrationFragment: Fragment() {
 
             if(it.equals(RequestStages.SUCCESS)) {
                 signUp.hideProgress("Success!")
-                rootActivity.launchMainActivity()
+                rootActivity.showLoginFragment()
             }
             if(it.equals(RequestStages.FAIL)) {
                 signUp.hideProgress("Fail!")
@@ -57,8 +55,6 @@ class RegistrationFragment: Fragment() {
 
         rootActivity = activity as StartActivity
 
-        firstName = binding.firstName
-        lastName = binding.lastName
         nickname = binding.nickname
         email = binding.email
         password = binding.password

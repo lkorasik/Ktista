@@ -3,20 +3,22 @@ package com.lkorasik.ktistaclient.ui.feed
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
+import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 class FeedFragment : Fragment() {
 
-    private lateinit var feedAdapter: FeedRecyclerAdapter
+    private lateinit var postsAdapter: PostsRecyclerAdapter
     private val viewModel: FeedViewModel by navGraphViewModels(R.id.navigation_feed)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        feedAdapter = FeedRecyclerAdapter()
+        postsAdapter = PostsRecyclerAdapter()
     }
 
     override fun onCreateView(
@@ -24,26 +26,38 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_feed)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_posts)
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
-            feedAdapter.setItems(posts)
+            postsAdapter.setItems(posts)
         }
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(activity)
-            adapter = feedAdapter
+            adapter = postsAdapter
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_feed_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_add_post -> {
+                findNavController().navigate(R.id.action_navigation_feed_to_addPostActivity)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
