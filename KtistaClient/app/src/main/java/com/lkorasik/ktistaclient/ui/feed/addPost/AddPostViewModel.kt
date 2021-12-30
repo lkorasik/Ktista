@@ -12,27 +12,31 @@ import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
 import com.lkorasik.ktistaclient.ui.helper.utils.PrimitiveBenchmark
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Headers
 import java.io.File
 import java.util.*
 
-class AddPostViewModel: ViewModel() {
-    companion object{
+class AddPostViewModel : ViewModel() {
+    companion object {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
+
+    val inProgress = MutableLiveData(RequestStages.INIT)
 
     private val createPost = CreatePostRequest().apply {
         setOnResultListener(object : OnResultListener<String> {
             override fun onSuccess(body: String?, headers: Headers) {
-                inProgress.value = RequestStages.SUCCESS
+                inProgress.postValue(RequestStages.SUCCESS)
                 Log.i(LOG_TAG, "Request was success")
 
                 PrimitiveBenchmark.stop()
             }
 
             override fun onFail() {
-                inProgress.value = RequestStages.FAIL
+                inProgress.postValue(RequestStages.FAIL)
                 Log.i(LOG_TAG, "Request was failed")
 
                 PrimitiveBenchmark.stop()
@@ -40,25 +44,18 @@ class AddPostViewModel: ViewModel() {
         })
     }
 
-    val inProgress = MutableLiveData(RequestStages.INIT)
+    private fun createPost(id: Long, text: String, getBytes: () -> ByteArray?) {
 
-    private fun createPost(id: Long, text: String, getBytes: () -> ByteArray?){
+        inProgress.value = RequestStages.IN_PROGRESS
+
         viewModelScope.launch(Dispatchers.IO) {
-            inProgress.postValue(RequestStages.IN_PROGRESS)
             Log.i(LOG_TAG, "Start request")
 
-            PrimitiveBenchmark.startMessage = "Start getting bytes"
-            PrimitiveBenchmark.startMessage = "End getting bytes file"
+            getBytes()?.let {
+                val data = getBase64Image(byteArray = it)
 
-            PrimitiveBenchmark.start()
-            val bytes = getBytes()
-            PrimitiveBenchmark.stop()
-
-            bytes?.let {
-                val data = Base64.getEncoder().encodeToString(it)
-
-                PrimitiveBenchmark.startMessage = "Start request"
-                PrimitiveBenchmark.startMessage = "End request"
+                PrimitiveBenchmark.startMessage = "Start benchmark request"
+                PrimitiveBenchmark.endMessage = "End benchmark request"
 
                 PrimitiveBenchmark.start()
                 createPost.createPost(CreatePostDTO(id, text, data))
@@ -66,13 +63,19 @@ class AddPostViewModel: ViewModel() {
         }
     }
 
-    fun createPost(contentResolver: ContentResolver, id: Long, text: String, imagePath: String){
+    private suspend fun getBase64Image(byteArray: ByteArray): String {
+        return withContext(Dispatchers.Default) {
+            Base64.getEncoder().encodeToString(byteArray)
+        }
+    }
+
+    fun createPost(contentResolver: ContentResolver, id: Long, text: String, imagePath: String) {
         createPost(id, text) {
             contentResolver.openInputStream(Uri.parse(imagePath))?.readBytes()
         }
     }
 
-    fun createPost(id: Long, text: String, imagePath: String){
+    fun createPost(id: Long, text: String, imagePath: String) {
         createPost(id, text) {
             File(imagePath).readBytes()
         }
