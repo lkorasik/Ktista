@@ -1,9 +1,11 @@
 package com.lkorasik.ktistaclient.ui.profile
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -12,6 +14,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 
@@ -21,7 +24,10 @@ class ProfileFragment : Fragment() {
     private var postsAdapter: PostsRecyclerAdapter? = null
     private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
+    private var avatar: ImageView? = null
     private var nickname: TextView? = null
+    private var followersCount: TextView? = null
+    private var followingCount: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +38,20 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        avatar = binding.includedProfileInfo.ivAvatar
         nickname = binding.includedProfileInfo.profileName
+        followingCount = binding.includedProfileInfo.profileCountFollowings
+        followersCount = binding.includedProfileInfo.profileCountFollowers
 
         viewModel.data.observe(this, {
+            it.image?.apply {
+                val bmp = ImageHelper.convertToBitmap(this)
+                avatar?.setImageBitmap(bmp)
+            }
+            //TODO: Set avatar
             nickname?.text = it.username
+            followingCount?.text = it.followings.toString()
+            followersCount?.text = it.followers.toString()
         })
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
