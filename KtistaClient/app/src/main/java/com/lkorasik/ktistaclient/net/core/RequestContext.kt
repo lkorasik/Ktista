@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RequestContext{
     private val ktistaAPI: KtistaAPI
-    private const val BASE_URL = "http://10.4.14.242:8081/"
+    private const val BASE_URL = "http://192.168.0.231:8080/"
     val API: KtistaAPI
         get() = ktistaAPI
 
