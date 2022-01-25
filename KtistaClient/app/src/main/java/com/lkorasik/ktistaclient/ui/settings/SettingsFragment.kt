@@ -6,12 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,20 +22,31 @@ import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
 
 class SettingsFragment : Fragment() {
-    private lateinit var settingsViewModel: SettingsViewModel
+    private lateinit var viewModel: SettingsViewModel
     private var _binding: FragmentSettingsBinding? = null
 
     private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private var image: ImageView? = null
     private var changeAvatar: Button? = null
+    private var email: EditText? = null
+    private var nickname: EditText? = null
 
     private var imagePath: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+        email = binding.email
+        nickname = binding.nickname
+
+        viewModel.data.observe(this, {
+            //TODO("Set avatar")
+            email?.setText(it.email)
+            nickname?.setText(it.nickname)
+        })
 
         binding.settingBtChangePassword.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_settings_to_changePasswordDialog)
@@ -49,6 +61,8 @@ class SettingsFragment : Fragment() {
         changeAvatar?.setOnClickListener {
             chooseImage(activity)
         }
+
+        viewModel.getSettings()
 
         return binding.root
     }
