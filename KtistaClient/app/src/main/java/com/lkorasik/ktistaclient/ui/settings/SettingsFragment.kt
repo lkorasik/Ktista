@@ -43,6 +43,10 @@ class SettingsFragment : Fragment() {
         nickname = binding.nickname
 
         viewModel.data.observe(this, {
+            it.avatar?.apply {
+                val bmp = ImageHelper.convertToBitmap(this)
+                image?.setImageBitmap(bmp)
+            }
             //TODO("Set avatar")
             email?.setText(it.email)
             nickname?.setText(it.nickname)
