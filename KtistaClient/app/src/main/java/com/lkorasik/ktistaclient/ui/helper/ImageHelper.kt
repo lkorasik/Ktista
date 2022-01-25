@@ -1,5 +1,6 @@
 package com.lkorasik.ktistaclient.ui.helper
 
+import android.R
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -58,5 +59,9 @@ object ImageHelper {
             postRotate(angle)
         }
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+    }
+
+    fun convertToBitmap(bytes: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 }

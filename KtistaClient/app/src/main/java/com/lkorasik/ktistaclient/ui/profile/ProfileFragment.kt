@@ -14,6 +14,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 
@@ -43,6 +44,10 @@ class ProfileFragment : Fragment() {
         followersCount = binding.includedProfileInfo.profileCountFollowers
 
         viewModel.data.observe(this, {
+            it.image?.apply {
+                val bmp = ImageHelper.convertToBitmap(this)
+                avatar?.setImageBitmap(bmp)
+            }
             //TODO: Set avatar
             nickname?.text = it.username
             followingCount?.text = it.followings.toString()
