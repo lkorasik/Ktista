@@ -24,7 +24,7 @@ class LoginViewModel : ViewModel() {
             override fun onSuccess(body: Void?, headers: Headers) {
                 inProgress.postValue(RequestStages.SUCCESS)
                 JWTTempStorage.jwt =
-                    headers[HeadersKeys.AUTHORIZATION.toString()].toString().split(" ")[1]
+                    headers[HeadersKeys.AUTHORIZATION].toString().split(" ")[1]
                 Log.i(LOG_TAG, "Request was success")
             }
 
