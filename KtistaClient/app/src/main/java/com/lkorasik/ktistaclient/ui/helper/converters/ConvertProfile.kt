@@ -7,10 +7,13 @@ import com.lkorasik.ktistaclient.ui.models.ProfileModel
 
 object ConvertProfile: Converter<ProfileResponseDTO, ProfileModel> {
     override fun convert(input: ProfileResponseDTO, result: ProfileModel) {
-        val bytes = Base64.decode(input.image, Base64.DEFAULT)
-        val bmp = ImageHelper.convertToBitmap(bytes)
+        if(!input.image.isNullOrEmpty()) {
+            val bytes = Base64.decode(input.image, Base64.DEFAULT)
+            val bmp = ImageHelper.convertToBitmap(bytes)
 
-        result.image = bmp
+            result.image = bmp
+        }
+
         result.username = input.username
         result.followers = input.followers.toString()
         result.followings = input.followings.toString()
