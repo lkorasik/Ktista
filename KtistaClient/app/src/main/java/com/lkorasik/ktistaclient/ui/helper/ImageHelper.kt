@@ -61,7 +61,5 @@ object ImageHelper {
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
 
-    fun convertToBitmap(bytes: ByteArray): Bitmap {
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    }
+    fun convertToBitmap(bytes: ByteArray): Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
 }

@@ -1,8 +1,10 @@
 package com.lkorasik.ktistaclient.ui.profile
 
+import android.graphics.Bitmap
 import android.media.Image
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,13 +48,9 @@ class ProfileFragment : Fragment() {
 
         viewModel.data.observe(this, {
             nickname?.text = it.username
-            followingCount?.text = it.followings.toString()
-            followersCount?.text = it.followers.toString()
-            it.image?.apply {
-                val bytes = Base64.decode(this, Base64.DEFAULT)
-                val bmp = ImageHelper.convertToBitmap(bytes)
-                avatar?.setImageBitmap(bmp)
-            }
+            followingCount?.text = it.followings
+            followersCount?.text = it.followers
+            avatar?.setImageBitmap(it.image)
         })
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {

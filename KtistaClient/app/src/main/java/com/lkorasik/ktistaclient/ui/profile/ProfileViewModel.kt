@@ -11,7 +11,9 @@ import com.lkorasik.ktistaclient.net.model.dto.ProfileRequestDTO
 import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
 import com.lkorasik.ktistaclient.net.requests.ProfileRequest
 import com.lkorasik.ktistaclient.ui.TestDataClass
+import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
 import com.lkorasik.ktistaclient.ui.models.PostModel
+import com.lkorasik.ktistaclient.ui.models.ProfileModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Headers
@@ -24,8 +26,12 @@ class ProfileViewModel : ViewModel() {
     private val getProfileRequest = ProfileRequest().apply {
         setOnResultListener(object : OnResultListener<ProfileResponseDTO> {
             override fun onSuccess(body: ProfileResponseDTO?, headers: Headers) {
-                body.let {
-                    data.postValue(it)
+                body?.let {
+                    data.value?.apply {
+                        ConvertProfile.convert(it, this)
+                    }
+
+                    data.postValue(data.value)
                     Log.i(LOG_TAG, "Request get profile was success")
                 }
             }
@@ -38,7 +44,9 @@ class ProfileViewModel : ViewModel() {
     }
 
     val inProgress = MutableLiveData(RequestStages.INIT)
-    val data = MutableLiveData<ProfileResponseDTO>()
+    val data = MutableLiveData<ProfileModel>().apply {
+        this.postValue(ProfileModel())
+    }
 
     private val mutablePostsData: MutableLiveData<ArrayList<PostModel>> = MutableLiveData()
     val postsData: LiveData<ArrayList<PostModel>> = mutablePostsData
