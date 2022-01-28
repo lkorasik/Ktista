@@ -13,12 +13,3 @@ class UserRepository {
     }
 }
 
-class JwtRepository {
-    var jwt: String = ""
-        private set
-        get
-
-    fun <T> extractToken(response: Response<T>) {
-        jwt = response.headers()[HeadersKeys.AUTHORIZATION.toString()].toString().split(" ")[1]
-    }
-}

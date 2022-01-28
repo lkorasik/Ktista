@@ -19,7 +19,6 @@ class LoginViewModel : ViewModel() {
     val inProgress = MutableLiveData(RequestStages.INIT)
 
     private val ur = UserRepository()
-    private val jwt = JwtRepository()
 
     fun loginUser(nickname: String, password: String) {
         inProgress.value = RequestStages.IN_PROGRESS
@@ -27,7 +26,7 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start login request")
             val result = ur.login(UserLoginRequestDTO(nickname, password))
-            jwt.extractToken(result)
+            JwtRepository.extractToken(result)
             Log.i(LOG_TAG, "End login request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){
