@@ -23,9 +23,9 @@ class LoginViewModel : ViewModel() {
         inProgress.value = RequestStages.IN_PROGRESS
 
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i(LOG_TAG, "Start request")
+            Log.i(LOG_TAG, "Start login request")
             val isSuccessful = ur.login(UserLoginRequestDTO(nickname, password))
-            Log.i(LOG_TAG, "End request. ${if(isSuccessful) "Success" else "Failed"}")
+            Log.i(LOG_TAG, "End login request. Status: ${if(isSuccessful) "Success" else "Failed"}")
 
             if(isSuccessful){
                 inProgress.postValue(RequestStages.SUCCESS)
