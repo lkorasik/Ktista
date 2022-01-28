@@ -4,18 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.core.OnResultListener
-import com.lkorasik.ktistaclient.net.core.RequestContext
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.HeadersKeys
-import com.lkorasik.ktistaclient.net.model.JWTTempStorage
 import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
 import com.lkorasik.ktistaclient.net.repository.UserRepository
-import com.lkorasik.ktistaclient.net.requests.LoginRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Headers
-import java.security.interfaces.RSAKey
 
 class LoginViewModel : ViewModel() {
     companion object {
