@@ -8,7 +8,11 @@ import retrofit2.Response
 
 class UserRepository {
     fun login(user: UserLoginRequestDTO): Response<Void?> {
-        return RequestContext.API.login(user).execute()
+        val response = RequestContext.API.login(user).execute()
+
+        JwtRepository.extractToken(response)
+
+        return response
         //TODO(Handle errors. Response you can get from execute())
     }
 }

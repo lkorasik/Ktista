@@ -26,7 +26,6 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start login request")
             val result = ur.login(UserLoginRequestDTO(nickname, password))
-            JwtRepository.extractToken(result)
             Log.i(LOG_TAG, "End login request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){
