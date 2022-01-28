@@ -5,13 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.dto.ProfileRequestDTO
-import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
 import com.lkorasik.ktistaclient.net.repository.ProfileRepository
-import com.lkorasik.ktistaclient.net.requests.ProfileRequest
 import com.lkorasik.ktistaclient.ui.TestDataClass
 import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
 import com.lkorasik.ktistaclient.ui.models.PostModel
@@ -19,7 +14,6 @@ import com.lkorasik.ktistaclient.ui.models.ProfileModel
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Headers
 
 class ProfileViewModel : ViewModel() {
     companion object {

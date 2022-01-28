@@ -5,7 +5,6 @@ import com.lkorasik.ktistaclient.net.model.dto.*
 import retrofit2.*
 import retrofit2.http.*
 
-
 interface KtistaAPI {
     @POST("api/auth/registration/")
     fun register(@Body userDTO: UserRegistrationRequestDTO): Call<UserRegistrationResponseDTO?>?
