@@ -10,9 +10,7 @@ import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
-import com.lkorasik.ktistaclient.ui.helper.utils.PrimitiveBenchmark
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Headers
@@ -31,15 +29,11 @@ class AddPostViewModel : ViewModel() {
             override fun onSuccess(body: String?, headers: Headers) {
                 inProgress.postValue(RequestStages.SUCCESS)
                 Log.i(LOG_TAG, "Request was success")
-
-                PrimitiveBenchmark.stop()
             }
 
             override fun onFail() {
                 inProgress.postValue(RequestStages.FAIL)
                 Log.i(LOG_TAG, "Request was failed")
-
-                PrimitiveBenchmark.stop()
             }
         })
     }
@@ -53,11 +47,6 @@ class AddPostViewModel : ViewModel() {
 
             getBytes()?.let {
                 val data = getBase64Image(byteArray = it)
-
-                PrimitiveBenchmark.startMessage = "Start benchmark request"
-                PrimitiveBenchmark.endMessage = "End benchmark request"
-
-                PrimitiveBenchmark.start()
                 createPost.createPost(CreatePostDTO(id, text, data))
             }
         }
