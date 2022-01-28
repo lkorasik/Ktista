@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
-import com.lkorasik.ktistaclient.net.repository.JwtRepository
 import com.lkorasik.ktistaclient.net.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,14 +17,14 @@ class LoginViewModel : ViewModel() {
 
     val inProgress = MutableLiveData(RequestStages.INIT)
 
-    private val ur = UserRepository()
+    private val userRepository = UserRepository()
 
     fun loginUser(nickname: String, password: String) {
         inProgress.value = RequestStages.IN_PROGRESS
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start login request")
-            val result = ur.login(UserLoginRequestDTO(nickname, password))
+            val result = userRepository.login(UserLoginRequestDTO(nickname, password))
             Log.i(LOG_TAG, "End login request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){

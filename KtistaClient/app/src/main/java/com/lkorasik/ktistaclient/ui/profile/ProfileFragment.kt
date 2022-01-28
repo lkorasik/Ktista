@@ -46,12 +46,12 @@ class ProfileFragment : Fragment() {
         followingCount = binding.includedProfileInfo.profileCountFollowings
         followersCount = binding.includedProfileInfo.profileCountFollowers
 
-        viewModel.data.observe(this, {
+        viewModel.data.observe(viewLifecycleOwner) {
             nickname?.text = it.username
             followingCount?.text = it.followings
             followersCount?.text = it.followers
             avatar?.setImageBitmap(it.image)
-        })
+        }
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
@@ -61,6 +61,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
         }
 
+        viewModel.testLoadPosts()
         viewModel.getProfile()
 
         return binding.root

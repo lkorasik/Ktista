@@ -9,11 +9,14 @@ import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.ProfileRequestDTO
 import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
+import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
+import com.lkorasik.ktistaclient.net.repository.ProfileRepository
 import com.lkorasik.ktistaclient.net.requests.ProfileRequest
 import com.lkorasik.ktistaclient.ui.TestDataClass
 import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
 import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.models.ProfileModel
+import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Headers
@@ -23,39 +26,17 @@ class ProfileViewModel : ViewModel() {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
-    private val getProfileRequest = ProfileRequest().apply {
-        setOnResultListener(object : OnResultListener<ProfileResponseDTO> {
-            override fun onSuccess(body: ProfileResponseDTO?, headers: Headers) {
-                body?.let {
-                    data.value?.apply {
-                        ConvertProfile.convert(it, this)
-                    }
-
-                    data.postValue(data.value)
-                    Log.i(LOG_TAG, "Request get profile was success")
-                }
-            }
-
-            override fun onFail() {
-                inProgress.postValue(RequestStages.FAIL)
-                Log.i(LOG_TAG, "Request get profile was failed")
-            }
-        })
-    }
-
     val inProgress = MutableLiveData(RequestStages.INIT)
     val data = MutableLiveData<ProfileModel>().apply {
         this.postValue(ProfileModel())
     }
 
+    private val profileRepository = ProfileRepository()
+
     private val mutablePostsData: MutableLiveData<ArrayList<PostModel>> = MutableLiveData()
     val postsData: LiveData<ArrayList<PostModel>> = mutablePostsData
 
-    init {
-        testLoadPosts()
-    }
-
-    private fun testLoadPosts() {
+    fun testLoadPosts() {
         mutablePostsData.postValue(TestDataClass.getPostsData())
     }
 
@@ -66,7 +47,22 @@ class ProfileViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request get profile")
-            getProfileRequest.getProfile(ProfileRequestDTO(1))
+            val result = profileRepository.getProfile(1)
+            Log.i(LoginViewModel.LOG_TAG, "End get profile request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
+
+            if(result.isSuccessful){
+                inProgress.postValue(RequestStages.SUCCESS)
+
+                result.body()?.let {
+                    data.value?.apply {
+                        ConvertProfile.convert(it, this)
+                    }
+
+                    data.postValue(data.value)
+                }
+            } else {
+                inProgress.postValue(RequestStages.FAIL)
+            }
         }
     }
 }

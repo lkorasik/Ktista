@@ -14,7 +14,7 @@ interface KtistaAPI {
     fun login(@Body userDTO: UserLoginRequestDTO): Call<Void?>
 
     @GET("api/user/profile/{id}")
-    fun getProfile(@Header(HeadersKeys.AUTHORIZATION) token: String, @Path("id") id: Long): Call<ProfileResponseDTO?>?
+    fun getProfile(@Header(HeadersKeys.AUTHORIZATION) token: String, @Path("id") id: Long): Call<ProfileResponseDTO?>
 
     @POST("api/post/create")
     fun createPost(@Header(HeadersKeys.AUTHORIZATION) token: String, @Body postDTO: CreatePostDTO): Call<String?>?
