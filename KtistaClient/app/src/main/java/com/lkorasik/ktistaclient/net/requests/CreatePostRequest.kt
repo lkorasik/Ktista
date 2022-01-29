@@ -6,5 +6,5 @@ import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.repository.JwtRepository
 
 class CreatePostRequest: Request<String>() {
-    fun createPost(post: CreatePostDTO) = RequestContext.API.createPost("Bearer ${JwtRepository.jwt}", post)?.enqueue(this)
+    fun createPost(post: CreatePostDTO) = RequestContext.API.createPost("Bearer ${JwtRepository.jwt}", post).enqueue(this)
 }

@@ -41,18 +41,14 @@ class ProfileViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request get profile")
-            val result = profileRepository.getProfile(1)
+            val result = profileRepository.getProfile()
             Log.i(LoginViewModel.LOG_TAG, "End get profile request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){
                 inProgress.postValue(RequestStages.SUCCESS)
 
                 result.body()?.let {
-                    data.value?.apply {
-                        ConvertProfile.convert(it, this)
-                    }
-
-                    data.postValue(data.value)
+                    data.postValue(ConvertProfile.convert(it))
                 }
             } else {
                 inProgress.postValue(RequestStages.FAIL)
