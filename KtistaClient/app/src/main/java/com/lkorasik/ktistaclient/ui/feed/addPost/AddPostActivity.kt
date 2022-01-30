@@ -37,14 +37,14 @@ class AddPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         addPostViewModel = ViewModelProvider(this)[AddPostViewModel::class.java]
 
-        addPostViewModel.inProgress.observe(this, {
+        addPostViewModel.inProgress.observe(this) {
             Log.i(LoginViewModel.LOG_TAG, "new state: $it")
 
             if (it == RequestStages.SUCCESS)
                 Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
             if (it == RequestStages.FAIL)
                 Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
-        })
+        }
 
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -124,9 +124,9 @@ class AddPostActivity : AppCompatActivity() {
         imagePath?.let {
             val text = binding?.etDescription?.text.toString()
             if(it.contains("content")) {
-                addPostViewModel.createPost(contentResolver, 1, text,it)
+                addPostViewModel.createPost(contentResolver, text,it)
             } else {
-                addPostViewModel.createPost(1, text, it)
+                addPostViewModel.createPost(text, it)
             }
         }
     }

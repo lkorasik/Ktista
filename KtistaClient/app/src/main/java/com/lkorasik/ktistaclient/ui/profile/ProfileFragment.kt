@@ -1,6 +1,5 @@
 package com.lkorasik.ktistaclient.ui.profile
 
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
-import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 
@@ -43,16 +41,12 @@ class ProfileFragment : Fragment() {
         followingCount = binding.includedProfileInfo.profileCountFollowings
         followersCount = binding.includedProfileInfo.profileCountFollowers
 
-        viewModel.data.observe(this, {
-            it.image?.apply {
-                val bmp = ImageHelper.convertToBitmap(this)
-                avatar?.setImageBitmap(bmp)
-            }
-            //TODO: Set avatar
+        viewModel.profile.observe(viewLifecycleOwner) {
             nickname?.text = it.username
-            followingCount?.text = it.followings.toString()
-            followersCount?.text = it.followers.toString()
-        })
+            followingCount?.text = it.followings
+            followersCount?.text = it.followers
+            avatar?.setImageBitmap(it.image)
+        }
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
@@ -62,6 +56,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
         }
 
+        viewModel.testLoadPosts()
         viewModel.getProfile()
 
         return binding.root

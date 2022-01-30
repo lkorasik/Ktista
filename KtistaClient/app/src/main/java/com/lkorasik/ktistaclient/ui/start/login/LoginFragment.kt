@@ -31,7 +31,7 @@ class LoginFragment: Fragment() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         loginViewModel.inProgress.observe(this, {
-            Log.i(LoginViewModel.LOG_TAG, "$it")
+            Log.i(LoginViewModel.LOG_TAG,   "$it")
 
             if(it.equals(RequestStages.SUCCESS)) {
                 signIn.hideProgress("Success!")

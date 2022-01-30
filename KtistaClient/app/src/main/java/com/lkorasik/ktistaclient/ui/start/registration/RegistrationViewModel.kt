@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationRequestDTO
-import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationResponseDTO
 import com.lkorasik.ktistaclient.net.requests.RegistrationRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +18,8 @@ class RegistrationViewModel : ViewModel() {
     }
 
     private val registrationRequest = RegistrationRequest().apply {
-        setOnResultListener(object : OnResultListener<UserRegistrationResponseDTO> {
-            override fun onSuccess(body: UserRegistrationResponseDTO?, headers: Headers) {
+        setOnResultListener(object : OnResultListener<Void> {
+            override fun onSuccess(body: Void?, headers: Headers) {
                 inProgress.postValue(RequestStages.SUCCESS)
                 Log.i(LOG_TAG, "Request was success ${inProgress.value}")
             }
