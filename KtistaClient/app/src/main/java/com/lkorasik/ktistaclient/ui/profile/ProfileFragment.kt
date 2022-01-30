@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,7 +22,10 @@ class ProfileFragment : Fragment() {
     private var postsAdapter: PostsRecyclerAdapter? = null
     private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
+    private var avatar: ImageView? = null
     private var nickname: TextView? = null
+    private var followersCount: TextView? = null
+    private var followingCount: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +36,17 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        avatar = binding.includedProfileInfo.ivAvatar
         nickname = binding.includedProfileInfo.profileName
+        followingCount = binding.includedProfileInfo.profileCountFollowings
+        followersCount = binding.includedProfileInfo.profileCountFollowers
 
-        viewModel.data.observe(this, {
+        viewModel.profile.observe(viewLifecycleOwner) {
             nickname?.text = it.username
-        })
+            followingCount?.text = it.followings
+            followersCount?.text = it.followers
+            avatar?.setImageBitmap(it.image)
+        }
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
@@ -46,6 +56,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
         }
 
+        viewModel.testLoadPosts()
         viewModel.getProfile()
 
         return binding.root

@@ -9,6 +9,6 @@ object JwtRepository {
         get
 
     fun <T> extractToken(response: Response<T>) {
-        jwt = response.headers()[HeadersKeys.AUTHORIZATION.toString()].toString().split(" ")[1]
+        jwt = response.headers()[HeadersKeys.AUTHORIZATION].toString().split(" ")[1]
     }
 }

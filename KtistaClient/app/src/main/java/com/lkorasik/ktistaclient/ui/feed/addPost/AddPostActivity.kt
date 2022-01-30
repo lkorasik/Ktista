@@ -124,9 +124,9 @@ class AddPostActivity : AppCompatActivity() {
         imagePath?.let {
             val text = binding?.etDescription?.text.toString()
             if(it.contains("content")) {
-                addPostViewModel.createPost(contentResolver, 1, text,it)
+                addPostViewModel.createPost(contentResolver, text,it)
             } else {
-                addPostViewModel.createPost(1, text, it)
+                addPostViewModel.createPost(text, it)
             }
         }
     }

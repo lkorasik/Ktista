@@ -38,7 +38,7 @@ class AddPostViewModel : ViewModel() {
         })
     }
 
-    private fun createPost(id: Long, text: String, getBytes: () -> ByteArray?) {
+    private fun createPost(text: String, getBytes: () -> ByteArray?) {
 
         inProgress.value = RequestStages.IN_PROGRESS
 
@@ -47,7 +47,7 @@ class AddPostViewModel : ViewModel() {
 
             getBytes()?.let {
                 val data = getBase64Image(byteArray = it)
-                createPost.createPost(CreatePostDTO(id, text, data))
+                createPost.createPost(CreatePostDTO(text, data))
             }
         }
     }
@@ -58,14 +58,14 @@ class AddPostViewModel : ViewModel() {
         }
     }
 
-    fun createPost(contentResolver: ContentResolver, id: Long, text: String, imagePath: String) {
-        createPost(id, text) {
+    fun createPost(contentResolver: ContentResolver, text: String, imagePath: String) {
+        createPost(text) {
             contentResolver.openInputStream(Uri.parse(imagePath))?.readBytes()
         }
     }
 
-    fun createPost(id: Long, text: String, imagePath: String) {
-        createPost(id, text) {
+    fun createPost(text: String, imagePath: String) {
+        createPost(text) {
             File(imagePath).readBytes()
         }
     }
