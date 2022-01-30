@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.dto.SettingsRequestDTO
 import com.lkorasik.ktistaclient.net.repository.SettingsRepository
-import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
 import com.lkorasik.ktistaclient.ui.helper.converters.ConvertSettings
 import com.lkorasik.ktistaclient.ui.models.SettingsModel
 import kotlinx.coroutines.Dispatchers
