@@ -1,52 +1,47 @@
 package com.lkorasik.ktistaclient.ui.settings
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
-import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
 import com.lkorasik.ktistaclient.net.model.dto.SettingsRequestDTO
-import com.lkorasik.ktistaclient.net.model.dto.SettingsResponseDTO
-import com.lkorasik.ktistaclient.net.requests.SettingsRequest
-import com.lkorasik.ktistaclient.ui.profile.ProfileViewModel
+import com.lkorasik.ktistaclient.net.repository.SettingsRepository
+import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
+import com.lkorasik.ktistaclient.ui.helper.converters.ConvertSettings
+import com.lkorasik.ktistaclient.ui.models.SettingsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Headers
-import java.security.interfaces.RSAKey
 
 class SettingsViewModel : ViewModel() {
     companion object {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
-    private val getSettingsRequest = SettingsRequest().apply {
-        setOnResultListener(object : OnResultListener<SettingsResponseDTO> {
-            override fun onSuccess(body: SettingsResponseDTO?, headers: Headers) {
-                body?.let {
-                    data.postValue(it)
-                    Log.i(ProfileViewModel.LOG_TAG, "Request get settings was success")
-                }
-            }
-
-            override fun onFail() {
-                inProgress.postValue(RequestStages.FAIL)
-                Log.i(ProfileViewModel.LOG_TAG, "Request get settings was failed")
-            }
-        })
+    val requestStage = MutableLiveData(RequestStages.INIT)
+    val data = MutableLiveData<SettingsModel>().apply {
+        postValue(SettingsModel())
     }
 
-    val inProgress = MutableLiveData(RequestStages.INIT)
-    val data = MutableLiveData<SettingsResponseDTO>()
+    private val settingsRepository = SettingsRepository()
 
-    fun getSettings(){
-        inProgress.value = RequestStages.IN_PROGRESS
+    fun getSettings() {
+        requestStage.value = RequestStages.IN_PROGRESS
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request get settings")
-            getSettingsRequest.getSettings(SettingsRequestDTO(1))
+            val result = settingsRepository.getSettings()
+            Log.i(LOG_TAG, "End get settings request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
+
+            if(result.isSuccessful){
+                requestStage.postValue(RequestStages.SUCCESS)
+
+                result.body()?.let {
+                    data.postValue(ConvertSettings.convert(it))
+                }
+            } else {
+                requestStage.postValue(RequestStages.FAIL)
+            }
         }
     }
 }

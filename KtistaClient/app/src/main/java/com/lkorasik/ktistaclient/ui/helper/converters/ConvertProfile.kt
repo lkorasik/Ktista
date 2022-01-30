@@ -2,8 +2,10 @@ package com.lkorasik.ktistaclient.ui.helper.converters
 
 import android.util.Base64
 import com.lkorasik.ktistaclient.net.model.dto.ProfileResponseDTO
+import com.lkorasik.ktistaclient.net.model.dto.SettingsResponseDTO
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.models.ProfileModel
+import com.lkorasik.ktistaclient.ui.models.SettingsModel
 
 object ConvertProfile: Converter<ProfileResponseDTO, ProfileModel> {
     override fun convert(input: ProfileResponseDTO): ProfileModel {
