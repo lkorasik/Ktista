@@ -20,8 +20,8 @@ class ProfileViewModel : ViewModel() {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
-    val inProgress = MutableLiveData(RequestStages.INIT)
-    val data = MutableLiveData<ProfileModel>().apply {
+    val requestProgress = MutableLiveData(RequestStages.INIT)
+    val profile = MutableLiveData<ProfileModel>().apply {
         this.postValue(ProfileModel())
     }
 
@@ -37,7 +37,7 @@ class ProfileViewModel : ViewModel() {
     private fun loadPosts() {}
 
     fun getProfile() {
-        inProgress.value = RequestStages.IN_PROGRESS
+        requestProgress.value = RequestStages.IN_PROGRESS
 
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request get profile")
@@ -45,13 +45,13 @@ class ProfileViewModel : ViewModel() {
             Log.i(LoginViewModel.LOG_TAG, "End get profile request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){
-                inProgress.postValue(RequestStages.SUCCESS)
+                requestProgress.postValue(RequestStages.SUCCESS)
 
                 result.body()?.let {
-                    data.postValue(ConvertProfile.convert(it))
+                    profile.postValue(ConvertProfile.convert(it))
                 }
             } else {
-                inProgress.postValue(RequestStages.FAIL)
+                requestProgress.postValue(RequestStages.FAIL)
             }
         }
     }

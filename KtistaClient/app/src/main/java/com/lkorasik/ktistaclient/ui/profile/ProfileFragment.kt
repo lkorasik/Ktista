@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
         followingCount = binding.includedProfileInfo.profileCountFollowings
         followersCount = binding.includedProfileInfo.profileCountFollowers
 
-        viewModel.data.observe(viewLifecycleOwner) {
+        viewModel.profile.observe(viewLifecycleOwner) {
             nickname?.text = it.username
             followingCount?.text = it.followings
             followersCount?.text = it.followers
