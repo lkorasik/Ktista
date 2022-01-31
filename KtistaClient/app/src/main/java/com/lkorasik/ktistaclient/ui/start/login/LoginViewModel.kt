@@ -10,14 +10,12 @@ import com.lkorasik.ktistaclient.net.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
     companion object {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
     val inProgress = MutableLiveData(RequestStages.INIT)
-
-    private val userRepository = UserRepository()
 
     fun loginUser(nickname: String, password: String) {
         inProgress.value = RequestStages.IN_PROGRESS
