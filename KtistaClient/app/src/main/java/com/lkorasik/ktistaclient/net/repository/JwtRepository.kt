@@ -2,7 +2,6 @@ package com.lkorasik.ktistaclient.net.repository
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.lkorasik.ktistaclient.net.model.HeadersKeys
 import retrofit2.Response
 
@@ -26,7 +25,6 @@ object JwtRepository {
         jwtAccess = extractToken(response)
         jwtPreferences = context.getSharedPreferences(JWT_PREFERENCES, Context.MODE_PRIVATE)
 
-        Log.e(javaClass.name, jwtAccess)
         jwtPreferences?.let {
             with(it.edit()) {
                 putString(JWT_ACCESS, jwtAccess)
