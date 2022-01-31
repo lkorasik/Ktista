@@ -1,10 +1,12 @@
 package com.lkorasik.ktistaclient.ui.settings
 
+import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.RequestStages
+import com.lkorasik.ktistaclient.net.model.dto.SettingsDTO
 import com.lkorasik.ktistaclient.net.repository.SettingsRepository
 import com.lkorasik.ktistaclient.ui.helper.converters.ConvertSettings
 import com.lkorasik.ktistaclient.ui.models.SettingsModel
@@ -22,6 +24,19 @@ class SettingsViewModel : ViewModel() {
     }
 
     private val settingsRepository = SettingsRepository()
+
+    fun setSettings(avatar: ByteArray?, email: String, username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.i(LOG_TAG, "Start request set settings")
+            settingsRepository.setSettings(SettingsDTO(
+                //avatar = avatar,
+                email = email,
+                nickname = username,
+                avatar = Base64.encodeToString(avatar, Base64.DEFAULT)
+            ))
+            Log.i(LOG_TAG, "End get settings request")
+        }
+    }
 
     fun getSettings() {
         requestStage.value = RequestStages.IN_PROGRESS
