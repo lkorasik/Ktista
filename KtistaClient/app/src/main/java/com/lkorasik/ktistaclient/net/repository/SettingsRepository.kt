@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class SettingsRepository {
     fun getSettings(): Response<SettingsResponseDTO?> {
-        return RequestContext.API.getSettings(JwtRepository.jwt).execute()
+        return RequestContext.API.getSettings(JwtRepository.jwtAccess).execute()
     }
 }
