@@ -105,7 +105,7 @@
                     android:textColor="@color/color_6" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/first_name"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -133,7 +133,7 @@
                     android:textColor="@color/color_6" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/settings_login"
+                    android:id="@+id/nickname"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"

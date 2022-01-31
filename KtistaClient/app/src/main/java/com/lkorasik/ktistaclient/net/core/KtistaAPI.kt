@@ -17,4 +17,7 @@ interface KtistaAPI {
 
     @POST("api/post/create")
     fun createPost(@Header(HeadersKeys.AUTHORIZATION) token: String, @Body postDTO: CreatePostDTO): Call<String?>
+
+    @GET("api/user/settings")
+    fun getSettings(@Header(HeadersKeys.AUTHORIZATION) token: String): Call<SettingsResponseDTO?>
 }
