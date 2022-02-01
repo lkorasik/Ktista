@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
-import com.lkorasik.ktistaclient.net.requests.CreatePostRequest
+import com.lkorasik.ktistaclient.net.repository.PostRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,30 +24,26 @@ class AddPostViewModel : ViewModel() {
 
     val inProgress = MutableLiveData(RequestStages.INIT)
 
-    private val createPost = CreatePostRequest().apply {
-        setOnResultListener(object : OnResultListener<String> {
-            override fun onSuccess(body: String?, headers: Headers) {
-                inProgress.postValue(RequestStages.SUCCESS)
-                Log.i(LOG_TAG, "Request was success")
-            }
-
-            override fun onFail() {
-                inProgress.postValue(RequestStages.FAIL)
-                Log.i(LOG_TAG, "Request was failed")
-            }
-        })
-    }
+    private val postRepository = PostRepository()
 
     private fun createPost(text: String, getBytes: () -> ByteArray?) {
-
         inProgress.value = RequestStages.IN_PROGRESS
 
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i(LOG_TAG, "Start request")
-
             getBytes()?.let {
                 val data = getBase64Image(byteArray = it)
-                createPost.createPost(CreatePostDTO(text, data))
+
+                Log.i(LOG_TAG, "Start request create post")
+                val result = postRepository.createPost(CreatePostDTO(text, data))
+                Log.i(LOG_TAG, "End create post request.")
+
+                if(result.isSuccessful){
+                    inProgress.postValue(RequestStages.SUCCESS)
+                    Log.i(LOG_TAG, "Create post request was successful.")
+                } else {
+                    inProgress.postValue(RequestStages.FAIL)
+                    Log.i(LOG_TAG, "Create post request was failed.")
+                }
             }
         }
     }
