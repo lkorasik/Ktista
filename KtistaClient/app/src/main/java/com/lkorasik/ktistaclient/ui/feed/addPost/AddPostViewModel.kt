@@ -34,8 +34,16 @@ class AddPostViewModel : ViewModel() {
                 val data = getBase64Image(byteArray = it)
 
                 Log.i(LOG_TAG, "Start request create post")
-                postRepository.createPost(CreatePostDTO(text, data))
-                Log.i(LOG_TAG, "End get settings request.")
+                val result = postRepository.createPost(CreatePostDTO(text, data))
+                Log.i(LOG_TAG, "End create post request.")
+
+                if(result.isSuccessful){
+                    inProgress.postValue(RequestStages.SUCCESS)
+                    Log.i(LOG_TAG, "Create post request was successful.")
+                } else {
+                    inProgress.postValue(RequestStages.FAIL)
+                    Log.i(LOG_TAG, "Create post request was failed.")
+                }
             }
         }
     }
