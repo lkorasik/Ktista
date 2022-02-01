@@ -5,7 +5,8 @@ import com.lkorasik.ktistaclient.net.model.dto.SettingsDTO
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.models.SettingsModel
 
-object ConvertSettings: Converter<SettingsDTO, SettingsModel> {
+
+object ConvertSettingsDTO: Converter<SettingsDTO, SettingsModel> {
     override fun convert(input: SettingsDTO): SettingsModel {
         val settingsModel = SettingsModel()
 
