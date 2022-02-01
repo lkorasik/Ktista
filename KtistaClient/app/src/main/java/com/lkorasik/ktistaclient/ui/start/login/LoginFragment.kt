@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
@@ -17,10 +17,11 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentLoginBinding
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
-import com.lkorasik.ktistaclient.ui.utils.factory
+import com.lkorasik.ktistaclient.ui.utils.ViewModelFactory
 
 class LoginFragment : Fragment() {
-    private val loginViewModel: LoginViewModel by viewModels { factory() }
+    private lateinit var  loginViewModel: LoginViewModel
+    private lateinit var viewModelFactory: ViewModelFactory
     private var bindingObject: FragmentLoginBinding? = null
     private lateinit var rootActivity: StartActivity
 
@@ -38,6 +39,9 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModelFactory = ViewModelFactory(requireContext().applicationContext)
+        loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
+
         loginViewModel.inProgress.observe(viewLifecycleOwner) {
             Log.i(LoginViewModel.LOG_TAG, "$it")
 
