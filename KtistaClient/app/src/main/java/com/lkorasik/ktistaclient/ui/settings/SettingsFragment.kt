@@ -131,7 +131,9 @@ class SettingsFragment : Fragment() {
                 val file = if(imagePath?.contains("content://") == true){
                     context?.contentResolver?.openInputStream(Uri.parse(imagePath))?.readBytes()
                 } else {
-                    File(imagePath).readBytes()
+                    imagePath?.let {
+                        File(it).readBytes()
+                    }
                 }
 
                 viewModel.setSettings(avatar = file, email = email?.text.toString(), username = nickname?.text.toString())

@@ -28,11 +28,13 @@ class SettingsViewModel : ViewModel() {
     fun setSettings(avatar: ByteArray?, email: String, username: String) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request set settings")
+
+            val avatarImg = if (avatar != null) Base64.encodeToString(avatar, Base64.DEFAULT) else ""
+
             settingsRepository.setSettings(SettingsDTO(
-                //avatar = avatar,
+                avatar = avatarImg,
                 email = email,
                 nickname = username,
-                avatar = Base64.encodeToString(avatar, Base64.DEFAULT)
             ))
             Log.i(LOG_TAG, "End get settings request")
         }
