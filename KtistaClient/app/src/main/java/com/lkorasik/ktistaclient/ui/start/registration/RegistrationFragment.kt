@@ -26,29 +26,28 @@ class RegistrationFragment: Fragment() {
     private lateinit var nickname: EditText
     private lateinit var password: EditText
     private lateinit var signIn: Button
-    //https://github.com/razir/ProgressButton
     private lateinit var signUp: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         registrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
 
-        registrationViewModel.inProgress.observe(this, {
+        registrationViewModel.inProgress.observe(viewLifecycleOwner) {
             Log.i(RegistrationViewModel.LOG_TAG, "$it")
 
-            if(it.equals(RequestStages.SUCCESS)) {
+            if (it.equals(RequestStages.SUCCESS)) {
                 signUp.hideProgress("Success!")
                 rootActivity.showLoginFragment()
             }
-            if(it.equals(RequestStages.FAIL)) {
+            if (it.equals(RequestStages.FAIL)) {
                 signUp.hideProgress("Fail!")
             }
-            if(it.equals(RequestStages.IN_PROGRESS)){
+            if (it.equals(RequestStages.IN_PROGRESS)) {
                 signUp.showProgress {
                     buttonTextRes = R.string.registration_button_progress
                     progressColor = Color.WHITE
                 }
             }
-        })
+        }
 
         bindingObject = FragmentRegistrationBinding.inflate(inflater, container, false)
         val root: View = binding.root
