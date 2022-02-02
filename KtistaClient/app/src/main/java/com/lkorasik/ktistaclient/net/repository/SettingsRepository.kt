@@ -7,8 +7,8 @@ import com.lkorasik.ktistaclient.ui.models.SettingsModel
 import retrofit2.Response
 
 class SettingsRepository {
-    fun getSettings(): Response<SettingsDTO?> {
-        return RequestContext.API.getSettings(JwtRepository.jwt).execute()
+    fun getSettings(): Response<SettingsResponseDTO?> {
+        return RequestContext.API.getSettings(JwtRepository.jwtAccess).execute()
     }
 
     fun setSettings(settings: SettingsModel) {

@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class ProfileRepository {
     fun getProfile(): Response<ProfileResponseDTO?> {
-        return RequestContext.API.getProfile(JwtRepository.jwt).execute()
+        return RequestContext.API.getProfile(JwtRepository.jwtAccess).execute()
     }
 }
