@@ -14,39 +14,48 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.*
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.ui.start.StartActivity
+import com.lkorasik.ktistaclient.ui.utils.ViewModelFactory
 
-class LoginFragment: Fragment() {
+class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var viewModelFactory: ViewModelFactory
     private var bindingObject: FragmentLoginBinding? = null
     private lateinit var rootActivity: StartActivity
 
-    private val binding get() = bindingObject ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+    private val binding
+        get() = bindingObject
+            ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 
     private lateinit var nickname: EditText
     private lateinit var password: EditText
     private lateinit var signIn: Button
     private lateinit var signUp: Button
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewModelFactory = ViewModelFactory(requireContext().applicationContext)
+        loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
 
-        loginViewModel.inProgress.observe(this, {
-            Log.i(LoginViewModel.LOG_TAG,   "$it")
+        loginViewModel.inProgress.observe(viewLifecycleOwner) {
+            Log.i(javaClass.name, "$it")
 
-            if(it.equals(RequestStages.SUCCESS)) {
+            if (it.equals(RequestStages.SUCCESS)) {
                 signIn.hideProgress("Success!")
                 rootActivity.launchMainActivity()
             }
-            if(it.equals(RequestStages.FAIL)) {
+            if (it.equals(RequestStages.FAIL)) {
                 signIn.hideProgress("Fail!")
             }
-            if(it.equals(RequestStages.IN_PROGRESS)){
+            if (it.equals(RequestStages.IN_PROGRESS)) {
                 signIn.showProgress {
                     buttonTextRes = R.string.registration_button_progress
                     progressColor = Color.WHITE
                 }
             }
-        })
+        }
 
         bindingObject = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root

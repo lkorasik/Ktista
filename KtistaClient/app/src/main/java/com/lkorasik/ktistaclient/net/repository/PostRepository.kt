@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class PostRepository {
     fun createPost(post: CreatePostDTO): Response<String?> {
-        return RequestContext.API.createPost(JwtRepository.jwt, post).execute()
+        return RequestContext.API.createPost(JwtRepository.jwtAccess, post).execute()
     }
 }
