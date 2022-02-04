@@ -7,13 +7,13 @@ import com.lkorasik.ktistaclient.ui.models.SettingsModel
 import retrofit2.Response
 
 class SettingsRepository {
-    fun getSettings(): Response<SettingsResponseDTO?> {
+    fun getSettings(): Response<SettingsDTO?> {
         return RequestContext.API.getSettings(JwtRepository.jwtAccess).execute()
     }
 
     fun setSettings(settings: SettingsModel) {
         val settingsDTO = ConvertSettingsModel.convert(settings)
 
-        RequestContext.API.setSettings(JwtRepository.jwt, settingsDTO).execute()
+        RequestContext.API.setSettings(JwtRepository.jwtAccess, settingsDTO).execute()
     }
 }
