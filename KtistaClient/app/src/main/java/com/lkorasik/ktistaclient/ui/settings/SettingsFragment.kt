@@ -4,11 +4,10 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -19,6 +18,7 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentSettingsBinding
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.helper.ImageSources
+import java.io.File
 
 class SettingsFragment : Fragment() {
     private lateinit var viewModel: SettingsViewModel
@@ -32,6 +32,11 @@ class SettingsFragment : Fragment() {
     private var nickname: EditText? = null
 
     private var imagePath: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
@@ -103,6 +108,7 @@ class SettingsFragment : Fragment() {
                     image?.setImageBitmap(ImageHelper.loadBitmap(imagePath!!, image?.width ?: 0, image?.height ?: 0))
                 }
                 ImageSources.GALLERY.ordinal -> if ((resultCode == Activity.RESULT_OK) && (data != null)) {
+                    imagePath = data.dataString
                     image?.setImageURI(data.data)
                 }
             }
@@ -112,5 +118,28 @@ class SettingsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_save_settings, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_save_settings -> {
+                val file = if(imagePath?.contains("content://") == true){
+                    context?.contentResolver?.openInputStream(Uri.parse(imagePath))?.readBytes()
+                } else {
+                    imagePath?.let {
+                        File(it).readBytes()
+                    }
+                }
+
+                viewModel.setSettings(avatar = file, email = email?.text.toString(), username = nickname?.text.toString())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.repository.SettingsRepository
-import com.lkorasik.ktistaclient.ui.helper.converters.ConvertSettings
+import com.lkorasik.ktistaclient.ui.helper.ImageHelper
+import com.lkorasik.ktistaclient.ui.helper.converters.ConvertSettingsDTO
 import com.lkorasik.ktistaclient.ui.models.SettingsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +24,20 @@ class SettingsViewModel : ViewModel() {
 
     private val settingsRepository = SettingsRepository()
 
+    fun setSettings(avatar: ByteArray?, email: String, username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.i(LOG_TAG, "Start request set settings")
+
+            settingsRepository.setSettings(SettingsModel(
+                avatar = avatar?.let { ImageHelper.convertToBitmap(it) },
+                username = username,
+                email = email)
+            )
+
+            Log.i(LOG_TAG, "End get settings request")
+        }
+    }
+
     fun getSettings() {
         requestStage.value = RequestStages.IN_PROGRESS
 
@@ -35,7 +50,7 @@ class SettingsViewModel : ViewModel() {
                 requestStage.postValue(RequestStages.SUCCESS)
 
                 result.body()?.let {
-                    data.postValue(ConvertSettings.convert(it))
+                    data.postValue(ConvertSettingsDTO.convert(it))
                 }
             } else {
                 requestStage.postValue(RequestStages.FAIL)

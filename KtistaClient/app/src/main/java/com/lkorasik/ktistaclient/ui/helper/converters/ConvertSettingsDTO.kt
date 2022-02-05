@@ -1,12 +1,13 @@
 package com.lkorasik.ktistaclient.ui.helper.converters
 
 import android.util.Base64
-import com.lkorasik.ktistaclient.net.model.dto.SettingsResponseDTO
+import com.lkorasik.ktistaclient.net.model.dto.SettingsDTO
 import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.models.SettingsModel
 
-object ConvertSettings: Converter<SettingsResponseDTO, SettingsModel> {
-    override fun convert(input: SettingsResponseDTO): SettingsModel {
+
+object ConvertSettingsDTO: Converter<SettingsDTO, SettingsModel> {
+    override fun convert(input: SettingsDTO): SettingsModel {
         val settingsModel = SettingsModel()
 
         if((input.avatar != null) && input.avatar.isNotEmpty()) {
