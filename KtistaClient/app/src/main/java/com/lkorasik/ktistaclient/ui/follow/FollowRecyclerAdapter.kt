@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.WidgetFollowerBinding
 import com.lkorasik.ktistaclient.ui.models.FollowModel
-import com.squareup.picasso.Picasso
 
 
 class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.FollowingViewHolder>() {
@@ -43,11 +42,9 @@ class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.Followi
 
         fun bind(model: FollowModel) {
             with(binding) {
-                model.user.avatarUrl?.let { url ->
-                    Picasso.get().load(url).into(includeUser.ciPostAvatar)
-                }
+                includeUser.ciPostAvatar.setImageBitmap(model.user.avatar)
 
-                includeUser.tvUserName.text = model.user.name
+                includeUser.tvUserName.text = model.user.username
 
                 if (model.isFollow) {
                     btFollow.setText(R.string.unfollow)
