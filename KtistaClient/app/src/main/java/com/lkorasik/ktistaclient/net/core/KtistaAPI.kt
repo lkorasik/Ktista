@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface KtistaAPI {
     @POST("api/auth/registration")
-    fun register(@Body userDTO: UserRegistrationRequestDTO): Call<Void?>
+    fun register(@Body userDTO: UserRegistrationRequestDTO): Call<String>
 
     @POST("api/auth/login")
     fun login(@Body userDTO: UserLoginRequestDTO): Call<Void?>

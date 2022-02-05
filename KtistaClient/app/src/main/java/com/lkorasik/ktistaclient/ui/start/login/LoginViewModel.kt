@@ -19,7 +19,6 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
     private val _inProgress = MutableLiveData(RequestStages.INIT)
     val inProgress: LiveData<RequestStages> = _inProgress
 
-
     fun loginUser(nickname: String, password: String) {
         _inProgress.value = RequestStages.IN_PROGRESS
 
