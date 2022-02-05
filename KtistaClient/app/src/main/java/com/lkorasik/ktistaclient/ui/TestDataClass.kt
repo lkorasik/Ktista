@@ -5,7 +5,6 @@ import com.lkorasik.ktistaclient.ui.helper.ImageHelper
 import com.lkorasik.ktistaclient.ui.models.FollowModel
 import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.models.UserModel
-import com.squareup.picasso.Picasso
 
 object TestDataClass {
     fun getPostsData(): ArrayList<PostModel> {
