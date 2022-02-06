@@ -1,7 +1,8 @@
 package com.lkorasik.ktistaclient.ui.models
 
+import android.graphics.Bitmap
+
 data class UserModel(
-    var avatarUrl: String?,
-    var name: String = "",
-    var login: String = ""
+    var avatar: Bitmap?,
+    var username: String = ""
 )

@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.ui.models.PostModel
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewHolder>() {
@@ -51,13 +50,9 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
         private val showComments: TextView = itemView.findViewById(R.id.tv_show_comments)
 
         fun bind(postModel: PostModel) {
-            postModel.user.avatarUrl?.let { url ->
-                Picasso.get().load(url).into(avatar)
-            }
-
-            Picasso.get().load(postModel.photoUrl).into(postPhoto)
-
-            name.text = postModel.user.name
+            avatar.setImageBitmap(postModel.user?.avatar)
+            postPhoto.setImageBitmap(postModel.photo)
+            name.text = postModel.user?.username
             description.text = postModel.description
             dislikeCount.text = if (postModel.dislikeCount == 0) "" else postModel.dislikeCount.toString()
             likeCount.text = if (postModel.likeCount == 0) "" else postModel.likeCount.toString()
