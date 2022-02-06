@@ -29,4 +29,7 @@ interface KtistaAPI {
         @Header(HeadersKeys.AUTHORIZATION) token: String,
         @Body settingsDTO: SettingsDTO
     ): Call<Void>
+
+    @GET("api/user/all-my-posts")
+    fun getUsersPosts(@Header(HeadersKeys.AUTHORIZATION) token: String): Call<List<PostDTO>>
 }
