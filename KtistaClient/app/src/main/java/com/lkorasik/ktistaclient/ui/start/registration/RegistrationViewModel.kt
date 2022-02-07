@@ -32,6 +32,7 @@ class RegistrationViewModel(private val userRepository: UserRepository) : ViewMo
             if(result.isSuccessful){
                 _inProgress.postValue(RequestStages.SUCCESS)
             } else {
+                Log.i(LOG_TAG, "${result.errorBody()}")
                 _inProgress.postValue(RequestStages.FAIL)
             }
         }
