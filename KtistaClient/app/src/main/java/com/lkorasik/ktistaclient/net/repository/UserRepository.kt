@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.lkorasik.ktistaclient.net.core.RequestContext
 import com.lkorasik.ktistaclient.net.model.dto.UserLoginRequestDTO
+import com.lkorasik.ktistaclient.net.model.dto.UserRegistrationRequestDTO
 import retrofit2.Response
 
 class UserRepository(private val context: Context) {
@@ -16,6 +17,13 @@ class UserRepository(private val context: Context) {
         else {
             Log.e(javaClass.name,"Login Fail: $response.code()")
         }
+        return response
+        //TODO(Handle errors. Response you can get from execute())
+    }
+
+    fun registration(user: UserRegistrationRequestDTO): Response<String> {
+        val response = RequestContext.API.register(user).execute()
+
         return response
         //TODO(Handle errors. Response you can get from execute())
     }
