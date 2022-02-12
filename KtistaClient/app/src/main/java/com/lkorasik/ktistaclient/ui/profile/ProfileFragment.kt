@@ -13,6 +13,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.databinding.FragmentProfileBinding
+import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 
@@ -56,8 +57,8 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
         }
 
-        viewModel.testLoadPosts()
         viewModel.getProfile()
+        viewModel.getUsersPosts()
 
         return binding.root
     }
@@ -69,7 +70,7 @@ class ProfileFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         viewModel.postsData.observe(viewLifecycleOwner) { posts ->
-            postsAdapter?.setItems(posts)
+            postsAdapter?.setItems(posts as ArrayList<PostModel>)
         }
 
         with(recyclerView) {
