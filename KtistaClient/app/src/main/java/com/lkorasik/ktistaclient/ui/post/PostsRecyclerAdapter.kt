@@ -14,7 +14,7 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
 
     private var postList: ArrayList<PostModel> = ArrayList()
 
-    fun setItems(posts: ArrayList<PostModel>) {
+    fun setItems(posts: List<PostModel>) {
         clearItems()
         postList.addAll(posts)
         notifyDataSetChanged() // Позже придумаю как это заменить
