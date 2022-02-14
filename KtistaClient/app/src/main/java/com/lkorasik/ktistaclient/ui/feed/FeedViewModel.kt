@@ -1,13 +1,13 @@
 package com.lkorasik.ktistaclient.ui.feed
 
 import android.util.Log
-import androidx.lifecycle.*
-import com.lkorasik.ktistaclient.net.core.RequestStages
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lkorasik.ktistaclient.net.repository.FeedRepository
-import com.lkorasik.ktistaclient.ui.models.PostModel
-import com.lkorasik.ktistaclient.ui.TestDataClass
 import com.lkorasik.ktistaclient.ui.helper.converters.ConvertPost
-import com.lkorasik.ktistaclient.ui.helper.converters.ConvertProfile
+import com.lkorasik.ktistaclient.ui.models.PostModel
 import com.lkorasik.ktistaclient.ui.profile.ProfileViewModel
 import com.lkorasik.ktistaclient.ui.start.login.LoginViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,17 +19,6 @@ class FeedViewModel : ViewModel() {
     val postsData: LiveData<List<PostModel>> = mutablePostsData
 
     val repository = FeedRepository()
-
-    init {
-        //testLoadPosts()
-    }
-
-    private fun testLoadPosts() {
-        mutablePostsData.postValue(TestDataClass.getPostsData())
-
-    }
-
-    private fun loadPosts() {}
 
     fun getFeed() {
         viewModelScope.launch(Dispatchers.IO) {

@@ -20,7 +20,7 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
         notifyDataSetChanged() // Позже придумаю как это заменить
     }
 
-    fun clearItems() {
+    private fun clearItems() {
         postList.clear()
     }
 
@@ -50,9 +50,9 @@ class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewH
         private val showComments: TextView = itemView.findViewById(R.id.tv_show_comments)
 
         fun bind(postModel: PostModel) {
-            avatar.setImageBitmap(postModel.user?.avatar)
+            avatar.setImageBitmap(postModel.user.avatar)
             postPhoto.setImageBitmap(postModel.photo)
-            name.text = postModel.user?.username
+            name.text = postModel.user.username
             description.text = postModel.description
             dislikeCount.text = if (postModel.dislikeCount == 0) "" else postModel.dislikeCount.toString()
             likeCount.text = if (postModel.likeCount == 0) "" else postModel.likeCount.toString()
