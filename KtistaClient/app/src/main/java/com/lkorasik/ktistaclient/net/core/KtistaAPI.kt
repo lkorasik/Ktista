@@ -32,4 +32,7 @@ interface KtistaAPI {
 
     @GET("api/user/all-my-posts")
     fun getUsersPosts(@Header(HeadersKeys.AUTHORIZATION) token: String): Call<List<PostDTO>>
+
+    @GET("api/user/feed")
+    fun getFeed(@Header(HeadersKeys.AUTHORIZATION) token: String): Call<List<PostDTO>>
 }

@@ -44,6 +44,8 @@ class FeedFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = postsAdapter
         }
+
+        viewModel.getFeed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
