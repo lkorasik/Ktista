@@ -15,6 +15,10 @@ import kotlinx.coroutines.launch
 
 
 class FeedViewModel : ViewModel() {
+    companion object {
+        val LOG_TAG: String = this::class.qualifiedName.toString()
+    }
+
     private val mutablePostsData: MutableLiveData<List<PostModel>> = MutableLiveData()
     val postsData: LiveData<List<PostModel>> = mutablePostsData
 
@@ -22,9 +26,9 @@ class FeedViewModel : ViewModel() {
 
     fun getFeed() {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i(ProfileViewModel.LOG_TAG, "Start request get feed")
+            Log.i(LOG_TAG, "Start request get feed")
             val result = repository.getFeed()
-            Log.i(LoginViewModel.LOG_TAG, "End get feed request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
+            Log.i(LOG_TAG, "End get feed request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
 
             if(result.isSuccessful){
                 result.body()?.apply {
