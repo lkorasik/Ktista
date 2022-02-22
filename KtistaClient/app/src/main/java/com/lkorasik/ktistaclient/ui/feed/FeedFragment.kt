@@ -11,7 +11,6 @@ import com.lkorasik.ktistaclient.R
 import com.lkorasik.ktistaclient.ui.post.PostsRecyclerAdapter
 
 class FeedFragment : Fragment() {
-
     private lateinit var postsAdapter: PostsRecyclerAdapter
     private val viewModel: FeedViewModel by navGraphViewModels(R.id.navigation_feed)
 

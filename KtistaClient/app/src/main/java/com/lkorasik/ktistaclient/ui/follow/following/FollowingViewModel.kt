@@ -7,7 +7,6 @@ import com.lkorasik.ktistaclient.ui.models.FollowModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
 
 class FollowingViewModel : ViewModel() {
-
     private val mutableFollowingData: MutableLiveData<ArrayList<FollowModel>> = MutableLiveData()
     val followingData: LiveData<ArrayList<FollowModel>> = mutableFollowingData
 

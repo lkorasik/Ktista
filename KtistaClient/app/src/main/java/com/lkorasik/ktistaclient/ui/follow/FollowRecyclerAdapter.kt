@@ -9,7 +9,6 @@ import com.lkorasik.ktistaclient.ui.models.FollowModel
 
 
 class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.FollowingViewHolder>() {
-
     private var listItems: ArrayList<FollowModel> = ArrayList()
 
     fun setItems(items: ArrayList<FollowModel>) {
@@ -34,7 +33,6 @@ class FollowRecyclerAdapter : RecyclerView.Adapter<FollowRecyclerAdapter.Followi
     override fun onBindViewHolder(holder: FollowingViewHolder, position: Int) {
         holder.bind(listItems[position])
     }
-
 
     class FollowingViewHolder(var binding: WidgetFollowerBinding) :
 

@@ -7,7 +7,6 @@ import com.lkorasik.ktistaclient.ui.models.FollowModel
 import com.lkorasik.ktistaclient.ui.TestDataClass
 
 class FollowersViewModel : ViewModel() {
-
     private val mutableFollowersData: MutableLiveData<ArrayList<FollowModel>> = MutableLiveData()
     val followersData: LiveData<ArrayList<FollowModel>> = mutableFollowersData
 

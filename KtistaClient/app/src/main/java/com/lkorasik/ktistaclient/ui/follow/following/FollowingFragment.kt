@@ -11,7 +11,6 @@ class FollowingFragment : AbstractFollowFragment() {
     override fun setViewModel() {
         viewModel.followingData.observe(viewLifecycleOwner) { followers ->
             followingAdapter.setItems(followers)
-
         }
     }
 }

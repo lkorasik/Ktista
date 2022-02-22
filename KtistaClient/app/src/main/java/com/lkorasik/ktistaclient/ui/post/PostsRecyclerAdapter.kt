@@ -11,7 +11,6 @@ import com.lkorasik.ktistaclient.ui.models.PostModel
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PostsRecyclerAdapter : RecyclerView.Adapter<PostsRecyclerAdapter.FeedViewHolder>() {
-
     private var postList: ArrayList<PostModel> = ArrayList()
 
     fun setItems(posts: List<PostModel>) {

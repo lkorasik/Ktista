@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkorasik.ktistaclient.databinding.FragmentRecyclerFollowerBinding
 
 abstract class AbstractFollowFragment : Fragment() {
-
     protected lateinit var followingAdapter: FollowRecyclerAdapter
     private var _binding: FragmentRecyclerFollowerBinding? = null
-    protected val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+    protected val binding get() = _binding ?: throw IllegalStateException("Try use binding " +
+            "before onCreateView or after onDestroyView")
 
     abstract fun setViewModel()
 

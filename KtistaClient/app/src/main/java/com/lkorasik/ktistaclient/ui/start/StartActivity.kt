@@ -44,7 +44,6 @@ class StartActivity: AppCompatActivity() {
         finish()
     }
 
-
     private fun initFragment(){
         setTheme(R.style.Theme_Ktista_NoActionBar)
 

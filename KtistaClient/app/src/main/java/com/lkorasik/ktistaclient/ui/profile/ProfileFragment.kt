@@ -21,7 +21,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val viewModel: ProfileViewModel by navGraphViewModels(R.id.navigation_profile)
     private var postsAdapter: PostsRecyclerAdapter? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before " +
+            "onCreateView or after onDestroyView")
 
     private var avatar: ImageView? = null
     private var nickname: TextView? = null
@@ -34,7 +35,10 @@ class ProfileFragment : Fragment() {
         postsAdapter = PostsRecyclerAdapter()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         avatar = binding.includedProfileInfo.ivAvatar
@@ -50,11 +54,13 @@ class ProfileFragment : Fragment() {
         }
 
         binding.includedProfileInfo.llFollowingInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 1))
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment,
+                bundleOf("position" to 1))
         }
 
         binding.includedProfileInfo.llFollowersInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_followFragment, bundleOf("position" to 0))
+            findNavController().navigate(R.id.action_navigation_profile_to_followFragment,
+                bundleOf("position" to 0))
         }
 
         viewModel.getProfile()

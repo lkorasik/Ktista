@@ -25,13 +25,12 @@ import com.lkorasik.ktistaclient.ui.helper.utils.ImageNotSelectedException
 
 class AddPostActivity : AppCompatActivity() {
     private lateinit var addPostViewModel: AddPostViewModel
+    private var binding: ActivityAddPostBinding? = null
 
     private var image: ImageView? = null
     private var description: EditText? = null
 
     private var imagePath: String? = null
-
-    private var binding: ActivityAddPostBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

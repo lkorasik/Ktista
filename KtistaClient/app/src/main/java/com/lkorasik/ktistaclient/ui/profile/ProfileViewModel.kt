@@ -21,7 +21,7 @@ class ProfileViewModel : ViewModel() {
         val LOG_TAG: String = this::class.qualifiedName.toString()
     }
 
-    val requestProgress = MutableLiveData(RequestStages.INIT)
+    private val requestProgress = MutableLiveData(RequestStages.INIT)
     val profile = MutableLiveData<ProfileModel>().apply {
         this.postValue(ProfileModel())
     }
@@ -69,4 +69,3 @@ class ProfileViewModel : ViewModel() {
         }
     }
 }
-

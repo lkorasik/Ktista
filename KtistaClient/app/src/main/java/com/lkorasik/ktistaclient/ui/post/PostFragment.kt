@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.lkorasik.ktistaclient.R
 
 class PostFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
