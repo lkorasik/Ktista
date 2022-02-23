@@ -24,7 +24,8 @@ class LoginFragment : Fragment() {
 
     private val binding
         get() = bindingObject
-            ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+            ?: throw IllegalStateException("Try use binding before onCreateView or after " +
+                    "onDestroyView")
 
     private lateinit var nickname: EditText
     private lateinit var password: EditText

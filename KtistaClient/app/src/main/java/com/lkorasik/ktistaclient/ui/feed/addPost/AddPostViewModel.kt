@@ -6,14 +6,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lkorasik.ktistaclient.net.core.OnResultListener
 import com.lkorasik.ktistaclient.net.core.RequestStages
 import com.lkorasik.ktistaclient.net.model.dto.CreatePostDTO
 import com.lkorasik.ktistaclient.net.repository.PostRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Headers
 import java.io.File
 import java.util.*
 

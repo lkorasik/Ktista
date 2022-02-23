@@ -6,7 +6,6 @@ import com.lkorasik.ktistaclient.net.model.HeadersKeys
 import retrofit2.Response
 
 object JwtRepository {
-
     private var jwtPreferences: SharedPreferences? = null
     private const val JWT_PREFERENCES = "JWT_PREFERENCES"
     private const val JWT_ACCESS = "JWT_ACCESS"

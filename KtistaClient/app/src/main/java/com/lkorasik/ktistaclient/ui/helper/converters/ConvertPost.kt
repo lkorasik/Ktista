@@ -8,7 +8,7 @@ import com.lkorasik.ktistaclient.ui.models.PostModel
 object ConvertPost: Converter<PostDTO, PostModel> {
     override fun convert(input: PostDTO): PostModel {
         val bytes = Base64.decode(input.data, Base64.DEFAULT)
-        var bmp = ImageHelper.convertToBitmap(bytes)
+        val bmp = ImageHelper.convertToBitmap(bytes)
 
         return PostModel(
             user = ConvertAuthor.convert(input.author),

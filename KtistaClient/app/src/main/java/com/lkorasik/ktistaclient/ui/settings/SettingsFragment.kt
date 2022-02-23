@@ -24,7 +24,8 @@ class SettingsFragment : Fragment() {
     private lateinit var viewModel: SettingsViewModel
     private var _binding: FragmentSettingsBinding? = null
 
-    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before " +
+            "onCreateView or after onDestroyView")
 
     private var image: ImageView? = null
     private var changeAvatar: Button? = null
@@ -38,7 +39,10 @@ class SettingsFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
         viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)

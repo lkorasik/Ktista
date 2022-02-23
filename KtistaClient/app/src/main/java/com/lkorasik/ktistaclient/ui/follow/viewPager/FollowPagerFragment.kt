@@ -13,14 +13,13 @@ import com.lkorasik.ktistaclient.ui.follow.following.FollowingFragment
 
 
 class FollowPagerFragment : Fragment() {
-
     private var _binding: FragmentPagerFollowerBinding? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
+    private val binding get() = _binding ?: throw IllegalStateException("Try use binding before " +
+            "onCreateView or after onDestroyView")
 
     private lateinit var followAdapter: FollowPagerAdapter
     private lateinit var viewPager: ViewPager2
     private val listNames = listOf("Followers", "Followings")
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

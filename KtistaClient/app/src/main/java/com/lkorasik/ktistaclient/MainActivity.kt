@@ -10,7 +10,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lkorasik.ktistaclient.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding

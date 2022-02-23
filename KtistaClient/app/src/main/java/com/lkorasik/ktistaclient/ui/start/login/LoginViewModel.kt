@@ -25,7 +25,8 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start login request")
             val result = userRepository.login(UserLoginRequestDTO(nickname, password))
-            Log.i(LOG_TAG, "End login request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
+            Log.i(LOG_TAG, "End login request. Status: ${if(result.isSuccessful) 
+                "Success" else "Failed"}")
 
             if(result.isSuccessful){
                 _inProgress.postValue(RequestStages.SUCCESS)

@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import com.lkorasik.ktistaclient.databinding.DialogChangePasswordBinding
 
 class ChangePasswordDialog : DialogFragment() {
-
     private var _binding: DialogChangePasswordBinding? = null
     private val binding get() = _binding ?: throw IllegalStateException("Try use binding before onCreateView or after onDestroyView")
 

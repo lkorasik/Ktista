@@ -44,7 +44,8 @@ class SettingsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(LOG_TAG, "Start request get settings")
             val result = settingsRepository.getSettings()
-            Log.i(LOG_TAG, "End get settings request. Status: ${if(result.isSuccessful) "Success" else "Failed"}")
+            Log.i(LOG_TAG, "End get settings request. Status: ${if(result.isSuccessful) 
+                "Success" else "Failed"}")
 
             if(result.isSuccessful){
                 requestStage.postValue(RequestStages.SUCCESS)
